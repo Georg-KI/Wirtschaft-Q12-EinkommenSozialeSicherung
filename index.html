@@ -356,6 +356,22 @@
   .poll-feedback.show { display: block; }
   .poll-feedback.correct { background: var(--teal-100); color: #065f46; border: 1px solid #99f6e4; }
   .poll-feedback.wrong { background: var(--rose-100); color: #9f1239; border: 1px solid #fecdd3; }
+  .poll-retry {
+    display: none;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--indigo-700);
+    border: 2px solid var(--indigo-500);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  .poll-retry:hover { background: var(--indigo-50); }
+  .poll-retry.show { display: inline-flex; align-items: center; gap: 6px; }
 
   /* ===== QUIZ ===== */
   .quiz-question {
@@ -470,36 +486,92 @@
   .solution-content ul { padding-left: 20px; margin-top: 8px; }
   .solution-content li { margin-bottom: 5px; }
 
-  /* ===== ROLLENSPIEL CARDS ===== */
+  /* ===== ROLLENKARTEN ===== */
   .role-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-top: 14px;
+    gap: 16px;
+    margin-top: 16px;
   }
   @media (max-width: 640px) { .role-cards { grid-template-columns: 1fr; } }
   .role-card {
-    padding: 18px;
     border-radius: var(--radius-card);
     border: 2px solid;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   }
-  .role-card.gewerkschaft {
-    border-color: var(--teal-600);
-    background: var(--teal-100);
+  .role-card-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .role-card.arbeitgeber {
-    border-color: var(--amber-600);
-    background: var(--amber-100);
+  .role-card-badge {
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: auto;
   }
-  .role-card h4 {
-    font-size: 14px;
-    margin-bottom: 10px;
+  .role-card.gewerkschaft { border-color: var(--teal-600); }
+  .role-card.gewerkschaft .role-card-header { background: var(--teal-600); }
+  .role-card.gewerkschaft .role-card-header h4 { color: white; font-size: 14px; margin: 0; }
+  .role-card.gewerkschaft .role-card-badge { background: rgba(255,255,255,0.25); color: white; }
+  .role-card.arbeitgeber { border-color: var(--amber-600); }
+  .role-card.arbeitgeber .role-card-header { background: var(--amber-600); }
+  .role-card.arbeitgeber .role-card-header h4 { color: white; font-size: 14px; margin: 0; }
+  .role-card.arbeitgeber .role-card-badge { background: rgba(255,255,255,0.25); color: white; }
+  .role-card-body {
+    padding: 16px;
+    background: white;
   }
-  .role-card.gewerkschaft h4 { color: #065f46; }
-  .role-card.arbeitgeber h4 { color: #92400e; }
-  .role-card ul { padding-left: 16px; font-size: 13.5px; }
-  .role-card.gewerkschaft ul { color: #065f46; }
-  .role-card.arbeitgeber ul { color: #92400e; }
+  .role-card-task {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--slate-600);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--slate-300);
+  }
+  .role-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .role-line-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .gewerkschaft .role-line-num { background: var(--teal-100); color: var(--teal-600); }
+  .arbeitgeber .role-line-num { background: var(--amber-100); color: var(--amber-600); }
+  .role-line-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px dashed var(--slate-300);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--slate-800);
+    background: transparent;
+    padding: 2px 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .role-line-input:focus { border-bottom-color: var(--indigo-500); }
+  .role-line-input::placeholder { color: var(--slate-300); font-style: italic; }
 
   /* ===== NAV BUTTONS ===== */
   .nav-row {
@@ -949,6 +1021,7 @@
           </button>
         </div>
         <div class="poll-feedback" id="poll-einstieg-feedback"></div>
+        <button class="poll-retry" id="poll-einstieg-retry" onclick="retryPoll('poll-einstieg')">↩ Nochmal versuchen</button>
 
         <div class="teacher-box" id="tb-einstieg">
           🎓 <strong>Lehrkraft-Hinweis:</strong> Diese Einstiegsfrage aktiviert Vorwissen und stellt einen Lebensweltbezug her (K2: Lebensweltbezug). Nutze kurze spontane Wortmeldungen, um die Klasse abzuholen, bevor die Erarbeitungsphase beginnt.
@@ -990,22 +1063,31 @@
         <h3 style="margin-top:18px;">Aufgabe für die Partnerarbeit:</h3>
         <p>Arbeitet aus M1–M3 jeweils <strong>3 Argumente</strong> heraus: Welche Ziele und Begründungen bringen (a) die Gewerkschaften, (b) die Arbeitgeberverbände in Tarifverhandlungen vor?</p>
 
-        <div class="role-cards" style="margin-top:14px;">
+        <p style="font-size:13px;color:var(--slate-600);margin-top:14px;">✏️ <em>Tragt eure Ergebnisse direkt in die Rollenkarten ein:</em></p>
+        <div class="role-cards" style="margin-top:10px;">
           <div class="role-card gewerkschaft">
-            <h4>🔴 Gewerkschaften (DGB/ver.di etc.)</h4>
-            <ul>
-              <li>Reallohnerhöhung (Inflationsausgleich)</li>
-              <li>Gerechte Einkommensverteilung (Lohnquote)</li>
-              <li>Kaufkraftargument: mehr Konsum → Wachstum</li>
-            </ul>
+            <div class="role-card-header">
+              <h4>🔴 Gewerkschaften</h4>
+              <span class="role-card-badge">DGB / ver.di / IG Metall</span>
+            </div>
+            <div class="role-card-body">
+              <div class="role-card-task">Forderungen &amp; Argumente (aus M1–M2):</div>
+              <div class="role-line"><div class="role-line-num">1</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">2</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">3</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+            </div>
           </div>
           <div class="role-card arbeitgeber">
-            <h4>🔵 Arbeitgeberverbände (BDA etc.)</h4>
-            <ul>
-              <li>Lohnzurückhaltung für Wettbewerbsfähigkeit</li>
-              <li>Produktivität als Maßstab</li>
-              <li>Gefahr der Lohn-Preis-Spirale</li>
-            </ul>
+            <div class="role-card-header">
+              <h4>🔵 Arbeitgeberverbände</h4>
+              <span class="role-card-badge">BDA / Gesamtmetall</span>
+            </div>
+            <div class="role-card-body">
+              <div class="role-card-task">Forderungen &amp; Argumente (aus M3):</div>
+              <div class="role-line"><div class="role-line-num">1</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">2</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">3</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+            </div>
           </div>
         </div>
 
@@ -1295,6 +1377,7 @@
           </button>
         </div>
         <div class="poll-feedback" id="poll-auswirkung-feedback"></div>
+        <button class="poll-retry" id="poll-auswirkung-retry" onclick="retryPoll('poll-auswirkung')">↩ Nochmal versuchen</button>
         <p style="margin-top:14px;font-size:14px;color:var(--slate-600);">Tatsächlich sind alle Antworten denkbar – je nach wirtschaftlicher Ausgangslage und Perspektive. Genau das werdet ihr heute analysieren.</p>
 
         <div class="teacher-box">
@@ -1848,13 +1931,48 @@
   // ==================== POLL ====================
   function pollAnswer(groupId, btn, isCorrect, explanation) {
     const group = document.getElementById(groupId);
+    if (group.dataset.answered) return;
+    group.dataset.answered = '1';
+
     const options = group.querySelectorAll('.poll-option');
     options.forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
     btn.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
 
+    // highlight correct if wrong
+    if (!isCorrect) {
+      options.forEach(o => {
+        if (o.classList.contains('selected-wrong')) return;
+        // find correct by checking onclick attribute for 'true,'
+        if (o.getAttribute('onclick') && o.getAttribute('onclick').includes(', true,')) {
+          o.classList.add('highlight-correct');
+        }
+      });
+    }
+
     const fb = document.getElementById(groupId + '-feedback');
     fb.textContent = (isCorrect ? '✅ ' : '❌ ') + explanation;
     fb.className = 'poll-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+
+    if (!isCorrect) {
+      const retry = document.getElementById(groupId + '-retry');
+      if (retry) retry.classList.add('show');
+    }
+  }
+
+  function retryPoll(groupId) {
+    const group = document.getElementById(groupId);
+    delete group.dataset.answered;
+    const options = group.querySelectorAll('.poll-option');
+    options.forEach(o => {
+      o.disabled = false;
+      o.style.cursor = 'pointer';
+      o.classList.remove('selected-correct', 'selected-wrong', 'highlight-correct');
+    });
+    const fb = document.getElementById(groupId + '-feedback');
+    fb.className = 'poll-feedback';
+    fb.textContent = '';
+    const retry = document.getElementById(groupId + '-retry');
+    if (retry) retry.classList.remove('show');
   }
 
   // ==================== QUIZ ====================
