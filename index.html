@@ -800,6 +800,2154 @@
   }
   .kl-blue { background: var(--indigo-100); color: var(--indigo-700); }
   .kl-green { background: var(--teal-100); color: var(--teal-600); }
+  .kl-gap {
+    background: white;
+    border: 2px dashed var(--slate-300);
+    color: var(--slate-600);
+    min-width: 130px;
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
+  .kl-gap.correct { border-color: var(--teal-600); background: var(--teal-100); }
+  .kl-gap.wrong   { border-color: var(--rose-600); background: var(--rose-100); }
+  .kl-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--slate-800);
+    width: 100%;
+    text-align: center;
+  }
+  .kl-input::placeholder { color: var(--slate-300); font-weight: 400; font-style: italic; }
+  .kl-arrow { font-size: 20px; color: var(--slate-600); }
+
+  /* Comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 14px;
+  }
+  .compare-table th {
+    padding: 10px 14px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: left;
+  }
+  .compare-table th:nth-child(2) { background: var(--teal-100); color: #065f46; border-radius: 8px 8px 0 0; }
+  .compare-table th:nth-child(3) { background: var(--amber-100); color: #92400e; border-radius: 8px 8px 0 0; }
+  .compare-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--slate-100);
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--slate-600);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* ===== SPIRALE VIS ===== */
+  .spiral-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 14px 0;
+    padding: 16px;
+    background: var(--rose-100);
+    border-radius: var(--radius-card);
+    border: 1.5px solid #fecdd3;
+  }
+  .spiral-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+  }
+  .spiral-step:not(:last-child) {
+    border-bottom: 1px dashed #fca5a5;
+  }
+  .spiral-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--rose-600);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .spiral-text { font-size: 14px; color: #9f1239; font-weight: 500; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    #main { padding: 16px 12px 40px; }
+    .section { padding: 20px 16px; }
+    #topbar-title { font-size: 13px; }
+  }
+
+  /* Print styles for Abfrage */
+  @media print {
+    #topbar, #progress-container, .nav-row, .btn-prev, .btn-next,
+    .section:not(.print-section), #modal-overlay { display: none !important; }
+    .abfrage-section { display: block !important; }
+    .erwartung-content { display: block !important; }
+    body { background: white; }
+    .frage-card { page-break-inside: avoid; }
+  }
+
+  /* Step nav highlight */
+  .step-dot { transition: transform 0.2s; }
+  .step-dot:hover { transform: scale(1.1); }
+
+  /* Lehrplan badge */
+  .lp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--indigo-50);
+    border: 1px solid var(--indigo-100);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--indigo-700);
+    margin-top: 4px;
+  }
+
+  /* intro card */
+  .intro-card {
+    background: linear-gradient(135deg, var(--indigo-700) 0%, #4f46e5 100%);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .intro-card::after {
+    content: '';
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .intro-card h1 {
+    font-size: 22px;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .intro-card .subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+  .intro-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .intro-chip {
+    background: rgba(255,255,255,0.18);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* zwei-spaltig layout helper */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div id="topbar-title">WR Q12 · 2.3 Einkommen & soziale Sicherung</div>
+  <div id="lesson-tabs">
+    <button class="lesson-tab active" onclick="switchLesson(0)">2.3.1 Ziele</button>
+    <button class="lesson-tab" onclick="switchLesson(1)">2.3.2 Auswirkungen</button>
+  </div>
+  <button id="teacher-btn" onclick="openPinModal()">🎓 Lehrkraft</button>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="progress-container">
+  <!-- filled by JS -->
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- ============================================================ -->
+  <!-- LEKTION 1: 2.3.1 Ziele der Tarifparteien -->
+  <!-- ============================================================ -->
+  <div class="lesson-page active" id="lesson-0">
+
+    <!-- STEP 0: Einstieg -->
+    <div class="step-content" data-step="0">
+      <div class="intro-card section visible">
+        <h1>2.3.1 Welche Ziele verfolgen die Tarifparteien?</h1>
+        <div class="subtitle">Kapitel 2.3 · Einkommen und soziale Sicherung · startup.WR Bayern</div>
+        <div class="intro-meta">
+          <span class="intro-chip">⏱ 40 Min. Arbeitsphase</span>
+          <span class="intro-chip">📖 S. 104–109</span>
+          <span class="intro-chip">Q12 · WR</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Einstieg: Löhne und Gerechtigkeit</h2>
+          <span class="time-badge">⏱ 5 Min.</span>
+        </div>
+        <div class="sozialform sf-ea">👤 Einzelarbeit</div>
+
+        <p style="margin-bottom:14px;">Schau dir das Bild auf Seite 104 in deinem Buch an – eine Demonstration mit Plakaten zur Lohnpolitik.</p>
+
+        <div class="book-ref">
+          <span class="book-icon">📖</span>
+          <strong>Lies die Einleitung</strong> „2.3 Einkommen und soziale Sicherung" auf <strong>Seite 104–105</strong> in deinem Buch. Schau dir auch die Kompetenzen an (rechte Seite S. 105).
+        </div>
+
+        <p style="margin-top: 14px; margin-bottom: 14px;"><strong>Gedankenexperiment:</strong> Du siehst auf einem Plakat: „Inflation, sinkende Kaufkraft – Überleben, nicht wirklich leben." Beantworte für dich:</p>
+
+        <div style="font-size:14px; color:var(--slate-600);">Welche Aussage trifft deiner Meinung nach am ehesten zu?</div>
+        <div class="poll-options" id="poll-einstieg">
+          <button class="poll-option" onclick="pollAnswer('poll-einstieg', this, false, 'Lohnerhöhungen sind wichtig, aber das Hauptproblem ist die Inflation selbst – Gewerkschaften sollten sich vor allem für Preisstabilität einsetzen.')">
+            A) Lohnerhöhungen sind wichtig, aber Preisstabilität ist die eigentliche Lösung.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-einstieg', this, true, 'Richtig! Wenn Löhne hinter der Inflation zurückbleiben, verlieren Beschäftigte real an Kaufkraft – genau das ist das Kernargument der Gewerkschaften für Lohnerhöhungen mindestens in Höhe der Inflationsrate.')">
+            B) Wenn Löhne hinter der Inflation zurückbleiben, verlieren Menschen real an Kaufkraft.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-einstieg', this, false, 'Nicht ganz: Höhere Löhne können Konsum ankurbeln. Ob das automatisch zu Inflation führt, ist umstritten – Arbeitgeber sehen die Gefahr einer Lohn-Preis-Spirale, Gewerkschaften widersprechen dem.')">
+            C) Höhere Löhne führen automatisch zu noch mehr Inflation – ein Teufelskreis.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-einstieg', this, false, 'Nur bedingt: In manchen Branchen kann das zutreffen. Aber generell sind Tarifverhandlungen der demokratisch legitimierte Weg der Konfliktlösung.')">
+            D) Der Staat sollte Löhne festlegen, damit solche Konflikte gar nicht erst entstehen.
+          </button>
+        </div>
+        <div class="poll-feedback" id="poll-einstieg-feedback"></div>
+        <button class="poll-retry" id="poll-einstieg-retry" onclick="retryPoll('poll-einstieg')">↩ Nochmal versuchen</button>
+
+        <div class="teacher-box" id="tb-einstieg">
+          🎓 <strong>Lehrkraft-Hinweis:</strong> Diese Einstiegsfrage aktiviert Vorwissen und stellt einen Lebensweltbezug her (K2: Lebensweltbezug). Nutze kurze spontane Wortmeldungen, um die Klasse abzuholen, bevor die Erarbeitungsphase beginnt.
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-next" onclick="nextStep(0)">Weiter zur Erarbeitung →</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: Erarbeitung Buch -->
+    <div class="step-content" data-step="1" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Erarbeitung: Ziele der Tarifparteien</h2>
+          <span class="time-badge">⏱ 12 Min.</span>
+        </div>
+        <div class="sozialform sf-pa">👥 Partnerarbeit</div>
+
+        <div class="book-ref">
+          <span class="book-icon">📖</span>
+          <strong>Lies mit deiner Partnerin/deinem Partner</strong> die Abschnitte 2.3.1 auf <strong>Seite 106–109</strong>. Bearbeitet gemeinsam die Materialien M1–M3 (S. 106/107). Lest auch den Erklärkasten zur <em>Tarifautonomie</em> (S. 107, rechts).
+        </div>
+
+        <div class="teacher-box" id="tb-erarbeitung">
+          🎓 <strong>Buchstruktur:</strong> M1 = Gewerkschaftsfoto Paris + Text einer Pflegekraft (S. 106); M2 = BDA-Position Rainer Dulger (S. 107); M3 = BDA-Positionspapier (S. 106/107). M4 Schreinerei + M5 Produktivitätsdiagramm + M6 BIP-Zusammensetzung auf S. 108/109.
+        </div>
+
+        <a href="https://www.boeckler.de/de/erklaerfilm-tarifverhandlungen-58570.htm" target="_blank" class="media-link" style="margin-top:14px;">
+          <span class="media-icon">🎬</span>
+          <div>
+            <div>Erklärfilm: Tarifverhandlungen – Hans-Böckler-Stiftung</div>
+            <div class="media-desc">boeckler.de · Optional: Hintergrundinfo zu Tarifverhandlungen (QR-Code M1, S. 106)</div>
+          </div>
+        </a>
+
+        <h3 style="margin-top:18px;">Aufgabe für die Partnerarbeit:</h3>
+        <p>Arbeitet aus M1–M3 jeweils <strong>3 Argumente</strong> heraus: Welche Ziele und Begründungen bringen (a) die Gewerkschaften, (b) die Arbeitgeberverbände in Tarifverhandlungen vor?</p>
+
+        <p style="font-size:13px;color:var(--slate-600);margin-top:14px;">✏️ <em>Tragt eure Ergebnisse direkt in die Rollenkarten ein:</em></p>
+        <div class="role-cards" style="margin-top:10px;">
+          <div class="role-card gewerkschaft">
+            <div class="role-card-header">
+              <h4>🔴 Gewerkschaften</h4>
+              <span class="role-card-badge">DGB / ver.di / IG Metall</span>
+            </div>
+            <div class="role-card-body">
+              <div class="role-card-task">Forderungen &amp; Argumente (aus M1–M2):</div>
+              <div class="role-line"><div class="role-line-num">1</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">2</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">3</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+            </div>
+          </div>
+          <div class="role-card arbeitgeber">
+            <div class="role-card-header">
+              <h4>🔵 Arbeitgeberverbände</h4>
+              <span class="role-card-badge">BDA / Gesamtmetall</span>
+            </div>
+            <div class="role-card-body">
+              <div class="role-card-task">Forderungen &amp; Argumente (aus M3):</div>
+              <div class="role-line"><div class="role-line-num">1</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">2</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+              <div class="role-line"><div class="role-line-num">3</div><input class="role-line-input" type="text" placeholder="Argument eintragen …"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <button class="solution-toggle" onclick="toggleSolution('sol-pa-aufgabe')">📋 Musterlösung anzeigen</button>
+          <div class="solution-content" id="sol-pa-aufgabe">
+            <strong>Gewerkschaften fordern:</strong>
+            <ul>
+              <li>Lohnerhöhungen mindestens in Höhe der Inflationsrate → Reallohnschutz</li>
+              <li>Gerechte Verteilung: steigende Unternehmensgewinne sollen an Beschäftigte weitergegeben werden</li>
+              <li>Höhere Löhne stärken Binnennachfrage → positive gesamtwirtschaftliche Wirkung</li>
+            </ul>
+            <strong>Arbeitgeberverbände fordern:</strong>
+            <ul>
+              <li>Lohnerhöhungen dürfen Produktivitätszuwachs nicht übersteigen</li>
+              <li>Wettbewerbsfähigkeit sichern: zu hohe Lohnkosten gefährden Investitionen</li>
+              <li>Flexible Tarifverträge (Öffnungsklauseln) nötig für unterschiedliche Branchen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(0)">← Zurück</button>
+        <button class="btn-next" onclick="nextStep(0)">Weiter: Produktivität →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Produktivität & Rollenspiel -->
+    <div class="step-content" data-step="2" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Vertiefung: Schreinerei Büchele – Rollenspiel vorbereiten</h2>
+          <span class="time-badge">⏱ 10 Min.</span>
+        </div>
+        <div class="sozialform sf-ga">👨‍👩‍👧 Gruppenarbeit (3–4 Pers.)</div>
+
+        <div class="book-ref">
+          <span class="book-icon">📖</span>
+          <strong>Lies M4</strong> (Schreinerei Büchele, S. 108) und <strong>M5</strong> (Produktivitätsdiagramm, S. 108) sowie <strong>M6</strong> (BIP-Zusammensetzung, S. 109) in deinem Buch.
+        </div>
+
+        <a href="https://www.ccbuchner.de/clip_code/82023-223" target="_blank" class="media-link">
+          <span class="media-icon">🔗</span>
+          <div>
+            <div>Digitale Materialien 82023-223 (C.C. Buchner)</div>
+            <div class="media-desc">Ergänzende Online-Materialien zum Abschnitt 2.3.1 · Aufgaben zu den Buchseiten</div>
+          </div>
+        </a>
+
+        <h3>Aufgabe (aus dem Buch, S. 109, Aufgabe 5–6):</h3>
+        <p style="margin-bottom:12px;">Formuliert ausgehend von <strong>M4 (Schreinerei Büchele)</strong> einen Kompromissvorschlag: Welche Lohnerhöhung wäre vertretbar, ohne die Wettbewerbsfähigkeit zu gefährden? Berücksichtigt M5 (Produktivitätsentwicklung) und M6 (BIP-Zusammensetzung).</p>
+        <p>Bereitet dann ein kurzes <strong>Rollenspiel</strong> vor (ca. 3 Min.): Eine Gruppe spielt die Gewerkschaftsseite, eine Gruppe die Arbeitgeberseite.</p>
+
+        <div class="teacher-box">
+          🎓 <strong>Lehrkraft-Hinweis:</strong> Die Schreinerei hat 15 Beschäftigte, Bruttolohn 100 €/Tag, Produktivität gestiegen (von 10 auf 12 Schränke/Tag = +20%), Inflationsrate 4 %, Wettbewerb mit Tschechien. Ein vertretbarer Kompromiss liegt bei ca. 6–8 % Lohnerhöhung (Produktivitätszuwachs + Inflationsausgleich), begrenzt durch Wettbewerbssituation.
+        </div>
+
+        <div style="margin-top:14px;">
+          <button class="solution-toggle" onclick="toggleSolution('sol-rollenspiel')">📋 Musterlösung / Erwartungshorizont</button>
+          <div class="solution-content" id="sol-rollenspiel">
+            <strong>Kompromissrechnung:</strong>
+            <ul>
+              <li>Inflationsrate: 4 % → Mindestforderung der Gewerkschaft</li>
+              <li>Produktivitätssteigerung: +20 % (von 10 auf 12 Schränke) → Verteilungsspielraum</li>
+              <li>Wettbewerbsdruck: Tschechien als Konkurrenz → Arbeitgeber argumentiert mit Kostendruck</li>
+              <li>Vertretbarer Kompromiss: ca. 5–6 % (Inflation + anteiliger Produktivitätszuwachs)</li>
+            </ul>
+            <strong>Rollenspiel-Argumente Gewerkschaft:</strong> Reallohnschutz, faire Verteilung der Produktivitätsgewinne, Binnennachfrage stärken.<br><br>
+            <strong>Rollenspiel-Argumente Arbeitgeber:</strong> Tschechische Konkurrenz, nur Teil der Produktivitätsgewinne ist nachhaltig, Planungssicherheit nötig.
+          </div>
+        </div>
+      </div>
+
+      <!-- QUIZ 2.3.1 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">✓</div>
+          <h2>Selbstcheck: Was hast du gelernt?</h2>
+          <span class="time-badge">⏱ 5 Min.</span>
+        </div>
+        <div class="sozialform sf-ea">👤 Einzelarbeit</div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">1. Was versteht man unter <em>Tarifautonomie</em>?</div>
+          <div class="quiz-options" id="q1">
+            <button class="quiz-option" onclick="quizAnswer('q1',this,false)"><span class="opt-letter">A</span> Der Staat legt Mindestlöhne für alle Branchen einheitlich fest.</button>
+            <button class="quiz-option" onclick="quizAnswer('q1',this,true)"><span class="opt-letter">B</span> Gewerkschaften und Arbeitgeberverbände handeln Löhne und Arbeitsbedingungen ohne staatliche Einflussnahme aus.</button>
+            <button class="quiz-option" onclick="quizAnswer('q1',this,false)"><span class="opt-letter">C</span> Jeder Arbeitnehmer verhandelt seinen Lohn individuell mit dem Arbeitgeber.</button>
+            <button class="quiz-option" onclick="quizAnswer('q1',this,false)"><span class="opt-letter">D</span> Die Bundesbank setzt den Lohnrahmen, um die Inflation zu kontrollieren.</button>
+          </div>
+          <div class="quiz-feedback" id="q1-fb"></div>
+          <button class="quiz-retry" id="q1-retry" onclick="retryQuiz('q1')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">2. Welches ist das zentrale Kaufkraftargument der Gewerkschaften?</div>
+          <div class="quiz-options" id="q2">
+            <button class="quiz-option" onclick="quizAnswer('q2',this,false)"><span class="opt-letter">A</span> Höhere Löhne senken automatisch die Unternehmensgewinne.</button>
+            <button class="quiz-option" onclick="quizAnswer('q2',this,false)"><span class="opt-letter">B</span> Lohnerhöhungen führen immer zu Inflation – das schadet allen.</button>
+            <button class="quiz-option" onclick="quizAnswer('q2',this,true)"><span class="opt-letter">C</span> Höhere Löhne → mehr Konsum → steigende Nachfrage → mehr Produktion und Beschäftigung.</button>
+            <button class="quiz-option" onclick="quizAnswer('q2',this,false)"><span class="opt-letter">D</span> Höhere Löhne verringern den Export, weil Produkte teurer werden.</button>
+          </div>
+          <div class="quiz-feedback" id="q2-fb"></div>
+          <button class="quiz-retry" id="q2-retry" onclick="retryQuiz('q2')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">3. Was ist die <em>Lohn-Preis-Spirale</em>? (Wähle die richtige Erklärung)</div>
+          <div class="quiz-options" id="q3">
+            <button class="quiz-option" onclick="quizAnswer('q3',this,false)"><span class="opt-letter">A</span> Preise steigen, ohne dass die Löhne sich verändern – eine reine Unternehmens­entscheidung.</button>
+            <button class="quiz-option" onclick="quizAnswer('q3',this,false)"><span class="opt-letter">B</span> Niedrige Löhne führen zu niedrigen Preisen, was die Wirtschaft bremst.</button>
+            <button class="quiz-option" onclick="quizAnswer('q3',this,true)"><span class="opt-letter">C</span> Löhne steigen → Unternehmen erhöhen Preise → neue Lohnforderungen → weitere Preissteigerungen (sich verstärkender Kreislauf).</button>
+            <button class="quiz-option" onclick="quizAnswer('q3',this,false)"><span class="opt-letter">D</span> Ein Mechanismus, bei dem immer abwechselnd Arbeitnehmer und Arbeitgeber nachgeben.</button>
+          </div>
+          <div class="quiz-feedback" id="q3-fb"></div>
+          <button class="quiz-retry" id="q3-retry" onclick="retryQuiz('q3')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">4. Was ist laut Arbeitgeberverbänden die wichtigste Voraussetzung für Lohnerhöhungen?</div>
+          <div class="quiz-options" id="q4">
+            <button class="quiz-option" onclick="quizAnswer('q4',this,false)"><span class="opt-letter">A</span> Steigende Konsumausgaben der privaten Haushalte.</button>
+            <button class="quiz-option" onclick="quizAnswer('q4',this,true)"><span class="opt-letter">B</span> Steigerungen der Arbeitsproduktivität.</button>
+            <button class="quiz-option" onclick="quizAnswer('q4',this,false)"><span class="opt-letter">C</span> Sinkende Staatsschulden.</button>
+            <button class="quiz-option" onclick="quizAnswer('q4',this,false)"><span class="opt-letter">D</span> Niedrige Zinsen der EZB.</button>
+          </div>
+          <div class="quiz-feedback" id="q4-fb"></div>
+          <button class="quiz-retry" id="q4-retry" onclick="retryQuiz('q4')">↩ Nochmal versuchen</button>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(0)">← Zurück</button>
+        <button class="btn-next" onclick="nextStep(0)">Abschluss & Sicherung →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Mündliche Abfrage 2.3.1 -->
+    <div class="step-content" data-step="3" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Sicherung: Zusammenfassung</h2>
+        </div>
+        <p style="font-size:14px; color:var(--slate-600);">Die Stunde endet mit einer mündlichen Abfrage durch die Lehrkraft (10 Min.). Bereite dich auf die folgenden Kompetenzbereiche vor:</p>
+
+        <div class="two-col" style="margin-top:16px;">
+          <div style="background:var(--indigo-50); border-radius:10px; padding:16px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--indigo-700);margin-bottom:8px;">📚 Das sollst du erklären können:</div>
+            <ul style="font-size:13.5px;color:var(--slate-600);padding-left:18px;line-height:1.6;">
+              <li>Was ist Tarifautonomie?</li>
+              <li>Ziele der Gewerkschaften</li>
+              <li>Ziele der Arbeitgeberverbände</li>
+              <li>Bedeutung der Produktivität</li>
+            </ul>
+          </div>
+          <div style="background:var(--teal-100); border-radius:10px; padding:16px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--teal-600);margin-bottom:8px;">💬 Das sollst du beurteilen können:</div>
+            <ul style="font-size:13.5px;color:#065f46;padding-left:18px;line-height:1.6;">
+              <li>Sind höhere Löhne immer positiv?</li>
+              <li>Welche Position ist unter welchen Bedingungen überzeugender?</li>
+              <li>Was ist ein fairer Kompromiss?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÜNDLICHE ABFRAGE – nur Lehrkraft -->
+      <div class="abfrage-section print-section" id="abfrage-231">
+        <div class="section" style="border: 2px solid var(--amber-600);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+            <span style="font-size:24px;">🎓</span>
+            <h2 style="color:var(--amber-600);">Mündliche Abfrage · 2.3.1 (10 Min.)</h2>
+            <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨️ Drucken</button>
+          </div>
+          <p style="font-size:13px;color:var(--slate-600);margin-bottom:20px;">4K-Modell: Wissen · Kritisches Denken · Kommunikation · Kreativität</p>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-wissen">💡 Wissen</span>
+            <div class="frage-text">Erkläre den Begriff „Tarifautonomie" und nenne die beiden Tarifparteien.</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <ul>
+                <li>Tarifautonomie = Recht der Tarifparteien, Löhne und Arbeitsbedingungen eigenverantwortlich (ohne staatliche Einflussnahme) auszuhandeln</li>
+                <li>Verfassungsrechtlich verankert (Koalitionsfreiheit, Art. 9 GG)</li>
+                <li>Tarifparteien: Gewerkschaften (z.B. ver.di, IG Metall) und Arbeitgeberverbände (z.B. BDA, Gesamtmetall)</li>
+                <li>Ergebnis: Tarifvertrag, der Mindeststandards für eine Branche festlegt</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kritisch">🧠 Kritisches Denken</span>
+            <div class="frage-text">Entscheide dich: Haben die Gewerkschaften oder die Arbeitgeberverbände bei Tarifverhandlungen das stärkere Argument? Begründe deine Meinung.</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <strong>Mögliche Lösungswege:</strong>
+              <ul>
+                <li>Gewerkschaft: Inflationsausgleich ist nötig, sonst realer Lohnverlust; Kaufkraftargument plausibel</li>
+                <li>Arbeitgeber: Lohnerhöhungen müssen produktivitätsgebunden sein; sonst Gefahr von Arbeitslosigkeit / Verlagerung</li>
+                <li>Differenzierte Antwort: Abhängig von Konjunkturlage, Branche, Unternehmensgewinnsituation</li>
+                <li>Bewertung: Eigenständige Positionierung mit nachvollziehbarer Begründung (nicht reine Reproduktion)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kommunikation">🗣 Kommunikation</span>
+            <div class="frage-text">Fasse in 2–3 Sätzen zusammen, was euer Rollenspiel zur Schreinerei Büchele ergeben hat. Welchen Kompromiss habt ihr gefunden?</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <ul>
+                <li>Klarer Bezug auf M4: Produktivitätssteigerung (+20 %), Inflationsrate (4 %), Wettbewerbssituation</li>
+                <li>Formulierung eines konkreten Lohnerhöhungswerts (z.B. 5–7 %)</li>
+                <li>Begründung aus beiden Perspektiven (Interessenausgleich)</li>
+                <li>Sprachlich: flüssige Darstellung des Gruppenarbeitsergebnisses</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kreativitaet">✨ Kreativität</span>
+            <div class="frage-text">Erfinde ein kurzes Fallbeispiel: Du bist Verhandlungsführer einer Gewerkschaft in einer Branche deiner Wahl. In welcher Situation würdest du besonders hohe Lohnforderungen stellen – und warum?</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <ul>
+                <li>Plausible Branchenwahl mit Begründung</li>
+                <li>Hohe Lohnforderungen bei: guter Konjunktur, hohen Unternehmensgewinnen, Fachkräftemangel, niedriger Inflation (dann Reallohngewinn möglich)</li>
+                <li>Kreativität: eigenes Szenario, nicht bloße Reproduktion</li>
+                <li>Verknüpfung mit Unterrichtsstoff (Kaufkraftargument, Produktivität)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(0)">← Zurück</button>
+      </div>
+    </div>
+
+  </div><!-- end lesson-0 -->
+
+
+  <!-- ============================================================ -->
+  <!-- LEKTION 2: 2.3.2 Auswirkungen von Tarifabschlüssen -->
+  <!-- ============================================================ -->
+  <div class="lesson-page" id="lesson-1">
+
+    <!-- STEP 0 -->
+    <div class="step-content" data-step="0">
+      <div class="intro-card section visible">
+        <h1>2.3.2 Auswirkungen von Tarifabschlüssen auf Wachstum und Beschäftigung</h1>
+        <div class="subtitle">Kapitel 2.3 · Einkommen und soziale Sicherung · startup.WR Bayern</div>
+        <div class="intro-meta">
+          <span class="intro-chip">⏱ 40 Min. Arbeitsphase</span>
+          <span class="intro-chip">📖 S. 110–113</span>
+          <span class="intro-chip">Q12 · WR</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Einstieg: Was passiert nach einem Tarifabschluss?</h2>
+          <span class="time-badge">⏱ 5 Min.</span>
+        </div>
+        <div class="sozialform sf-ea">👤 Einzelarbeit</div>
+
+        <p style="margin-bottom:14px;">Stell dir vor: Die Gewerkschaft hat eine Lohnerhöhung von 8 % durchgesetzt. Was glaubst du: Was passiert als nächstes?</p>
+
+        <div style="font-size:14px; color:var(--slate-600); margin-bottom:10px;"><strong>Welche Folge tritt deiner Meinung nach am wahrscheinlichsten zuerst ein?</strong></div>
+        <div class="poll-options" id="poll-auswirkung">
+          <button class="poll-option" onclick="pollAnswer('poll-auswirkung', this, true, 'Richtig! Aus nachfrageorientierter Sicht (Gewerkschaft): Höhere Löhne → mehr Konsumausgaben → steigende Nachfrage → mehr Produktion → mehr Beschäftigung. Das ist der Kern des Kaufkraftarguments.')">
+            A) Beschäftigte haben mehr Geld → kaufen mehr → Konjunktur wird angekurbelt.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-auswirkung', this, false, 'Das ist die angebotsorientierte Sicht der Arbeitgeber: Höhere Lohnkosten → weniger Investitionen → weniger Einstellungen. Ob das in der Realität dominiert, ist umstritten und hängt von der Branche ab.')">
+            B) Unternehmen zahlen mehr → stellen weniger ein → Arbeitslosigkeit steigt.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-auswirkung', this, false, 'Möglich, aber nicht zwingend. Ob Unternehmen Lohnkosten an Kunden weitergeben, hängt von ihrer Marktmacht ab. Manche Unternehmen nehmen zunächst niedrigere Gewinne in Kauf.')">
+            C) Unternehmen erhöhen Preise sofort → Inflation entsteht automatisch.
+          </button>
+          <button class="poll-option" onclick="pollAnswer('poll-auswirkung', this, false, 'Nicht automatisch. Produktionsverlagerung ist ein mittelfristiges Risiko bei dauerhaft hohen Lohnkosten, aber kein unmittelbarer Automatismus nach einem Tarifabschluss.')">
+            D) Unternehmen verlagern Produktion sofort ins Ausland.
+          </button>
+        </div>
+        <div class="poll-feedback" id="poll-auswirkung-feedback"></div>
+        <button class="poll-retry" id="poll-auswirkung-retry" onclick="retryPoll('poll-auswirkung')">↩ Nochmal versuchen</button>
+        <p style="margin-top:14px;font-size:14px;color:var(--slate-600);">Tatsächlich sind alle Antworten denkbar – je nach wirtschaftlicher Ausgangslage und Perspektive. Genau das werdet ihr heute analysieren.</p>
+
+        <div class="teacher-box">
+          🎓 <strong>Lehrkraft-Hinweis:</strong> Einstieg bewusst mehrdeutig gestaltet (keine eindeutige Antwort), um Kontroverse zu aktivieren. Beide Perspektiven (Nachfrage- vs. angebotsorientiert) werden in der Stunde herausgearbeitet.
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-next" onclick="nextStep(1)">Weiter: Kreislaufanalyse →</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: Kreislaufanalyse -->
+    <div class="step-content" data-step="1" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Erarbeitung: Lohnerhöhungen und der Wirtschaftskreislauf</h2>
+          <span class="time-badge">⏱ 12 Min.</span>
+        </div>
+        <div class="sozialform sf-pa">👥 Partnerarbeit</div>
+
+        <div class="book-ref">
+          <span class="book-icon">📖</span>
+          <strong>Lies mit deiner Partnerin/deinem Partner</strong> den Abschnitt 2.3.2 auf <strong>Seite 110–113</strong> in deinem Buch. Bearbeitet M1–M3 (S. 110/111) und die Aufgaben 1–4 auf S. 113.
+        </div>
+
+        <a href="https://www.ccbuchner.de/clip_code/82023-224" target="_blank" class="media-link" style="margin-top:12px;">
+          <span class="media-icon">🔗</span>
+          <div>
+            <div>Digitale Materialien 82023-224 (C.C. Buchner)</div>
+            <div class="media-desc">Online-Materialien zu 2.3.2 · Aufgaben S. 113</div>
+          </div>
+        </a>
+
+        <h3>Aufgabe 1 (Buchaufgabe S. 113, Aufg. 1):</h3>
+        <p style="margin-bottom:14px;">Belege anhand einer Kreislaufanalyse, dass Lohnerhöhungen „kein Schaden für die Wirtschaft" (M1) sein müssen.</p>
+
+        <p style="font-size:13px;color:var(--slate-600);margin-bottom:10px;">✏️ <em>Ergänze die fehlenden Stationen im Kreislauf (graue Felder):</em></p>
+
+        <div class="kreislauf-visual" id="kreislauf-wrap">
+          <!-- Station 1: vorgegeben -->
+          <div class="kl-box kl-blue">💰 Lohnerhöhung</div>
+          <span class="kl-arrow">→</span>
+          <!-- Station 2: LÜCKE -->
+          <div class="kl-box kl-gap">
+            <input class="kl-input" id="kl-1" type="text" placeholder="???">
+          </div>
+          <span class="kl-arrow">→</span>
+          <!-- Station 3: vorgegeben -->
+          <div class="kl-box kl-blue">📈 höhere Nachfrage</div>
+          <span class="kl-arrow">→</span>
+          <!-- Station 4: LÜCKE -->
+          <div class="kl-box kl-gap">
+            <input class="kl-input" id="kl-2" type="text" placeholder="???">
+          </div>
+          <span class="kl-arrow">→</span>
+          <!-- Station 5: LÜCKE -->
+          <div class="kl-box kl-gap">
+            <input class="kl-input" id="kl-3" type="text" placeholder="???">
+          </div>
+          <span class="kl-arrow">→</span>
+          <!-- Station 6: vorgegeben -->
+          <div class="kl-box kl-green">💵 höhere Staatseinnahmen</div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap;">
+          <button class="solution-toggle" style="margin-top:0;" onclick="checkKreislauf()">✅ Antworten prüfen</button>
+          <button class="solution-toggle" style="margin-top:0;background:var(--slate-100);color:var(--slate-600);" onclick="resetKreislauf()">↩ Zurücksetzen</button>
+        </div>
+        <div id="kl-feedback" style="margin-top:10px;font-size:13.5px;display:none;padding:12px 16px;border-radius:10px;line-height:1.6;"></div>
+
+        <p style="font-size:13px;color:var(--slate-600);margin-top:10px;"><em>Einschränkung: Ein Teil des Konsums fließt ins Ausland (Importe) → geringerer Inland-Effekt.</em></p>
+
+        <h3>Aufgabe 2 (Buchaufgabe S. 113, Aufg. 2):</h3>
+        <p style="margin-bottom:12px;">Beurteile, ob „Löhne rauf" und „Preise runter" gleichzeitig möglich sind (M1).</p>
+
+        <div style="margin-top:6px;">
+          <button class="solution-toggle" onclick="toggleSolution('sol-kreislauf-2')">📋 Musterlösung anzeigen</button>
+          <div class="solution-content" id="sol-kreislauf-2">
+            <strong>Beurteilung:</strong> Grundsätzlich sind beide Forderungen schwer gleichzeitig zu verwirklichen.
+            <ul>
+              <li>Höhere Löhne → höhere Kosten für Unternehmen → Preiserhöhung wahrscheinlich (Angebotsseite)</li>
+              <li>Preise sinken nur, wenn Produktivitätssteigerungen die Kostensteigerungen mehr als ausgleichen</li>
+              <li>ODER: Unternehmen akzeptieren zunächst niedrigere Gewinne (bei guter Ertragslage möglich)</li>
+              <li>Fazit: In der Regel nicht gleichzeitig dauerhaft möglich, außer bei starkem Produktivitätswachstum.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(1)">← Zurück</button>
+        <button class="btn-next" onclick="nextStep(1)">Weiter: Chancen & Risiken →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Chancen & Risiken / Zwei Sichtweisen -->
+    <div class="step-content" data-step="2" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Vertiefung: Zwei Sichtweisen im Vergleich</h2>
+          <span class="time-badge">⏱ 12 Min.</span>
+        </div>
+        <div class="sozialform sf-ga">👨‍👩‍👧 Gruppenarbeit</div>
+
+        <div class="book-ref">
+          <span class="book-icon">📖</span>
+          <strong>Bearbeitet M3</strong> (Positionen Fratzscher/Hüther, S. 110/111) und <strong>M4</strong> (Karikatur Lohnzurückhaltung) sowie <strong>M5</strong> (Forum, S. 112/113) in eurem Buch.
+        </div>
+
+        <h3 style="margin-top:16px;">Vergleich: Nachfrage- vs. Angebotsorientierte Sicht</h3>
+
+        <table class="compare-table" style="margin-bottom:16px;">
+          <thead>
+            <tr>
+              <th>Aspekt</th>
+              <th>🔴 Gewerkschaften (nachfrageorient.)</th>
+              <th>🔵 Arbeitgeberverbände (angebotsorient.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kernthese</strong></td>
+              <td>Löhne hinken Inflation hinterher; mehr Kaufkraft stärkt Wachstum</td>
+              <td>Lohnkosten gefährden Wettbewerbsfähigkeit; Produktivität entscheidet</td>
+            </tr>
+            <tr>
+              <td><strong>Spiralen-These</strong></td>
+              <td>Keine Lohn-Preis-Spirale – sondern eine <em>Gewinn-Preis-Spirale</em></td>
+              <td>Gefahr der Lohn-Preis-Spirale (Löhne → Preise → neue Forderungen)</td>
+            </tr>
+            <tr>
+              <td><strong>Fachkräfte</strong></td>
+              <td>Höhere Löhne ziehen qualifizierte Arbeitskräfte an</td>
+              <td>Zu hohe Lohnkosten fördern Automatisierung / Verlagerung ins Ausland</td>
+            </tr>
+            <tr>
+              <td><strong>Kleine Betriebe</strong></td>
+              <td>Niedriglöhne bei kleinen Betrieben ungerecht</td>
+              <td>Kleine Betriebe können hohe Abschlüsse oft nicht tragen</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Die Lohn-Preis-Spirale (Arbeitgeberargument)</h3>
+        <div class="spiral-steps">
+          <div class="spiral-step"><div class="spiral-num">1</div><div class="spiral-text">Tarifabschluss → Löhne steigen</div></div>
+          <div class="spiral-step"><div class="spiral-num">2</div><div class="spiral-text">Unternehmen erhöhen Preise → Inflation steigt</div></div>
+          <div class="spiral-step"><div class="spiral-num">3</div><div class="spiral-text">Reallohn sinkt wieder → Gewerkschaft fordert neue Lohnerhöhung</div></div>
+          <div class="spiral-step"><div class="spiral-num">4</div><div class="spiral-text">→ Spirale dreht sich weiter …</div></div>
+        </div>
+
+        <h3 style="margin-top:16px;">Aufgabe 4 (Buchaufgabe S. 113):</h3>
+        <p style="margin-bottom:12px;">Erarbeitet aus M3 mögliche gesamtwirtschaftliche Folgen von Lohnerhöhungen und ordnet die Argumente den Positionen (Gewerkschaft / Arbeitgeberverbände) zu.</p>
+
+        <div style="margin-top:6px;">
+          <button class="solution-toggle" onclick="toggleSolution('sol-zweisichten')">📋 Musterlösung anzeigen</button>
+          <div class="solution-content" id="sol-zweisichten">
+            <strong>Argumente Gewerkschaft (M3, Fratzscher-Seite):</strong>
+            <ul>
+              <li>Löhne sind real gesunken → Inflationsausgleich ist keine Lohnerhöhung, sondern Schadenskorrektur</li>
+              <li>Unternehmensgewinne stark gestiegen → Verteilungsgerechtigkeit gefordert</li>
+              <li>Keine Lohn-Preis-Spirale, sondern Gewinn-Preis-Spirale (Unternehmen haben Margen erhöht)</li>
+            </ul>
+            <strong>Argumente Arbeitgeberverbände (Hüther-Seite):</strong>
+            <ul>
+              <li>Maßstab für Tarifabschlüsse: Produktivitätsentwicklung im Unternehmen</li>
+              <li>Nicht alle Branchen können gleich hohe Abschlüsse verkraften (Bäckerei ≠ DAX-Konzern)</li>
+              <li>Planungssicherheit durch lange Laufzeiten wichtiger als hohe Einmalzahlungen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="teacher-box">
+          🎓 <strong>Lehrkraft-Hinweis:</strong> Marcel Fratzscher (DIW Berlin) steht für die nachfrageorientierte Position; Michael Hüther (IW Köln) für die angebotsorientierte. Beide sind renommierte Wirtschaftsforscher – das illustriert, dass der Streit nicht politisch-ideologisch, sondern fachwissenschaftlich ist. Für die Klausur: Schüler sollen beide Positionen darstellen und dann eigenständig beurteilen können.
+        </div>
+      </div>
+
+      <!-- QUIZ 2.3.2 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">✓</div>
+          <h2>Selbstcheck: Auswirkungen von Tarifabschlüssen</h2>
+          <span class="time-badge">⏱ 5 Min.</span>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">1. Was versteht man unter einer „Gewinn-Preis-Spirale" (Gewerkschaftsargument)?</div>
+          <div class="quiz-options" id="q5">
+            <button class="quiz-option" onclick="quizAnswer('q5',this,false)"><span class="opt-letter">A</span> Unternehmen und Beschäftigte steigern gemeinsam die Preise.</button>
+            <button class="quiz-option" onclick="quizAnswer('q5',this,false)"><span class="opt-letter">B</span> Höhere Löhne führen zu höheren Preisen, die wieder höhere Löhne erfordern.</button>
+            <button class="quiz-option" onclick="quizAnswer('q5',this,true)"><span class="opt-letter">C</span> Nicht Löhne, sondern überhöhte Unternehmensgewinne haben Preise nach oben getrieben.</button>
+            <button class="quiz-option" onclick="quizAnswer('q5',this,false)"><span class="opt-letter">D</span> Steigende Staatsausgaben führen automatisch zu Unternehmensgewinnen.</button>
+          </div>
+          <div class="quiz-feedback" id="q5-fb"></div>
+          <button class="quiz-retry" id="q5-retry" onclick="retryQuiz('q5')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">2. Welche Aussage beschreibt die <em>angebotsorientierte</em> Sicht auf Lohnerhöhungen?</div>
+          <div class="quiz-options" id="q6">
+            <button class="quiz-option" onclick="quizAnswer('q6',this,true)"><span class="opt-letter">A</span> Höhere Löhne = höhere Kosten → weniger Nachfrage nach Arbeit → mögliche Arbeitslosigkeit.</button>
+            <button class="quiz-option" onclick="quizAnswer('q6',this,false)"><span class="opt-letter">B</span> Höhere Löhne → mehr Konsum → mehr Produktion und Beschäftigung.</button>
+            <button class="quiz-option" onclick="quizAnswer('q6',this,false)"><span class="opt-letter">C</span> Der Staat muss Löhne stets regulieren, damit der Markt funktioniert.</button>
+            <button class="quiz-option" onclick="quizAnswer('q6',this,false)"><span class="opt-letter">D</span> Tarifabschlüsse haben auf das BIP keine nachweisbare Wirkung.</button>
+          </div>
+          <div class="quiz-feedback" id="q6-fb"></div>
+          <button class="quiz-retry" id="q6-retry" onclick="retryQuiz('q6')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">3. Warum profitiert laut dem Kreislaufargument auch der Staat von Lohnerhöhungen?</div>
+          <div class="quiz-options" id="q7">
+            <button class="quiz-option" onclick="quizAnswer('q7',this,false)"><span class="opt-letter">A</span> Er zahlt weniger Sozialleistungen, weil Löhne steigen.</button>
+            <button class="quiz-option" onclick="quizAnswer('q7',this,true)"><span class="opt-letter">B</span> Höhere Löhne → mehr Steuer- und Sozialversicherungseinnahmen → mehr Spielraum für öffentliche Ausgaben.</button>
+            <button class="quiz-option" onclick="quizAnswer('q7',this,false)"><span class="opt-letter">C</span> Der Staat kann dann Schulden leichter zurückzahlen, weil Inflationsrate sinkt.</button>
+            <button class="quiz-option" onclick="quizAnswer('q7',this,false)"><span class="opt-letter">D</span> Er erhält direkte Zahlungen von Gewerkschaften nach Tarifabschlüssen.</button>
+          </div>
+          <div class="quiz-feedback" id="q7-fb"></div>
+          <button class="quiz-retry" id="q7-retry" onclick="retryQuiz('q7')">↩ Nochmal versuchen</button>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-question">4. Was ist eine „Inflationsausgleichsprämie" und warum ist sie ökonomisch attraktiv?</div>
+          <div class="quiz-options" id="q8">
+            <button class="quiz-option" onclick="quizAnswer('q8',this,false)"><span class="opt-letter">A</span> Eine staatliche Zahlung an Unternehmen als Ausgleich für Lohnerhöhungen.</button>
+            <button class="quiz-option" onclick="quizAnswer('q8',this,false)"><span class="opt-letter">B</span> Eine dauerhafte Lohnerhöhung, die an die Inflationsrate gekoppelt ist.</button>
+            <button class="quiz-option" onclick="quizAnswer('q8',this,true)"><span class="opt-letter">C</span> Eine steuerfreie Einmalzahlung als Kompromiss: schützt Kaufkraft ohne dauerhafte Lohnkostenerhöhung.</button>
+            <button class="quiz-option" onclick="quizAnswer('q8',this,false)"><span class="opt-letter">D</span> Ein EU-Förderprogramm für Unternehmen mit hohen Energiekosten.</button>
+          </div>
+          <div class="quiz-feedback" id="q8-fb"></div>
+          <button class="quiz-retry" id="q8-retry" onclick="retryQuiz('q8')">↩ Nochmal versuchen</button>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(1)">← Zurück</button>
+        <button class="btn-next" onclick="nextStep(1)">Abschluss & Sicherung →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Abfrage 2.3.2 -->
+    <div class="step-content" data-step="3" style="display:none;">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Sicherung: Zusammenfassung</h2>
+        </div>
+        <p style="font-size:14px; color:var(--slate-600);">Die Stunde endet mit einer mündlichen Abfrage. Bereite dich vor:</p>
+
+        <div class="two-col" style="margin-top:16px;">
+          <div style="background:var(--indigo-50);border-radius:10px;padding:16px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--indigo-700);margin-bottom:8px;">📚 Das sollst du erklären können:</div>
+            <ul style="font-size:13.5px;color:var(--slate-600);padding-left:18px;line-height:1.6;">
+              <li>Kreislaufwirkung von Lohnerhöhungen</li>
+              <li>Lohn-Preis-Spirale</li>
+              <li>Gewinn-Preis-Spirale</li>
+              <li>Nachfrage- vs. angebotsorientierte Sicht</li>
+            </ul>
+          </div>
+          <div style="background:var(--teal-100);border-radius:10px;padding:16px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--teal-600);margin-bottom:8px;">💬 Das sollst du beurteilen können:</div>
+            <ul style="font-size:13.5px;color:#065f46;padding-left:18px;line-height:1.6;">
+              <li>Forderungen konkreter Tarifparteien einschätzen</li>
+              <li>Branchenspezifische Unterschiede erkennen</li>
+              <li>Kompromissmodelle bewerten</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÜNDLICHE ABFRAGE 2.3.2 -->
+      <div class="abfrage-section print-section" id="abfrage-232">
+        <div class="section" style="border: 2px solid var(--amber-600);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+            <span style="font-size:24px;">🎓</span>
+            <h2 style="color:var(--amber-600);">Mündliche Abfrage · 2.3.2 (10 Min.)</h2>
+            <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨️ Drucken</button>
+          </div>
+          <p style="font-size:13px;color:var(--slate-600);margin-bottom:20px;">4K-Modell: Wissen · Kritisches Denken · Kommunikation · Kreativität</p>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-wissen">💡 Wissen</span>
+            <div class="frage-text">Erkläre die „Lohn-Preis-Spirale" und nenne zwei Argumente der Arbeitgeberverbände, warum starke Tarifabschlüsse riskant sein können.</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <ul>
+                <li>Lohn-Preis-Spirale: Löhne steigen → Unternehmen erhöhen Preise → Inflation → neue Lohnforderungen → Spirale</li>
+                <li>Arbeitgeberargumente: Wettbewerbsfähigkeit sinkt; Gefahr von Produktionsverlagerung ins Ausland; Belastung kleiner Betriebe</li>
+                <li>Zusatz: Planungsunsicherheit bei langen Tarifverträgen</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kritisch">🧠 Kritisches Denken</span>
+            <div class="frage-text">Die Gewerkschaft sagt: „Es gibt keine Lohn-Preis-Spirale, sondern eine Gewinn-Preis-Spirale." Was meinen sie damit – und hast du ein eigenes Urteil?</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <strong>Erklärung:</strong>
+              <ul>
+                <li>Gewerkschaften: Nicht Lohnerhöhungen, sondern Unternehmen haben nach der Pandemie überhöhte Gewinne eingefahren und Preise über Kosten hinaus erhöht</li>
+                <li>Empirisch umstritten: Fratzscher (DIW) stützt diese These; Hüther (IW) widerspricht</li>
+              </ul>
+              <strong>Eigenes Urteil:</strong>
+              <ul>
+                <li>Differenzierte Argumentation: Wahrheit liegt branchenabhängig dazwischen</li>
+                <li>Branchenbeispiel nennen (z.B. Energie, Lebensmittel vs. Gastronomie)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kommunikation">🗣 Kommunikation</span>
+            <div class="frage-text">Fasse die Kreislaufanalyse aus eurer Partnerarbeit zusammen: Wie können höhere Löhne kein Schaden für die Wirtschaft sein?</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <ul>
+                <li>Vollständige Kette: Lohnerhöhung → mehr Kaufkraft → mehr Konsum → steigende Nachfrage → mehr Produktion → mehr Beschäftigung → höhere Steuereinnahmen</li>
+                <li>Einschränkung nennen: Importanteil schmälert Inlandseffekt</li>
+                <li>Verknüpfung mit M1 (Demonstranten) und Buchnertext möglich</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="frage-card">
+            <span class="frage-4k fk-kreativitaet">✨ Kreativität</span>
+            <div class="frage-text">Denk dir ein Szenario aus: In welchem wirtschaftlichen Umfeld wäre ein starker Tarifabschluss (z.B. +10 %) <em>unbedenklich</em> – und in welchem wäre er <em>riskant</em>?</div>
+            <button class="erwartung-toggle" onclick="toggleErwartung(this)">▶ Erwartungshorizont</button>
+            <div class="erwartung-content">
+              <strong>Unbedenklich bei:</strong>
+              <ul>
+                <li>Niedriger Inflation (Reallohngewinn ohne Preisspirale)</li>
+                <li>Hoher Produktivität und starkem Wirtschaftswachstum</li>
+                <li>Großem Fachkräftemangel (Löhne ziehen Arbeitskräfte an)</li>
+                <li>Hohen Unternehmensgewinnen (Verteilungsspielraum vorhanden)</li>
+              </ul>
+              <strong>Riskant bei:</strong>
+              <ul>
+                <li>Rezession / sinkender Nachfrage</li>
+                <li>Hoher Inflation (Lohn-Preis-Spirale wahrscheinlicher)</li>
+                <li>Vielen kleinen Betrieben in der Branche mit geringer Marge</li>
+                <li>Starkem internationalem Wettbewerb (Verlagerungsgefahr)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-prev" onclick="prevStep(1)">← Zurück</button>
+      </div>
+    </div>
+
+  </div><!-- end lesson-1 -->
+
+</div><!-- end main -->
+
+<!-- PIN MODAL -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div id="pin-modal">
+    <h3>🎓 Lehrkraft-Login</h3>
+    <p>Bitte PIN eingeben</p>
+    <div id="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+      <div class="pin-dot" id="d4"></div>
+      <div class="pin-dot" id="d5"></div>
+    </div>
+    <div id="pin-pad">
+      <button class="pin-key" onclick="pinInput('1')">1</button>
+      <button class="pin-key" onclick="pinInput('2')">2</button>
+      <button class="pin-key" onclick="pinInput('3')">3</button>
+      <button class="pin-key" onclick="pinInput('4')">4</button>
+      <button class="pin-key" onclick="pinInput('5')">5</button>
+      <button class="pin-key" onclick="pinInput('6')">6</button>
+      <button class="pin-key" onclick="pinInput('7')">7</button>
+      <button class="pin-key" onclick="pinInput('8')">8</button>
+      <button class="pin-key" onclick="pinInput('9')">9</button>
+      <button class="pin-key del" onclick="pinDelete()">⌫</button>
+      <button class="pin-key" onclick="pinInput('0')">0</button>
+      <button class="pin-key" onclick="pinCancel()" style="font-size:12px;color:var(--slate-600);">✕</button>
+    </div>
+    <div id="pin-error"></div>
+  </div>
+</div>
+
+<script>
+  // ==================== CONFIG ====================
+  const TEACHER_PIN = '123456'; // ← hier ändern
+
+  // ==================== STATE ====================
+  let isTeacher = false;
+  let currentLesson = 0;
+  let currentSteps = [0, 0]; // step per lesson
+  let pinBuffer = '';
+
+  const lessonSteps = [
+    [
+      { label: 'Einstieg' },
+      { label: 'Erarbeitung' },
+      { label: 'Vertiefung' },
+      { label: 'Abfrage', teacherOnly: true }
+    ],
+    [
+      { label: 'Einstieg' },
+      { label: 'Kreislauf' },
+      { label: 'Sichtweisen' },
+      { label: 'Abfrage', teacherOnly: true }
+    ]
+  ];
+
+  // ==================== LESSON SWITCH ====================
+  function switchLesson(idx) {
+    currentLesson = idx;
+    document.querySelectorAll('.lesson-page').forEach((p,i) => {
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.lesson-tab').forEach((t,i) => {
+      t.classList.toggle('active', i === idx);
+    });
+    renderProgress();
+    showStep(idx, currentSteps[idx]);
+  }
+
+  // ==================== STEPS ====================
+  function renderProgress() {
+    const container = document.getElementById('progress-container');
+    const steps = lessonSteps[currentLesson];
+    const current = currentSteps[currentLesson];
+    container.innerHTML = '';
+
+    steps.forEach((s, i) => {
+      if (s.teacherOnly && !isTeacher) return;
+
+      // connector before (except first)
+      if (i > 0) {
+        const conn = document.createElement('div');
+        conn.className = 'step-connector' + (i <= current ? ' done' : '');
+        container.appendChild(conn);
+      }
+
+      const dot = document.createElement('div');
+      dot.className = 'step-dot' +
+        (i === current ? ' active' : '') +
+        (i < current ? ' done' : '') +
+        (s.teacherOnly ? ' teacher-only' : '');
+      dot.onclick = () => showStep(currentLesson, i);
+      dot.innerHTML = `
+        <div class="step-circle">${i < current ? '✓' : (i + 1)}</div>
+        <div class="step-label">${s.label}</div>
+      `;
+      container.appendChild(dot);
+    });
+  }
+
+  function showStep(lessonIdx, stepIdx) {
+    currentSteps[lessonIdx] = stepIdx;
+    const lesson = document.getElementById('lesson-' + lessonIdx);
+    lesson.querySelectorAll('.step-content').forEach((s, i) => {
+      s.style.display = i === stepIdx ? 'block' : 'none';
+    });
+    renderProgress();
+    // Animate sections
+    setTimeout(() => {
+      lesson.querySelectorAll('.step-content[data-step="' + stepIdx + '"] .section').forEach(s => {
+        s.classList.add('visible');
+      });
+    }, 50);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateTeacherBoxes();
+  }
+
+  function nextStep(lessonIdx) {
+    const maxStep = lessonSteps[lessonIdx].length - 1;
+    if (currentSteps[lessonIdx] < maxStep) {
+      showStep(lessonIdx, currentSteps[lessonIdx] + 1);
+    }
+  }
+
+  function prevStep(lessonIdx) {
+    if (currentSteps[lessonIdx] > 0) {
+      showStep(lessonIdx, currentSteps[lessonIdx] - 1);
+    }
+  }
+
+  // ==================== TEACHER MODE ====================
+  function updateTeacherBoxes() {
+    document.querySelectorAll('.teacher-box').forEach(b => {
+      b.classList.toggle('teacher-visible', isTeacher);
+    });
+    document.querySelectorAll('.abfrage-section').forEach(b => {
+      b.classList.toggle('teacher-visible', isTeacher);
+    });
+  }
+
+  function setTeacherMode(on) {
+    isTeacher = on;
+    const btn = document.getElementById('teacher-btn');
+    btn.textContent = on ? '🎓 Lehrkraft ✓' : '🎓 Lehrkraft';
+    btn.classList.toggle('active', on);
+    updateTeacherBoxes();
+    renderProgress();
+  }
+
+  // ==================== PIN ====================
+  function openPinModal() {
+    if (isTeacher) { setTeacherMode(false); return; }
+    pinBuffer = '';
+    updatePinDots();
+    document.getElementById('pin-error').textContent = '';
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function pinInput(digit) {
+    if (pinBuffer.length >= 6) return;
+    pinBuffer += digit;
+    updatePinDots();
+    if (pinBuffer.length === 6) {
+      setTimeout(checkPin, 200);
+    }
+  }
+
+  function pinDelete() {
+    pinBuffer = pinBuffer.slice(0, -1);
+    updatePinDots();
+  }
+
+  function pinCancel() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    pinBuffer = '';
+    updatePinDots();
+  }
+
+  function updatePinDots() {
+    for (let i = 0; i < 6; i++) {
+      document.getElementById('d' + i).classList.toggle('filled', i < pinBuffer.length);
+    }
+  }
+
+  function checkPin() {
+    if (pinBuffer === TEACHER_PIN) {
+      document.getElementById('modal-overlay').classList.remove('open');
+      setTeacherMode(true);
+    } else {
+      document.getElementById('pin-error').textContent = 'Falscher PIN – bitte erneut versuchen.';
+      document.getElementById('pin-modal').classList.add('shake');
+      setTimeout(() => {
+        document.getElementById('pin-modal').classList.remove('shake');
+        pinBuffer = '';
+        updatePinDots();
+      }, 500);
+    }
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) pinCancel();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('modal-overlay').classList.contains('open')) return;
+    if (e.key >= '0' && e.key <= '9') pinInput(e.key);
+    if (e.key === 'Backspace') pinDelete();
+    if (e.key === 'Escape') pinCancel();
+  });
+
+  // ==================== POLL ====================
+  function pollAnswer(groupId, btn, isCorrect, explanation) {
+    const group = document.getElementById(groupId);
+    if (group.dataset.answered) return;
+    group.dataset.answered = '1';
+
+    const options = group.querySelectorAll('.poll-option');
+    options.forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
+    btn.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+
+    // highlight correct if wrong
+    if (!isCorrect) {
+      options.forEach(o => {
+        if (o.classList.contains('selected-wrong')) return;
+        // find correct by checking onclick attribute for 'true,'
+        if (o.getAttribute('onclick') && o.getAttribute('onclick').includes(', true,')) {
+          o.classList.add('highlight-correct');
+        }
+      });
+    }
+
+    const fb = document.getElementById(groupId + '-feedback');
+    fb.textContent = (isCorrect ? '✅ ' : '❌ ') + explanation;
+    fb.className = 'poll-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+
+    if (!isCorrect) {
+      const retry = document.getElementById(groupId + '-retry');
+      if (retry) retry.classList.add('show');
+    }
+  }
+
+  function retryPoll(groupId) {
+    const group = document.getElementById(groupId);
+    delete group.dataset.answered;
+    const options = group.querySelectorAll('.poll-option');
+    options.forEach(o => {
+      o.disabled = false;
+      o.style.cursor = 'pointer';
+      o.classList.remove('selected-correct', 'selected-wrong', 'highlight-correct');
+    });
+    const fb = document.getElementById(groupId + '-feedback');
+    fb.className = 'poll-feedback';
+    fb.textContent = '';
+    const retry = document.getElementById(groupId + '-retry');
+    if (retry) retry.classList.remove('show');
+  }
+
+  // ==================== QUIZ ====================
+  const quizAnswers = {
+    q1: 'B', q2: 'C', q3: 'C', q4: 'B',
+    q5: 'C', q6: 'A', q7: 'B', q8: 'C'
+  };
+  const quizExplanations = {
+    q1: { correct: 'Richtig! Tarifautonomie bedeutet: Gewerkschaften und Arbeitgeberverbände handeln Löhne eigenverantwortlich aus – ohne staatliche Einflussnahme. Grundlage ist die Koalitionsfreiheit (Art. 9 GG).', wrong: 'Nicht ganz. Tarifautonomie bedeutet gerade das Gegenteil staatlicher Kontrolle – es ist das Recht der Sozialpartner, selbst zu verhandeln.' },
+    q2: { correct: 'Richtig! Das ist der Kern des Kaufkraftarguments: Lohnerhöhungen fließen als Konsum zurück in den Wirtschaftskreislauf.', wrong: 'Das ist nicht das Kaufkraftargument. Denk an den Weg: Lohn → Konsum → Nachfrage → Produktion → Beschäftigung.' },
+    q3: { correct: 'Richtig! Die Lohn-Preis-Spirale beschreibt einen sich selbst verstärkenden Kreislauf: Höhere Löhne → höhere Preise → neue Lohnforderungen …', wrong: 'Nicht ganz. Die Lohn-Preis-Spirale zeigt einen gegenseitigen Aufschaukelungsprozess zwischen Löhnen und Preisen.' },
+    q4: { correct: 'Richtig! Arbeitgeberverbände fordern: Lohnerhöhungen müssen durch Produktivitätssteigerungen gedeckt sein.', wrong: 'Das ist nicht die Position der Arbeitgeberverbände. Sie orientieren sich vor allem an der Produktivitätsentwicklung.' },
+    q5: { correct: 'Richtig! Die Gewerkschaften argumentieren: Nicht steigende Löhne, sondern überhöhte Unternehmensgewinne haben nach der Pandemie die Preise getrieben.', wrong: 'Das beschreibt die Lohn-Preis-Spirale (Arbeitgeberargument). Die Gewinn-Preis-Spirale ist das Gegenargument der Gewerkschaften.' },
+    q6: { correct: 'Richtig! Angebotsorientierte Sicht: Höhere Lohnkosten → Unternehmen stellen weniger ein oder verlagern Produktion.', wrong: 'Das ist die nachfrageorientierte Sicht (Kaufkraftargument der Gewerkschaften). Die angebotsorientierte Sicht fokussiert auf Kosten.' },
+    q7: { correct: 'Richtig! Höhere Löhne → mehr Einkommensteuer und Sozialversicherungsbeiträge → Staat hat mehr Einnahmen für öffentliche Ausgaben.', wrong: 'Nicht ganz. Der Staat profitiert vor allem durch höhere Steuer- und Sozialversicherungseinnahmen.' },
+    q8: { correct: 'Richtig! Die Inflationsausgleichsprämie ist eine steuerfreie Einmalzahlung (bis 3.000 €) – ein Kompromiss: Kaufkraftschutz für Arbeitnehmer, keine dauerhaften Lohnkostensteigerungen für Arbeitgeber.', wrong: 'Nicht ganz. Die Inflationsausgleichsprämie ist eine steuerfreie Einmalzahlung als Kompromiss zwischen den Tarifparteien.' }
+  };
+
+  function quizAnswer(qId, btn, isCorrect) {
+    const group = document.getElementById(qId);
+    if (group.dataset.answered) return;
+    group.dataset.answered = '1';
+
+    const options = group.querySelectorAll('.quiz-option');
+    options.forEach(o => { o.disabled = true; o.style.cursor = 'default'; });
+
+    const letters = ['A','B','C','D'];
+    const correctLetter = quizAnswers[qId];
+
+    options.forEach((o, i) => {
+      if (letters[i] === correctLetter) o.classList.add(isCorrect ? 'correct' : 'show-correct');
+    });
+    if (!isCorrect) btn.classList.add('wrong');
+
+    const fb = document.getElementById(qId + '-fb');
+    const explanation = isCorrect ? quizExplanations[qId].correct : quizExplanations[qId].wrong;
+    fb.textContent = (isCorrect ? '✅ ' : '❌ ') + explanation;
+    fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+
+    if (!isCorrect) {
+      document.getElementById(qId + '-retry').classList.add('show');
+    }
+  }
+
+  function retryQuiz(qId) {
+    const group = document.getElementById(qId);
+    delete group.dataset.answered;
+    const options = group.querySelectorAll('.quiz-option');
+    options.forEach(o => {
+      o.disabled = false;
+      o.style.cursor = 'pointer';
+      o.classList.remove('correct','wrong','show-correct');
+    });
+    document.getElementById(qId + '-fb').className = 'quiz-feedback';
+    document.getElementById(qId + '-retry').classList.remove('show');
+  }
+
+  // ==================== SOLUTION TOGGLE ====================
+  function toggleSolution(id) {
+    const el = document.getElementById(id);
+    const btn = el.previousElementSibling;
+    el.classList.toggle('open');
+    btn.textContent = el.classList.contains('open') ? '📋 Musterlösung schließen' : '📋 Musterlösung anzeigen';
+  }
+
+  // ==================== ERWARTUNG TOGGLE ====================
+  function toggleErwartung(btn) {
+    const content = btn.nextElementSibling;
+    content.classList.toggle('open');
+    btn.textContent = content.classList.contains('open') ? '▼ Erwartungshorizont' : '▶ Erwartungshorizont';
+  }
+
+  // ==================== KREISLAUF LÜCKEN ====================
+  const klAnswers = {
+    'kl-1': ['mehr konsum', 'konsum steigt', 'steigende konsumausgaben', 'konsum', 'mehr kaufkraft', 'kaufkraft steigt'],
+    'kl-2': ['mehr produktion', 'produktion steigt', 'steigende produktion', 'produktion'],
+    'kl-3': ['mehr beschäftigung', 'beschäftigung steigt', 'steigende beschäftigung', 'weniger arbeitslosigkeit', 'beschäftigung']
+  };
+  const klCorrectLabels = { 'kl-1': '🛍 mehr Konsum', 'kl-2': '🏭 mehr Produktion', 'kl-3': '👷 mehr Beschäftigung' };
+
+  function checkKreislauf() {
+    let allCorrect = true;
+    let results = [];
+    ['kl-1','kl-2','kl-3'].forEach(id => {
+      const input = document.getElementById(id);
+      const val = input.value.trim().toLowerCase();
+      const box = input.closest('.kl-gap');
+      const isOk = klAnswers[id].some(a => val.includes(a.split(' ')[1] || a.split(' ')[0]));
+      box.classList.remove('correct','wrong');
+      box.classList.add(isOk ? 'correct' : 'wrong');
+      if (!isOk) { allCorrect = false; results.push(klCorrectLabels[id]); }
+    });
+    const fb = document.getElementById('kl-feedback');
+    fb.style.display = 'block';
+    if (allCorrect) {
+      fb.style.background = 'var(--teal-100)';
+      fb.style.color = '#065f46';
+      fb.style.border = '1px solid #99f6e4';
+      fb.innerHTML = '✅ <strong>Vollständig richtig!</strong> Der vollständige Kreislauf: Lohnerhöhung → mehr Konsum → höhere Nachfrage → mehr Produktion → mehr Beschäftigung → höhere Staatseinnahmen.';
+    } else {
+      fb.style.background = 'var(--rose-100)';
+      fb.style.color = '#9f1239';
+      fb.style.border = '1px solid #fecdd3';
+      fb.innerHTML = '❌ Noch nicht ganz. Schau nochmal nach bei: <strong>' + results.join(', ') + '</strong>. Tipp: Denk an den Weg vom Lohn zum Konsum und weiter zur Wirtschaftsleistung.';
+    }
+  }
+
+  function resetKreislauf() {
+    ['kl-1','kl-2','kl-3'].forEach(id => {
+      const input = document.getElementById(id);
+      input.value = '';
+      input.closest('.kl-gap').classList.remove('correct','wrong');
+    });
+    const fb = document.getElementById('kl-feedback');
+    fb.style.display = 'none';
+    fb.textContent = '';
+  }
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProgress();
+    showStep(0, 0);
+    // animate first section
+    setTimeout(() => {
+      document.querySelectorAll('#lesson-0 .step-content[data-step="0"] .section').forEach(s => {
+        s.classList.add('visible');
+      });
+    }, 100);
+  });
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR Q12 · 2.3 Einkommen & soziale Sicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo-900: #1e1b4b;
+    --indigo-700: #3730a3;
+    --indigo-500: #6366f1;
+    --indigo-100: #e0e7ff;
+    --indigo-50: #eef2ff;
+    --teal-600: #0d9488;
+    --teal-100: #ccfbf1;
+    --amber-600: #d97706;
+    --amber-100: #fef3c7;
+    --rose-600: #e11d48;
+    --rose-100: #ffe4e6;
+    --slate-800: #1e293b;
+    --slate-600: #475569;
+    --slate-300: #cbd5e1;
+    --slate-100: #f1f5f9;
+    --white: #ffffff;
+    --radius-card: 14px;
+    --radius-sm: 10px;
+    --shadow-card: 0 4px 24px rgba(55,48,163,0.08);
+    --shadow-md: 0 8px 32px rgba(55,48,163,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--slate-800);
+    background: var(--slate-100);
+    min-height: 100vh;
+  }
+
+  h1,h2,h3,h4 { font-family: 'Syne', sans-serif; font-weight: 800; }
+
+  /* ===== TOPBAR ===== */
+  #topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--indigo-700);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    box-shadow: 0 2px 12px rgba(55,48,163,0.25);
+  }
+  #topbar-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: white;
+    font-size: 15px;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #lesson-tabs {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .lesson-tab {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    white-space: nowrap;
+  }
+  .lesson-tab.active {
+    background: white;
+    color: var(--indigo-700);
+  }
+  #teacher-btn {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  #teacher-btn:hover { background: rgba(255,255,255,0.15); }
+  #teacher-btn.active { background: var(--amber-600); border-color: var(--amber-600); }
+
+  /* ===== PROGRESS BAR ===== */
+  #progress-container {
+    background: white;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--slate-100);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  .step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    min-width: 60px;
+  }
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    background: var(--slate-200, #e2e8f0);
+    color: var(--slate-600);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+  .step-dot.active .step-circle {
+    background: var(--indigo-700);
+    color: white;
+    box-shadow: 0 0 0 4px var(--indigo-100);
+  }
+  .step-dot.done .step-circle {
+    background: var(--teal-600);
+    color: white;
+  }
+  .step-dot.teacher-only .step-circle {
+    background: var(--amber-100);
+    color: var(--amber-600);
+    border-color: var(--amber-600);
+  }
+  .step-label {
+    font-size: 10px;
+    color: var(--slate-600);
+    text-align: center;
+    line-height: 1.2;
+    max-width: 60px;
+  }
+  .step-connector {
+    flex: 1;
+    height: 2px;
+    background: var(--slate-200, #e2e8f0);
+    min-width: 12px;
+    margin-bottom: 16px;
+  }
+  .step-connector.done { background: var(--teal-600); }
+
+  /* ===== MAIN CONTENT ===== */
+  #main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  .lesson-page { display: none; }
+  .lesson-page.active { display: block; }
+
+  /* Sections */
+  .section {
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--indigo-100);
+    color: var(--indigo-700);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section h2 {
+    font-size: 18px;
+    color: var(--indigo-700);
+    line-height: 1.3;
+  }
+  .section h3 {
+    font-size: 15px;
+    color: var(--slate-800);
+    margin-bottom: 10px;
+    margin-top: 18px;
+  }
+  .section p, .section li {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--slate-600);
+  }
+  .section ul { padding-left: 20px; margin-top: 6px; }
+  .section li { margin-bottom: 4px; }
+
+  /* Sozialform badge */
+  .sozialform {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .sf-ea { background: var(--indigo-100); color: var(--indigo-700); }
+  .sf-pa { background: var(--teal-100); color: var(--teal-600); }
+  .sf-ga { background: var(--amber-100); color: var(--amber-600); }
+
+  /* Time badge */
+  .time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--slate-100);
+    color: var(--slate-600);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ===== BOOK REFERENCE BOX ===== */
+  .book-ref {
+    background: var(--indigo-50);
+    border: 1.5px solid var(--indigo-100);
+    border-left: 4px solid var(--indigo-500);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--indigo-700);
+  }
+  .book-ref strong { font-weight: 700; }
+  .book-ref .book-icon { font-size: 18px; margin-right: 8px; }
+
+  /* ===== TEACHER BOX ===== */
+  .teacher-box {
+    background: var(--amber-100);
+    border: 1.5px solid #fde68a;
+    border-left: 4px solid var(--amber-600);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: #92400e;
+    display: none;
+  }
+  .teacher-box.teacher-visible { display: block; }
+  .teacher-box strong { font-weight: 700; }
+
+  /* ===== MEDIA LINKS ===== */
+  .media-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--teal-100);
+    border: 1.5px solid #99f6e4;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--teal-600);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+    margin-bottom: 8px;
+  }
+  .media-link:hover {
+    background: #a7f3d0;
+    transform: translateX(2px);
+  }
+  .media-icon { font-size: 20px; flex-shrink: 0; }
+  .media-desc { font-size: 12px; color: #0f766e; font-weight: 400; }
+
+  /* ===== POLL ===== */
+  .poll-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .poll-option {
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--slate-300);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    background: white;
+    text-align: left;
+    width: 100%;
+  }
+  .poll-option:hover { border-color: var(--indigo-500); background: var(--indigo-50); }
+  .poll-option.selected-correct {
+    border-color: var(--teal-600);
+    background: var(--teal-100);
+    color: #065f46;
+  }
+  .poll-option.selected-wrong {
+    border-color: var(--rose-600);
+    background: var(--rose-100);
+    color: #9f1239;
+  }
+  .poll-option.highlight-correct {
+    border-color: var(--teal-600);
+    background: var(--teal-100);
+    opacity: 0.6;
+  }
+  .poll-feedback {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    display: none;
+  }
+  .poll-feedback.show { display: block; }
+  .poll-feedback.correct { background: var(--teal-100); color: #065f46; border: 1px solid #99f6e4; }
+  .poll-feedback.wrong { background: var(--rose-100); color: #9f1239; border: 1px solid #fecdd3; }
+  .poll-retry {
+    display: none;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--indigo-700);
+    border: 2px solid var(--indigo-500);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  .poll-retry:hover { background: var(--indigo-50); }
+  .poll-retry.show { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ===== QUIZ ===== */
+  .quiz-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+  .quiz-option {
+    padding: 11px 15px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--slate-200, #e2e8f0);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    background: white;
+    text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--indigo-500); background: var(--indigo-50); }
+  .quiz-option.correct { border-color: var(--teal-600); background: var(--teal-100); color: #065f46; }
+  .quiz-option.wrong { border-color: var(--rose-600); background: var(--rose-100); color: #9f1239; }
+  .quiz-option.show-correct { border-color: var(--teal-600); background: var(--teal-100); opacity: 0.7; }
+  .opt-letter {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--slate-100);
+    color: var(--slate-600);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .quiz-feedback {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    margin-bottom: 10px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--teal-100); color: #065f46; }
+  .quiz-feedback.wrong { background: var(--rose-100); color: #9f1239; }
+  .quiz-retry {
+    display: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--rose-600);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: opacity 0.2s;
+  }
+  .quiz-retry:hover { opacity: 0.85; }
+  .quiz-retry.show { display: inline-flex; }
+
+  .quiz-block {
+    border: 1.5px solid var(--slate-200, #e2e8f0);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .quiz-block:last-child { margin-bottom: 0; }
+
+  /* ===== MUSTERLÖSUNG ===== */
+  .solution-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    background: var(--indigo-100);
+    color: var(--indigo-700);
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .solution-toggle:hover { background: var(--indigo-500); color: white; }
+  .solution-content {
+    display: none;
+    margin-top: 14px;
+    padding: 16px;
+    background: var(--indigo-50);
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--indigo-100);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--slate-600);
+  }
+  .solution-content.open { display: block; }
+  .solution-content ul { padding-left: 20px; margin-top: 8px; }
+  .solution-content li { margin-bottom: 5px; }
+
+  /* ===== ROLLENKARTEN ===== */
+  .role-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (max-width: 640px) { .role-cards { grid-template-columns: 1fr; } }
+  .role-card {
+    border-radius: var(--radius-card);
+    border: 2px solid;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .role-card-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .role-card-badge {
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: auto;
+  }
+  .role-card.gewerkschaft { border-color: var(--teal-600); }
+  .role-card.gewerkschaft .role-card-header { background: var(--teal-600); }
+  .role-card.gewerkschaft .role-card-header h4 { color: white; font-size: 14px; margin: 0; }
+  .role-card.gewerkschaft .role-card-badge { background: rgba(255,255,255,0.25); color: white; }
+  .role-card.arbeitgeber { border-color: var(--amber-600); }
+  .role-card.arbeitgeber .role-card-header { background: var(--amber-600); }
+  .role-card.arbeitgeber .role-card-header h4 { color: white; font-size: 14px; margin: 0; }
+  .role-card.arbeitgeber .role-card-badge { background: rgba(255,255,255,0.25); color: white; }
+  .role-card-body {
+    padding: 16px;
+    background: white;
+  }
+  .role-card-task {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--slate-600);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--slate-300);
+  }
+  .role-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .role-line-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .gewerkschaft .role-line-num { background: var(--teal-100); color: var(--teal-600); }
+  .arbeitgeber .role-line-num { background: var(--amber-100); color: var(--amber-600); }
+  .role-line-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px dashed var(--slate-300);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--slate-800);
+    background: transparent;
+    padding: 2px 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .role-line-input:focus { border-bottom-color: var(--indigo-500); }
+  .role-line-input::placeholder { color: var(--slate-300); font-style: italic; }
+
+  /* ===== NAV BUTTONS ===== */
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .btn-prev {
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--slate-300);
+    background: white;
+    color: var(--slate-600);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-prev:hover { border-color: var(--slate-600); }
+  .btn-next {
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--indigo-700);
+    color: white;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-next:hover { background: var(--indigo-500); }
+
+  /* ===== MODAL PIN ===== */
+  #modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30,27,75,0.65);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  #modal-overlay.open { display: flex; }
+  #pin-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    width: 320px;
+    max-width: 95vw;
+    box-shadow: var(--shadow-md);
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  #pin-modal h3 {
+    font-size: 20px;
+    color: var(--indigo-700);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  #pin-modal p {
+    font-size: 13px;
+    color: var(--slate-600);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .pin-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--slate-200, #e2e8f0);
+    transition: background 0.15s;
+  }
+  .pin-dot.filled { background: var(--indigo-700); }
+  #pin-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .pin-key {
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid var(--slate-200, #e2e8f0);
+    background: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--slate-800);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .pin-key:hover { border-color: var(--indigo-500); background: var(--indigo-50); }
+  .pin-key:active { transform: scale(0.95); }
+  .pin-key.del { font-size: 14px; color: var(--rose-600); border-color: var(--rose-100); }
+  .pin-key.del:hover { background: var(--rose-100); }
+  #pin-error {
+    text-align: center;
+    color: var(--rose-600);
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 18px;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  /* ===== MÜNDLICHE ABFRAGE ===== */
+  .abfrage-section {
+    display: none;
+    margin-top: 20px;
+  }
+  .abfrage-section.teacher-visible { display: block; }
+  .frage-card {
+    border: 1.5px solid var(--slate-200, #e2e8f0);
+    border-radius: var(--radius-card);
+    padding: 20px;
+    margin-bottom: 14px;
+    background: white;
+  }
+  .frage-4k {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    margin-bottom: 10px;
+  }
+  .fk-wissen { background: var(--indigo-100); color: var(--indigo-700); }
+  .fk-kritisch { background: var(--rose-100); color: var(--rose-600); }
+  .fk-kommunikation { background: var(--teal-100); color: var(--teal-600); }
+  .fk-kreativitaet { background: var(--amber-100); color: var(--amber-600); }
+  .frage-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .erwartung-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: var(--slate-100);
+    color: var(--slate-600);
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  .erwartung-toggle:hover { background: var(--slate-200, #e2e8f0); }
+  .erwartung-content {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 14px;
+    background: var(--amber-100);
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #92400e;
+    line-height: 1.55;
+  }
+  .erwartung-content.open { display: block; }
+  .erwartung-content ul { padding-left: 18px; margin-top: 6px; }
+  .erwartung-content li { margin-bottom: 4px; }
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    background: var(--amber-600);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 6px;
+    transition: opacity 0.2s;
+  }
+  .print-btn:hover { opacity: 0.85; }
+
+  /* ===== KREISLAUF DIAGRAMM ===== */
+  .kreislauf-visual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--indigo-50);
+    border-radius: var(--radius-card);
+    margin: 14px 0;
+  }
+  .kl-box {
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+  }
+  .kl-blue { background: var(--indigo-100); color: var(--indigo-700); }
+  .kl-green { background: var(--teal-100); color: var(--teal-600); }
   .kl-arrow { font-size: 20px; color: var(--slate-600); }
 
   /* Comparison table */
