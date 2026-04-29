@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR Q12 · 2.3.3 Zweige der Sozialversicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Primär: Orange/Rot */
+  --pri-900:#B71C1C; --pri-800:#C62828; --pri-700:#D32F2F;
+  --pri-500:#EF5350; --pri-400:#FF7043; --pri-50:#FFF3E0;
+  /* Akzente */
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --blue:#1976D2;    --blue-light:#E3F2FD;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --red:#E53935;     --red-light:#FFEBEE;
+  /* Neutral */
+  --text:#1A1A1A; --text-secondary:#555; --text-muted:#AAA;
+  --border:#E0E0E0; --bg-page:#FFF8F5; --bg-card:#fff;
+  /* Gradients */
+  --grad-pri:linear-gradient(135deg,#D32F2F,#FF7043);
+  --grad-green:linear-gradient(135deg,#43A047,#26C6DA);
+  --grad-orange:linear-gradient(135deg,#FF9800,#F44336);
+  --grad-purple:linear-gradient(135deg,#AB47BC,#E91E63);
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --grad-teal:linear-gradient(135deg,#26C6DA,#43A047);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+/* TOPBAR */
+.topbar{background:var(--pri-700);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 2rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(211,47,47,0.3);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo span{color:#FFAB91;}
+.topbar-chip{background:rgba(255,255,255,0.18);color:white;font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:20px;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.topbar-btn{color:rgba(255,255,255,0.8);font-size:13px;font-weight:700;background:transparent;
+  border:1.5px solid rgba(255,255,255,0.35);border-radius:6px;padding:5px 12px;cursor:pointer;
+  transition:all 0.2s;font-family:'Nunito',sans-serif;}
+.topbar-btn:hover{background:rgba(255,255,255,0.15);color:white;}
+.topbar-btn.active{background:var(--orange);border-color:var(--orange);}
+
+/* PROGRESS */
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:10px 2rem;display:flex;align-items:center;gap:6px;overflow-x:auto;}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
+  min-width:56px;transition:transform 0.15s;}
+.step-dot:hover{transform:scale(1.08);}
+.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:800;font-size:13px;background:#E0E0E0;color:#777;
+  transition:all 0.25s;}
+.step-dot.active .step-circle{background:var(--pri-700);color:white;
+  box-shadow:0 0 0 4px #FFCCBC;}
+.step-dot.done .step-circle{background:var(--green);color:white;}
+.step-dot.teacher-only .step-circle{background:var(--orange-light);color:var(--orange);
+  border:2px solid var(--orange);}
+.step-label{font-size:10px;color:var(--text-muted);text-align:center;line-height:1.2;max-width:56px;}
+.step-conn{flex:1;height:2px;background:#E0E0E0;min-width:10px;margin-bottom:14px;}
+.step-conn.done{background:var(--green);}
+
+/* MAIN */
+.main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+.step-content{display:none;}
+.step-content.active{display:block;}
+
+/* HERO */
+.hero{background:var(--grad-pri);border-radius:var(--radius-lg);padding:2.2rem 2.5rem;
+  color:white;position:relative;overflow:hidden;margin-bottom:24px;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-size:130px;
+  font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+  opacity:.75;margin-bottom:6px;}
+.hero h1{font-size:22px;font-weight:900;line-height:1.25;margin-bottom:8px;}
+.hero-sub{font-size:14px;opacity:.85;margin-bottom:16px;max-width:540px;line-height:1.5;}
+.hero-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-chip{background:rgba(255,255,255,0.18);padding:4px 12px;border-radius:20px;
+  font-size:12px;font-weight:700;}
+
+/* SECTION */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:18px;
+  opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;}
+.section.visible{opacity:1;transform:none;}
+.section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.section-num{width:34px;height:34px;border-radius:10px;background:#FFF3E0;color:var(--pri-700);
+  font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section h2{font-size:17px;font-weight:900;color:var(--pri-700);line-height:1.3;}
+.section h3{font-size:14px;font-weight:800;color:var(--text);margin:16px 0 8px;}
+.section p,.section li{font-size:14px;line-height:1.65;color:var(--text-secondary);}
+.section ul{padding-left:18px;margin-top:6px;}
+.section li{margin-bottom:4px;}
+
+/* SOZIALFORM */
+.sf-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:20px;
+  font-size:12px;font-weight:700;margin-bottom:12px;}
+.sf-ea{background:var(--blue-light);color:var(--blue);}
+.sf-pa{background:var(--teal-light);color:var(--teal);}
+.sf-ga{background:var(--purple-light);color:var(--purple);}
+.time-badge{margin-left:auto;background:#F5F5F5;color:var(--text-muted);padding:3px 10px;
+  border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap;}
+
+/* BOOK REF */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:13px 16px;margin:12px 0;font-size:13.5px;color:#581c87;}
+.book-ref strong{color:#6b21a8;font-weight:800;}
+
+/* MEDIA LINK */
+.media-link{display:flex;align-items:center;gap:10px;padding:12px 15px;
+  background:var(--teal-light);border:1.5px solid #99f6e4;border-radius:var(--radius-md);
+  text-decoration:none;color:var(--teal);font-weight:700;font-size:13.5px;
+  transition:all .2s;margin-bottom:8px;}
+.media-link:hover{background:#a7f3d0;transform:translateX(2px);}
+.media-desc{font-size:12px;color:#0f766e;font-weight:400;}
+
+/* INFO BOXES */
+.info-box{border-radius:var(--radius-md);padding:13px 16px;margin:10px 0;font-size:13.5px;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.blue{background:var(--blue-light);border-left:3px solid var(--blue);color:#1e3a6e;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+
+/* TEACHER BOX */
+.teacher-box{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);
+  padding:13px 16px;margin:12px 0;font-size:13.5px;color:#92400e;display:none;}
+.teacher-box.visible{display:block;}
+.teacher-box-hdr{font-weight:900;font-size:12px;text-transform:uppercase;
+  letter-spacing:.05em;margin-bottom:5px;}
+
+/* TASK BOX */
+.task{border:1.5px solid var(--pri-500);border-radius:var(--radius-md);overflow:hidden;margin-bottom:14px;}
+.task-hdr{background:var(--pri-700);padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-hdr-text{color:white;font-size:13px;font-weight:800;}
+.task-hdr-sub{color:rgba(255,255,255,0.75);font-size:11px;font-weight:600;margin-top:1px;}
+.task-body{background:var(--bg-page);padding:14px 16px;font-size:13.5px;
+  color:var(--text-secondary);line-height:1.6;}
+.task-body ul{padding-left:16px;margin-top:6px;}
+.task-body li{margin-bottom:4px;}
+
+/* SOLUTION */
+.solution-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:7px 14px;font-weight:700;color:var(--text-secondary);cursor:pointer;
+  font-family:'Nunito',sans-serif;font-size:13px;margin-top:8px;transition:all .2s;}
+.solution-btn:hover{border-color:var(--pri-700);color:var(--pri-700);background:#FFF3E0;}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);
+  border-radius:0 8px 8px 0;padding:10px 14px;color:#1b5e20;font-size:13px;
+  display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:6px;}
+.solution-reveal li{margin-bottom:4px;}
+
+/* QUIZ */
+.quiz-block{border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:16px;margin-bottom:14px;}
+.quiz-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.quiz-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;
+  background:white;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left;
+  display:flex;align-items:center;gap:8px;transition:all .15s;font-family:'Nunito',sans-serif;}
+.quiz-opt:hover:not(:disabled){border-color:var(--pri-400);background:#FFF3E0;}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.show-correct{border-color:var(--green);background:var(--green-light);opacity:.65;}
+.opt-letter{width:22px;height:22px;border-radius:6px;background:#F5F5F5;color:var(--text-muted);
+  font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.quiz-fb{padding:9px 13px;border-radius:var(--radius-sm);font-size:13px;display:none;margin-bottom:8px;}
+.quiz-fb.show{display:block;}
+.quiz-fb.correct{background:var(--green-light);color:#1b5e20;}
+.quiz-fb.wrong{background:var(--red-light);color:#7f1d1d;}
+.quiz-retry{display:none;padding:6px 14px;border-radius:var(--radius-sm);background:var(--red);
+  color:white;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:12px;transition:opacity .2s;}
+.quiz-retry:hover{opacity:.85;}
+.quiz-retry.show{display:inline-flex;align-items:center;gap:5px;}
+
+/* POLL */
+.poll-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
+.poll-opt{padding:11px 14px;border-radius:var(--radius-sm);border:2px solid var(--border);
+  cursor:pointer;font-size:13.5px;font-weight:600;background:white;text-align:left;
+  width:100%;transition:all .2s;font-family:'Nunito',sans-serif;}
+.poll-opt:hover:not(:disabled){border-color:var(--pri-400);background:#FFF3E0;}
+.poll-opt.sel-correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.poll-opt.sel-wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.poll-opt.show-correct{border-color:var(--green);background:var(--green-light);opacity:.6;}
+.poll-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:13.5px;display:none;}
+.poll-fb.show{display:block;}
+.poll-fb.correct{background:var(--green-light);color:#1b5e20;border:1px solid #86efac;}
+.poll-fb.wrong{background:var(--red-light);color:#7f1d1d;border:1px solid #fca5a5;}
+.poll-retry{display:none;margin-top:8px;padding:6px 14px;border-radius:var(--radius-sm);
+  background:white;color:var(--pri-700);border:2px solid var(--pri-500);cursor:pointer;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;transition:all .2s;}
+.poll-retry:hover{background:#FFF3E0;}
+.poll-retry.show{display:inline-flex;align-items:center;gap:5px;}
+
+/* ZWEIGE VISUAL */
+.zweige-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0;}
+@media(max-width:700px){.zweige-grid{grid-template-columns:1fr 1fr;}}
+.zweig-card{border-radius:var(--radius-md);overflow:hidden;text-align:center;
+  border:1.5px solid;box-shadow:var(--shadow);}
+.zweig-hdr{padding:10px 6px 8px;font-size:11px;font-weight:900;line-height:1.3;}
+.zweig-body{padding:10px 8px;font-size:11.5px;line-height:1.5;}
+.zw-kv{border-color:#1976D2;} .zw-kv .zweig-hdr{background:#1976D2;color:white;}
+.zw-kv .zweig-body{background:#E3F2FD;color:#0D47A1;}
+.zw-rv{border-color:#43A047;} .zw-rv .zweig-hdr{background:#43A047;color:white;}
+.zw-rv .zweig-body{background:#E8F5E9;color:#1b5e20;}
+.zw-av{border-color:#FF9800;} .zw-av .zweig-hdr{background:#FF9800;color:white;}
+.zw-av .zweig-body{background:#FFF3E0;color:#78350f;}
+.zw-pv{border-color:#AB47BC;} .zw-pv .zweig-hdr{background:#AB47BC;color:white;}
+.zw-pv .zweig-body{background:#F3E5F5;color:#4a1272;}
+.zw-uv{border-color:#E53935;} .zw-uv .zweig-hdr{background:#E53935;color:white;}
+.zw-uv .zweig-body{background:#FFEBEE;color:#7f1d1d;}
+
+/* PRINCIPLES GRID */
+.prinzip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+@media(max-width:560px){.prinzip-grid{grid-template-columns:1fr;}}
+.prinzip-card{padding:14px;border-radius:var(--radius-md);border:1.5px solid;}
+.pk-vers{border-color:var(--orange);background:var(--orange-light);}
+.pk-vers h4{color:#92400e;}
+.pk-soli{border-color:var(--teal);background:var(--teal-light);}
+.pk-soli h4{color:#065f46;}
+.pk-subs{border-color:var(--purple);background:var(--purple-light);}
+.pk-subs h4{color:#4a1272;}
+.pk-pflicht{border-color:var(--pri-700);background:#FFF3E0;}
+.pk-pflicht h4{color:var(--pri-800);}
+.prinzip-card h4{font-size:13px;font-weight:900;margin-bottom:6px;}
+.prinzip-card p{font-size:12.5px;line-height:1.5;color:var(--text-secondary);}
+
+/* GAP FILL */
+.gap-input{border:none;border-bottom:2px dashed var(--border);font-family:'Nunito',sans-serif;
+  font-size:13px;font-weight:700;color:var(--text);background:transparent;
+  padding:2px 4px;outline:none;width:130px;text-align:center;transition:border-color .2s;}
+.gap-input:focus{border-bottom-color:var(--pri-700);}
+.gap-input::placeholder{color:#CCC;font-style:italic;font-weight:400;}
+.gap-input.correct{border-bottom-color:var(--green);color:var(--green);}
+.gap-input.wrong{border-bottom-color:var(--red);color:var(--red);}
+
+/* NAV */
+.nav-row{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
+.btn-prev{padding:10px 20px;border-radius:var(--radius-md);border:1.5px solid var(--border);
+  background:white;color:var(--text-secondary);cursor:pointer;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:13.5px;transition:all .2s;}
+.btn-prev:hover{border-color:var(--text);}
+.btn-next{padding:10px 20px;border-radius:var(--radius-md);border:none;
+  background:var(--pri-700);color:white;cursor:pointer;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:13.5px;transition:all .2s;}
+.btn-next:hover{background:var(--pri-800);}
+
+/* PIN MODAL */
+#modal-overlay{display:none;position:fixed;inset:0;background:rgba(180,30,30,0.5);
+  z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
+#modal-overlay.open{display:flex;}
+#pin-modal{background:white;border-radius:20px;padding:30px 26px 22px;width:300px;
+  max-width:95vw;box-shadow:var(--shadow-lg);animation:fadeUp .22s ease;}
+#pin-modal h3{font-size:18px;font-weight:900;color:var(--pri-700);text-align:center;margin-bottom:4px;}
+#pin-modal p{font-size:13px;color:var(--text-secondary);text-align:center;margin-bottom:18px;}
+.pin-dots{display:flex;justify-content:center;gap:8px;margin-bottom:18px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:#E0E0E0;transition:background .15s;}
+.pin-dot.filled{background:var(--pri-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.pin-key{padding:13px;border-radius:9px;border:1.5px solid var(--border);background:white;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:17px;color:var(--text);
+  cursor:pointer;transition:all .15s;text-align:center;}
+.pin-key:hover{border-color:var(--pri-400);background:#FFF3E0;}
+.pin-key:active{transform:scale(.95);}
+.pin-key.del{font-size:13px;color:var(--red);border-color:#FFCDD2;}
+.pin-key.del:hover{background:var(--red-light);}
+#pin-error{text-align:center;color:var(--red);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.shake{animation:shake .38s ease;}
+
+/* ABFRAGE */
+.abfrage-section{display:none;margin-top:18px;}
+.abfrage-section.visible{display:block;}
+.frage-card{border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:18px;margin-bottom:12px;background:white;}
+.fk-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;
+  font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:8px;}
+.fk-wissen{background:var(--blue-light);color:var(--blue);}
+.fk-kritisch{background:var(--red-light);color:var(--red);}
+.fk-komm{background:var(--teal-light);color:var(--teal);}
+.fk-kreativ{background:var(--orange-light);color:var(--orange);}
+.frage-text{font-size:14.5px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.erw-toggle{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;
+  border-radius:7px;background:#F5F5F5;color:var(--text-secondary);border:none;
+  cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;
+  transition:all .2s;}
+.erw-toggle:hover{background:#E0E0E0;}
+.erw-content{display:none;margin-top:8px;padding:10px 13px;background:var(--orange-light);
+  border-radius:8px;font-size:13px;color:#78350f;line-height:1.55;}
+.erw-content.open{display:block;}
+.erw-content ul{padding-left:16px;margin-top:5px;}
+.erw-content li{margin-bottom:3px;}
+.print-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+  border-radius:var(--radius-sm);background:var(--orange);color:white;border:none;
+  cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;
+  margin-top:4px;transition:opacity .2s;}
+.print-btn:hover{opacity:.85;}
+
+/* BEITRAGSRECHNER */
+.rechner-box{background:var(--bg-page);border:1.5px solid var(--border);
+  border-radius:var(--radius-lg);padding:18px;margin:14px 0;}
+.rechner-box label{font-size:13px;font-weight:700;color:var(--text);
+  display:block;margin-bottom:4px;}
+.rechner-box input[type=range]{width:100%;accent-color:var(--pri-700);margin:4px 0 2px;}
+.rechner-row{display:flex;justify-content:space-between;align-items:center;
+  padding:7px 10px;border-radius:8px;margin-bottom:4px;font-size:13px;}
+.rechner-row.hdr{background:var(--pri-700);color:white;font-weight:800;font-size:12px;}
+.rechner-row.kv{background:#E3F2FD;color:#0D47A1;}
+.rechner-row.rv{background:#E8F5E9;color:#1b5e20;}
+.rechner-row.av{background:#FFF3E0;color:#78350f;}
+.rechner-row.pv{background:#F3E5F5;color:#4a1272;}
+.rechner-row.total{background:#FFF3E0;border:1.5px solid var(--pri-400);
+  font-weight:900;color:var(--pri-800);margin-top:4px;}
+.rechner-val{font-weight:900;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+@media(max-width:640px){
+  .main{padding:14px 12px 40px;}
+  .section{padding:16px;}
+  .topbar{padding:0 1rem;}
+}
+@media print{
+  #modal-overlay,.nav-row,.topbar,.progress-bar,.section:not(.print-section){display:none!important;}
+  .abfrage-section{display:block!important;}
+  .erw-content{display:block!important;}
+  body{background:white;}
+  .frage-card{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar" class="topbar">
+  <a class="topbar-logo" href="WR_Q12_index.html">WR <span>&</span> Recht</a>
+  <span class="topbar-chip">Q12</span>
+  <span class="topbar-chip" style="background:rgba(255,255,255,0.12);">2.3.3</span>
+  <div class="topbar-right">
+    <button class="topbar-btn" id="teacher-btn" onclick="openPinModal()">🎓 Lehrkraft</button>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar" id="progress-bar"></div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+
+  <!-- ====== STEP 0: EINSTIEG ====== -->
+  <div class="step-content active" data-step="0">
+
+    <div class="hero section visible">
+      <div class="hero-label">Wirtschaft und Recht · Q12 · Stunde 3</div>
+      <h1>2.3.3 Welche Zweige umfasst die gesetzliche Sozialversicherung?</h1>
+      <div class="hero-sub">Die fünf Säulen des deutschen Sozialstaats – Grundprinzipien, Leistungen und Finanzierung im Überblick.</div>
+      <div class="hero-meta">
+        <span class="hero-chip">📖 S. 114–115</span>
+        <span class="hero-chip">⏱ 40 Min.</span>
+        <span class="hero-chip">startup.WR Bayern</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">1</div>
+        <h2>Einstieg: Risiken des Lebens</h2>
+        <span class="time-badge">⏱ 5 Min.</span>
+      </div>
+      <span class="sf-badge sf-ea">👤 Einzelarbeit</span>
+
+      <div class="book-ref">
+        <strong>📖 Lies M1</strong> „Risiken des Lebens" auf <strong>Seite 114</strong> in deinem Buch. Betrachte die sechs Fotos sorgfältig.
+      </div>
+
+      <p style="margin-bottom:12px;">Welches der gezeigten Risiken schätzt du persönlich als am bedrohlichsten ein – gemessen daran, ob es die wirtschaftliche Existenz einer Person gefährden kann?</p>
+
+      <div class="poll-opts" id="poll-risiko">
+        <button class="poll-opt" onclick="pollAnswer('poll-risiko',this,false,'Nicht ganz: Einbrüche sind ärgerlich, aber Hausrat lässt sich oft ersetzen. Wirklich existenzbedrohend wird es erst, wenn Haftungsansprüche entstehen, die eigene Mittel übersteigen.')">
+          A) Einbruch in die Privatwohnung – Verlust wertvoller Gegenstände
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-risiko',this,false,'Richtig beobachtet, aber: Das Risiko Unfall im Straßenverkehr ist durch die KFZ-Haftpflicht (Pflichtversicherung) weitgehend abgedeckt – daher weniger existenzbedrohend als andere Risiken.')">
+          B) Unfall im Straßenverkehr – Reparaturkosten und Haftung
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-risiko',this,true,'Richtig! Langzeitarbeitslosigkeit bedeutet dauerhafter Ausfall des Erwerbseinkommens. Ohne Absicherung können selbst Grundbedürfnisse nicht mehr gedeckt werden – das ist existenzbedrohend im Wortsinn.')">
+          C) Arbeitslosigkeit – dauerhafter Ausfall des Erwerbseinkommens
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-risiko',this,false,'Auch richtig denkbar! Schwere Krankheit kann tatsächlich existenzbedrohend sein – hohe Behandlungskosten und Arbeitsausfall kommen zusammen. Die gesetzliche Krankenversicherung federt das ab.')">
+          D) Krankheit – hohe Behandlungskosten und Verdienstausfall
+        </button>
+      </div>
+      <div class="poll-fb" id="poll-risiko-fb"></div>
+      <button class="poll-retry show" id="poll-risiko-retry" onclick="retryPoll('poll-risiko')" style="display:none;">↩ Nochmal</button>
+
+      <div class="teacher-box" id="tb0">
+        <div class="teacher-box-hdr">🎓 Lehrkraft-Hinweis</div>
+        Alle Risiken aus M1 können je nach Situation existenzbedrohend sein. Die Umfrage ist bewusst offen angelegt – Ziel ist Aktivierung, nicht Selektion. Kurzimpuls: Wer hätte Antwort D gewählt? Warum? → Überleitung zur GKV.
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-next" onclick="nextStep()">Weiter: Die fünf Zweige →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 1: ERARBEITUNG ZWEIGE ====== -->
+  <div class="step-content" data-step="1">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">2</div>
+        <h2>Erarbeitung: Die fünf Zweige der Sozialversicherung</h2>
+        <span class="time-badge">⏱ 12 Min.</span>
+      </div>
+      <span class="sf-badge sf-pa">👥 Partnerarbeit</span>
+
+      <div class="book-ref">
+        <strong>📖 Lest M2 und M3</strong> auf <strong>Seite 114–115</strong>: Die Tabelle der fünf Zweige (M2) und das Schaubild „Was leistet das Sozialversicherungssystem?" (M3). Bearbeitet danach Aufgaben 1–3 (S. 115).
+      </div>
+
+      <a href="https://www.ccbuchner.de/clip_code/82023-225" target="_blank" class="media-link">
+        <span style="font-size:20px;">🔗</span>
+        <div>
+          <div>Digitale Materialien 82023-225 (C.C. Buchner)</div>
+          <div class="media-desc">Online-Materialien zu 2.3.3 · Aufgaben S. 115</div>
+        </div>
+      </a>
+
+      <h3>Die fünf Zweige im Überblick</h3>
+      <div class="zweige-grid">
+        <div class="zweig-card zw-kv">
+          <div class="zweig-hdr">🏥 Kranken&shy;versicherung</div>
+          <div class="zweig-body">seit 1883<br><strong>14,6 %</strong> Bruttolohn<br>AN: 7,3 %<br>Risiko: <em>Krankheit</em></div>
+        </div>
+        <div class="zweig-card zw-uv">
+          <div class="zweig-hdr">🦺 Unfall&shy;versicherung</div>
+          <div class="zweig-body">seit 1884<br><strong>nur AG</strong> zahlt<br>AN: 0 %<br>Risiko: <em>Arbeitsunfall</em></div>
+        </div>
+        <div class="zweig-card zw-rv">
+          <div class="zweig-hdr">👴 Renten&shy;versicherung</div>
+          <div class="zweig-body">seit 1889<br><strong>18,6 %</strong> Bruttolohn<br>AN: 9,3 %<br>Risiko: <em>Alter, Tod</em></div>
+        </div>
+        <div class="zweig-card zw-av">
+          <div class="zweig-hdr">💼 Arbeitslosen&shy;versicherung</div>
+          <div class="zweig-body">seit 1927<br><strong>2,6 %</strong> Bruttolohn<br>AN: 1,3 %<br>Risiko: <em>Arbeitslosigkeit</em></div>
+        </div>
+        <div class="zweig-card zw-pv">
+          <div class="zweig-hdr">🛁 Pflege&shy;versicherung</div>
+          <div class="zweig-body">seit 1995<br><strong>3,4–4 %</strong><br>AN: 1,7–2,3 %<br>Risiko: <em>Pflegebedarf</em></div>
+        </div>
+      </div>
+
+      <div class="info-box orange" style="margin-top:14px;">
+        <strong>Merke: Paritätische Finanzierung</strong> – Beiträge werden je zur Hälfte von Arbeitnehmer und Arbeitgeber getragen (Ausnahme: Unfallversicherung = 100 % Arbeitgeber).
+      </div>
+
+      <!-- Aufgabe 1 -->
+      <div class="task" style="margin-top:18px;">
+        <div class="task-hdr">
+          <div class="task-num">1</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 1 · Risiken beschreiben</div>
+            <div class="task-hdr-sub">Einzelarbeit · Schriftlich</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Beschreibt die Risiken in M1. Erläutert mögliche Kosten, die durch diese Risiken entstehen können, und inwiefern diese <strong>existenzbedrohend</strong> sein können.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-a1')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-a1">
+              <ul>
+                <li><strong>Arbeitslosigkeit:</strong> Kein Erwerbseinkommen → ohne Rücklagen können Grundbedürfnisse nicht gedeckt werden → existenzbedrohend</li>
+                <li><strong>Unfall im Straßenverkehr:</strong> Reparatur- und ggf. Heilkosten → bedingt existenzbedrohend (v.a. bei Haftungsansprüchen)</li>
+                <li><strong>Einbruch:</strong> Wiederbeschaffung Hausrat → kaum existenzbedrohend</li>
+                <li><strong>Krankheit:</strong> Behandlungs- und Rehakosten, Verdienstausfall → existenzbedrohend bei schwerer Erkrankung</li>
+                <li><strong>Arbeitsunfall:</strong> Heilbehandlung, ggf. Erwerbsminderungsrente → existenzbedrohend bei dauerhafter Einschränkung</li>
+                <li><strong>Pflege im Alter:</strong> Hohe Pflegekosten → existenzbedrohend, da Kosten eigene Mittel übersteigen können</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 2 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">2</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 2 · Abdeckung prüfen</div>
+            <div class="task-hdr-sub">Partnerarbeit · Tabelle ergänzen</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Überprüft, welche der Lebensrisiken durch die gesetzliche Sozialversicherung abgedeckt sind. Erläutert Möglichkeiten, sich gegen <em>nicht abgedeckte</em> Risiken privat abzusichern.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-a2')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-a2">
+              <strong>Abgedeckt durch GKV:</strong> Arbeitslosigkeit (AV), Krankheit (KV), Arbeitsunfall (UV), Pflege (PV)<br><br>
+              <strong>Nicht abgedeckt / privat zu versichern:</strong>
+              <ul>
+                <li>Unfall im Straßenverkehr → KFZ-Haftpflichtversicherung (gesetzliche Pflicht)</li>
+                <li>Einbruch → Hausratversicherung (freiwillig)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 3 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">3</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 3 · Leistungen zuordnen</div>
+            <div class="task-hdr-sub">Partnerarbeit · Schaubild M3</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Zeigt anhand von Beispielen (M3), wie die Leistungen der gesetzlichen Sozialversicherung die in M1 beschriebenen Risiken abmildern können.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-a3')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-a3">
+              <ul>
+                <li><strong>Arbeitslosigkeit → AV:</strong> Arbeitslosengeld sichert Teile des Einkommens; Arbeitsvermittlung und Qualifizierung</li>
+                <li><strong>Krankheit → KV:</strong> Behandlung, Krankengeld zum Ausgleich des Verdienstausfalls, Rehabilitation</li>
+                <li><strong>Arbeitsunfall → UV:</strong> Rehabilitation, Verletztenrente bei dauerhafter Einschränkung</li>
+                <li><strong>Pflegebedarf → PV:</strong> Zuschüsse zur Pflege je nach Pflegestufe</li>
+                <li><strong>Alter → RV:</strong> Altersrente; auch Erwerbsminderungsrente und Hinterbliebenenrente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-box">
+        <div class="teacher-box-hdr">🎓 Buchstruktur S. 114–115</div>
+        M1 = Bildcollage 6 Lebensrisiken; M2 = Tabelle 5 Zweige mit Beitragssätzen 2023; M3 = Schaubild Leistungen nach Versicherungszweig. Aufgaben 4+5 (S. 115) sind für Aufgabe 4 in dieser Stunde vorgesehen.
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+      <button class="btn-next" onclick="nextStep()">Weiter: Grundprinzipien →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 2: GRUNDPRINZIPIEN ====== -->
+  <div class="step-content" data-step="2">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">3</div>
+        <h2>Vertiefung: Grundprinzipien und Aufgabe 4 &amp; 5</h2>
+        <span class="time-badge">⏱ 12 Min.</span>
+      </div>
+      <span class="sf-badge sf-ga">👨‍👩‍👧 Gruppenarbeit (3–4 Pers.)</span>
+
+      <h3>Die vier Grundprinzipien</h3>
+      <div class="prinzip-grid">
+        <div class="prinzip-card pk-vers">
+          <h4>⚖️ Versicherungsprinzip</h4>
+          <p>Leistungen hängen von eingezahlten Beiträgen ab. Wer mehr einzahlt, erhält (bei RV und AV) höhere Leistungen.</p>
+        </div>
+        <div class="prinzip-card pk-soli">
+          <h4>🤝 Solidaritätsprinzip</h4>
+          <p>Gut Verdienende zahlen mehr, erhalten aber keine höhere Krankenleistung. Umverteilung von oben nach unten.</p>
+        </div>
+        <div class="prinzip-card pk-subs">
+          <h4>🏛 Subsidiaritätsprinzip</h4>
+          <p>Staatliche Hilfe greift erst, wenn eigene Sicherungssysteme versagen – persönliche Vorsorge hat Vorrang.</p>
+        </div>
+        <div class="prinzip-card pk-pflicht">
+          <h4>📋 Pflichtversicherung</h4>
+          <p>Alle abhängig Beschäftigten sind versicherungspflichtig. Ausgenommen: Beamte und Selbstständige.</p>
+        </div>
+      </div>
+
+      <!-- Aufgabe 4 -->
+      <div class="task" style="margin-top:16px;">
+        <div class="task-hdr">
+          <div class="task-num">4</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 4 · Beurteilung</div>
+            <div class="task-hdr-sub">Gruppenarbeit · Diskussion</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Beurteilt, ob die gesetzliche Sozialversicherung (M2, M3) für die Absicherung der <strong>„großen Risiken"</strong> ausreichend ist.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-a4')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-a4">
+              <strong>Grundsätzlich: breite und differenzierte Sicherung.</strong>
+              <ul>
+                <li>Leistungen der AV sind zeitlich begrenzt → Langzeitarbeitslosigkeit kann existenzbedrohend sein</li>
+                <li>Bei chronischen Krankheiten oder Berufsunfähigkeit reichen Lohnersatzleistungen dauerhaft nicht aus</li>
+                <li>Demographischer Wandel gefährdet Zukunftsfähigkeit von Renten- und Pflegeversicherung</li>
+                <li>Pflegeversicherung deckt nicht alle Kosten → eigene Zuzahlung erforderlich</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 5 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">5</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 5 · Perspektivwechsel</div>
+            <div class="task-hdr-sub">Gruppenarbeit · Rollenreflexion</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Versetzt euch in die Lage einer <strong>selbstständigen Unternehmerin</strong>: Würdet ihr euch freiwillig gesetzlich versichern oder lieber privat vorsorgen? Diskutiert Vor- und Nachteile.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-a5')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-a5">
+              <strong>Für freiwillige GKV:</strong>
+              <ul>
+                <li>Mitversicherung von Familienmitgliedern kostenlos</li>
+                <li>Krisensicherheit auf lange Sicht (keine Beitragserhöhung bei Krankheit)</li>
+                <li>Beitrag zur Solidargemeinschaft</li>
+              </ul>
+              <strong>Für private Vorsorge:</strong>
+              <ul>
+                <li>Hoffnung auf hohes Einkommen → eigene Rücklagen möglich</li>
+                <li>PKV-Konditionen bei jungen, gesunden Personen günstiger mit besseren Leistungen</li>
+                <li>Versicherung über Berufsverbände (z.B. Rechtsanwaltskammer) möglich</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-box">
+        <div class="teacher-box-hdr">🎓 Hinweis Aufgabe 5</div>
+        Selbstständige sind von der Pflichtversicherung ausgenommen (Art. 9 GG, Berufsfreiheit). Wichtig für das Unterrichtsgespräch: Das Fehlen eines Solidarbeitrags von Selbstständigen ist gleichzeitig ein Finanzierungsproblem der GKV.
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">✓</div>
+        <h2>Selbstcheck: Was weißt du über die Sozialversicherung?</h2>
+        <span class="time-badge">⏱ 5 Min.</span>
+      </div>
+      <span class="sf-badge sf-ea">👤 Einzelarbeit</span>
+
+      <div class="quiz-block">
+        <div class="quiz-q">1. Welcher Zweig der Sozialversicherung wird <em>ausschließlich</em> vom Arbeitgeber finanziert?</div>
+        <div class="quiz-opts" id="qq1">
+          <button class="quiz-opt" onclick="quizAnswer('qq1',this,false)"><span class="opt-letter">A</span> Krankenversicherung</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq1',this,false)"><span class="opt-letter">B</span> Rentenversicherung</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq1',this,true)"><span class="opt-letter">C</span> Unfallversicherung</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq1',this,false)"><span class="opt-letter">D</span> Pflegeversicherung</button>
+        </div>
+        <div class="quiz-fb" id="qq1-fb"></div>
+        <button class="quiz-retry" id="qq1-retry" onclick="retryQuiz('qq1')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">2. Was bedeutet das <em>Solidaritätsprinzip</em> in der gesetzlichen Krankenversicherung konkret?</div>
+        <div class="quiz-opts" id="qq2">
+          <button class="quiz-opt" onclick="quizAnswer('qq2',this,false)"><span class="opt-letter">A</span> Jeder zahlt den gleichen Beitrag, egal wie viel er verdient.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq2',this,true)"><span class="opt-letter">B</span> Gut Verdienende zahlen höhere Beiträge, erhalten aber dieselben Leistungen wie Geringverdiener.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq2',this,false)"><span class="opt-letter">C</span> Wer mehr einzahlt, bekommt auch mehr Leistung zurück.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq2',this,false)"><span class="opt-letter">D</span> Der Staat übernimmt alle Beiträge aus dem Steuertopf.</button>
+        </div>
+        <div class="quiz-fb" id="qq2-fb"></div>
+        <button class="quiz-retry" id="qq2-retry" onclick="retryQuiz('qq2')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">3. Wann wurde die älteste Sozialversicherung in Deutschland eingeführt?</div>
+        <div class="quiz-opts" id="qq3">
+          <button class="quiz-opt" onclick="quizAnswer('qq3',this,false)"><span class="opt-letter">A</span> 1871 (Reichsgründung)</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq3',this,false)"><span class="opt-letter">B</span> 1880 (Vorbereitung der Sozialgesetze)</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq3',this,true)"><span class="opt-letter">C</span> 1883 (Krankenversicherungsgesetz unter Bismarck)</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq3',this,false)"><span class="opt-letter">D</span> 1919 (Weimarer Republik)</button>
+        </div>
+        <div class="quiz-fb" id="qq3-fb"></div>
+        <button class="quiz-retry" id="qq3-retry" onclick="retryQuiz('qq3')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">4. Was versteht man unter dem <em>Subsidiaritätsprinzip</em> im Kontext der Sozialversicherung?</div>
+        <div class="quiz-opts" id="qq4">
+          <button class="quiz-opt" onclick="quizAnswer('qq4',this,false)"><span class="opt-letter">A</span> Der Staat übernimmt die volle Verantwortung für alle sozialen Risiken.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq4',this,false)"><span class="opt-letter">B</span> Nur Bedürftige erhalten staatliche Hilfe – alle anderen sind ausgeschlossen.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq4',this,true)"><span class="opt-letter">C</span> Staatliche Hilfe greift erst, wenn eigene und gemeinschaftliche Ressourcen ausgeschöpft sind.</button>
+          <button class="quiz-opt" onclick="quizAnswer('qq4',this,false)"><span class="opt-letter">D</span> Sozialleistungen werden ausschließlich aus Steuergeldern finanziert.</button>
+        </div>
+        <div class="quiz-fb" id="qq4-fb"></div>
+        <button class="quiz-retry" id="qq4-retry" onclick="retryQuiz('qq4')">↩ Nochmal</button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+      <button class="btn-next" onclick="nextStep()">Abschluss & Sicherung →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 3: SICHERUNG ====== -->
+  <div class="step-content" data-step="3">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">4</div>
+        <h2>Sicherung: Das hast du heute gelernt</h2>
+      </div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Die Stunde endet mit einer mündlichen Abfrage durch die Lehrkraft (10 Min.).</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="info-box orange">
+          <strong>📚 Erklären können:</strong><br>
+          Die 5 Zweige der Sozialversicherung · Beitragssätze · Welche Risiken sind abgedeckt? · Grundprinzipien (Versicherung, Solidarität, Subsidiarität)
+        </div>
+        <div class="info-box green">
+          <strong>💬 Beurteilen können:</strong><br>
+          Ist die Pflichtversicherung gerecht? · Sollten Selbstständige einbezogen werden? · Deckt die GKV die „großen Risiken" ausreichend ab?
+        </div>
+      </div>
+    </div>
+
+    <!-- MÜNDLICHE ABFRAGE – nur Lehrkraft -->
+    <div class="abfrage-section print-section" id="abfrage-233">
+      <div class="section" style="border:2px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+          <span style="font-size:22px;">🎓</span>
+          <h2 style="color:var(--orange);">Mündliche Abfrage · 2.3.3 (10 Min.)</h2>
+          <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨️ Drucken</button>
+        </div>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:18px;">4K-Modell: Wissen · Kritisches Denken · Kommunikation · Kreativität</p>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-wissen">💡 Wissen</span>
+          <div class="frage-text">Nenne die fünf Zweige der gesetzlichen Sozialversicherung und das jeweilige Lebensrisiko, das abgesichert wird.</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <ul>
+              <li>Krankenversicherung → Krankheit, Prävention, Rehabilitation</li>
+              <li>Rentenversicherung → Alter, Erwerbsminderung, Tod (Hinterbliebene)</li>
+              <li>Arbeitslosenversicherung → Arbeitslosigkeit (Einkommensersatz + Vermittlung)</li>
+              <li>Pflegeversicherung → Pflegebedürftigkeit</li>
+              <li>Unfallversicherung → Arbeitsunfall, Berufskrankheit</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-kritisch">🧠 Kritisches Denken</span>
+          <div class="frage-text">Beurteile: Sollten Beamte und Selbstständige in die Pflichtversicherung einbezogen werden? Argumentiere aus mindestens zwei Perspektiven.</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <strong>Pro Einbeziehung:</strong>
+            <ul>
+              <li>Verbreiterung der Beitragsbasis → Finanzierung stabiler</li>
+              <li>Gerechtigkeitsargument: Gleichbehandlung aller Erwerbstätigen</li>
+              <li>Solidargemeinschaft wird größer</li>
+            </ul>
+            <strong>Contra:</strong>
+            <ul>
+              <li>Beamte haben eigene Versorgungssysteme (Pensionen)</li>
+              <li>Selbstständige schätzen Gestaltungsfreiheit bei der Absicherung</li>
+              <li>Überführung bestehender Ansprüche wäre organisatorisch aufwändig</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-komm">🗣 Kommunikation</span>
+          <div class="frage-text">Erkläre einer außenstehenden Person in 2–3 Sätzen, was Solidaritätsprinzip und Versicherungsprinzip unterscheidet.</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <ul>
+              <li>Versicherungsprinzip: Leistung richtet sich nach eingezahlten Beiträgen (z.B. Rente → wer mehr einzahlt, bekommt mehr)</li>
+              <li>Solidaritätsprinzip: Leistung nach Bedarf, unabhängig von Beiträgen (z.B. GKV → alle erhalten gleiche Behandlung)</li>
+              <li>Sprachlich klar, sachlich korrekt, verständliche Alltagssprache</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-kreativ">✨ Kreativität</span>
+          <div class="frage-text">Erfinde ein kurzes Fallbeispiel: Eine Person in einer Lebenssituation, in der die gesetzliche Sozialversicherung <em>nicht</em> ausreicht, um den Lebensstandard zu sichern. Was würdest du dieser Person raten?</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <ul>
+              <li>Plausibles Szenario (z.B. chronische Krankheit, Langzeitpflege, Langzeitarbeitslosigkeit)</li>
+              <li>Bezug auf Grenzen der GKV (Zuzahlungen, zeitliche Begrenzung der AV)</li>
+              <li>Ratschläge: private Zusatzversicherung, Rücklagen, Berufsunfähigkeitsversicherung</li>
+              <li>Kreative Eigenleistung, nicht bloße Reproduktion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<!-- PIN MODAL -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div id="pin-modal">
+    <h3>🎓 Lehrkraft-Login</h3>
+    <p>Bitte 6-stelligen PIN eingeben</p>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+      <div class="pin-dot" id="d4"></div><div class="pin-dot" id="d5"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinInput('1')">1</button>
+      <button class="pin-key" onclick="pinInput('2')">2</button>
+      <button class="pin-key" onclick="pinInput('3')">3</button>
+      <button class="pin-key" onclick="pinInput('4')">4</button>
+      <button class="pin-key" onclick="pinInput('5')">5</button>
+      <button class="pin-key" onclick="pinInput('6')">6</button>
+      <button class="pin-key" onclick="pinInput('7')">7</button>
+      <button class="pin-key" onclick="pinInput('8')">8</button>
+      <button class="pin-key" onclick="pinInput('9')">9</button>
+      <button class="pin-key del" onclick="pinDelete()">⌫</button>
+      <button class="pin-key" onclick="pinInput('0')">0</button>
+      <button class="pin-key del" onclick="closePinModal()" style="font-size:12px;color:var(--text-muted);">✕</button>
+    </div>
+    <div id="pin-error"></div>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN = '123456';
+const STEPS = [
+  {label:'Einstieg'},{label:'Zweige'},{label:'Prinzipien'},{label:'Abfrage',teacherOnly:true}
+];
+let currentStep = 0;
+let isTeacher = false;
+let pinBuf = '';
+
+const quizCorrect = {qq1:'C',qq2:'B',qq3:'C',qq4:'C'};
+const quizExp = {
+  qq1:{c:'Richtig! Die Unfallversicherung wird als einziger Zweig vollständig vom Arbeitgeber getragen – da Arbeitsunfälle in dessen Verantwortungsbereich liegen.',w:'Nicht ganz. Die Unfallversicherung ist der einzige Zweig, der ausschließlich vom Arbeitgeber finanziert wird.'},
+  qq2:{c:'Richtig! Das Solidaritätsprinzip bedeutet: einkommensabhängige Beiträge, aber einheitliche Leistungen – Umverteilung von Besserverdienenden zu Geringverdienern.',w:'Das Solidaritätsprinzip meint: Beiträge richten sich nach dem Einkommen, Leistungen sind aber für alle gleich.'},
+  qq3:{c:'Richtig! Das Krankenversicherungsgesetz von 1883 unter Reichskanzler Bismarck war die erste gesetzliche Sozialversicherung der Welt.',w:'Die älteste Sozialversicherung ist die Krankenversicherung – eingeführt 1883 von Bismarck.'},
+  qq4:{c:'Richtig! Subsidiarität heißt: Eigenverantwortung geht vor. Der Staat hilft erst, wenn eigene Mittel erschöpft sind.',w:'Subsidiarität bedeutet: Staatliche Hilfe nur als letzte Instanz – eigene und familiäre Ressourcen kommen zuerst.'}
+};
+
+// PROGRESS
+function renderProgress(){
+  const bar = document.getElementById('progress-bar');
+  bar.innerHTML='';
+  STEPS.forEach((s,i)=>{
+    if(s.teacherOnly && !isTeacher) return;
+    if(i>0){
+      const c=document.createElement('div');
+      c.className='step-conn'+(i<=currentStep?' done':'');
+      bar.appendChild(c);
+    }
+    const dot=document.createElement('div');
+    dot.className='step-dot'+(i===currentStep?' active':'')+(i<currentStep?' done':'')+(s.teacherOnly?' teacher-only':'');
+    dot.onclick=()=>goToStep(i);
+    dot.innerHTML=`<div class="step-circle">${i<currentStep?'✓':i+1}</div><div class="step-label">${s.label}</div>`;
+    bar.appendChild(dot);
+  });
+}
+
+function goToStep(n){
+  document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
+  const target=document.querySelector(`[data-step="${n}"]`);
+  if(target){target.classList.add('active');currentStep=n;renderProgress();}
+  setTimeout(()=>{
+    target.querySelectorAll('.section').forEach(s=>s.classList.add('visible'));
+  },60);
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateTeacher();
+}
+function nextStep(){goToStep(currentStep+1);}
+function prevStep(){if(currentStep>0)goToStep(currentStep-1);}
+
+function updateTeacher(){
+  document.querySelectorAll('.teacher-box').forEach(b=>b.classList.toggle('visible',isTeacher));
+  document.querySelectorAll('.abfrage-section').forEach(b=>b.classList.toggle('visible',isTeacher));
+}
+
+// PIN
+function openPinModal(){
+  if(isTeacher){isTeacher=false;document.getElementById('teacher-btn').textContent='🎓 Lehrkraft';document.getElementById('teacher-btn').classList.remove('active');updateTeacher();renderProgress();return;}
+  pinBuf='';updatePinDots();document.getElementById('pin-error').textContent='';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closePinModal(){document.getElementById('modal-overlay').classList.remove('open');pinBuf='';updatePinDots();}
+function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closePinModal();}
+function pinInput(d){if(pinBuf.length>=6)return;pinBuf+=d;updatePinDots();if(pinBuf.length===6)setTimeout(checkPin,180);}
+function pinDelete(){pinBuf=pinBuf.slice(0,-1);updatePinDots();}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('d'+i).classList.toggle('filled',i<pinBuf.length);}
+function checkPin(){
+  if(pinBuf===TEACHER_PIN){
+    closePinModal();isTeacher=true;
+    document.getElementById('teacher-btn').textContent='🎓 Lehrkraft ✓';
+    document.getElementById('teacher-btn').classList.add('active');
+    updateTeacher();renderProgress();
+  } else {
+    document.getElementById('pin-error').textContent='Falscher PIN.';
+    document.getElementById('pin-modal').classList.add('shake');
+    setTimeout(()=>{document.getElementById('pin-modal').classList.remove('shake');pinBuf='';updatePinDots();},450);
+  }
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('modal-overlay').classList.contains('open'))return;
+  if(e.key>='0'&&e.key<='9')pinInput(e.key);
+  if(e.key==='Backspace')pinDelete();
+  if(e.key==='Escape')closePinModal();
+});
+
+// POLL
+function pollAnswer(gid,btn,ok,exp){
+  const g=document.getElementById(gid);
+  if(g.dataset.answered)return;
+  g.dataset.answered='1';
+  g.querySelectorAll('.poll-opt').forEach(o=>{o.disabled=true;o.style.cursor='default';});
+  btn.classList.add(ok?'sel-correct':'sel-wrong');
+  if(!ok) g.querySelectorAll('.poll-opt').forEach(o=>{
+    if(o.getAttribute('onclick')&&o.getAttribute('onclick').includes(',true,'))o.classList.add('show-correct');
+  });
+  const fb=document.getElementById(gid+'-fb');
+  fb.textContent=(ok?'✅ ':'❌ ')+exp;
+  fb.className='poll-fb show '+(ok?'correct':'wrong');
+  if(!ok){const r=document.getElementById(gid+'-retry');if(r)r.style.display='inline-flex';}
+}
+function retryPoll(gid){
+  const g=document.getElementById(gid);
+  delete g.dataset.answered;
+  g.querySelectorAll('.poll-opt').forEach(o=>{o.disabled=false;o.style.cursor='pointer';o.classList.remove('sel-correct','sel-wrong','show-correct');});
+  const fb=document.getElementById(gid+'-fb');fb.className='poll-fb';fb.textContent='';
+  const r=document.getElementById(gid+'-retry');if(r)r.style.display='none';
+}
+
+// QUIZ
+function quizAnswer(qid,btn,ok){
+  const g=document.getElementById(qid);
+  if(g.dataset.answered)return;
+  g.dataset.answered='1';
+  const opts=g.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>{o.disabled=true;o.style.cursor='default';});
+  const letters=['A','B','C','D'];
+  opts.forEach((o,i)=>{if(letters[i]===quizCorrect[qid])o.classList.add(ok?'correct':'show-correct');});
+  if(!ok)btn.classList.add('wrong');
+  const fb=document.getElementById(qid+'-fb');
+  const exp=ok?quizExp[qid].c:quizExp[qid].w;
+  fb.textContent=(ok?'✅ ':'❌ ')+exp;
+  fb.className='quiz-fb show '+(ok?'correct':'wrong');
+  if(!ok)document.getElementById(qid+'-retry').classList.add('show');
+}
+function retryQuiz(qid){
+  const g=document.getElementById(qid);
+  delete g.dataset.answered;
+  g.querySelectorAll('.quiz-opt').forEach(o=>{o.disabled=false;o.style.cursor='pointer';o.classList.remove('correct','wrong','show-correct');});
+  document.getElementById(qid+'-fb').className='quiz-fb';
+  document.getElementById(qid+'-retry').classList.remove('show');
+}
+
+// SOLUTION
+function toggleSolution(id){
+  const el=document.getElementById(id);
+  const btn=el.previousElementSibling;
+  el.classList.toggle('visible');
+  btn.textContent=el.classList.contains('visible')?'📋 Musterlösung schließen':'📋 Musterlösung';
+}
+
+// ERWARTUNGSHORIZONT
+function toggleErw(btn){
+  const c=btn.nextElementSibling;
+  c.classList.toggle('open');
+  btn.textContent=c.classList.contains('open')?'▼ Erwartungshorizont':'▶ Erwartungshorizont';
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProgress();
+  setTimeout(()=>{document.querySelectorAll('[data-step="0"] .section').forEach(s=>s.classList.add('visible'));},80);
+});
+</script>
+</body>
+</html>
