@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR Q12 · 2.3.4 Kranken- und Rentenversicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pri-900:#BF360C; --pri-800:#D84315; --pri-700:#E64A19;
+  --pri-500:#FF7043; --pri-400:#FF8A65; --pri-50:#FBE9E7;
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --blue:#1976D2;    --blue-light:#E3F2FD;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --red:#E53935;     --red-light:#FFEBEE;
+  --text:#1A1A1A; --text-secondary:#555; --text-muted:#AAA;
+  --border:#E0E0E0; --bg-page:#FFF9F7; --bg-card:#fff;
+  --grad-pri:linear-gradient(135deg,#E64A19,#FF8A65);
+  --grad-green:linear-gradient(135deg,#43A047,#26C6DA);
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --grad-purple:linear-gradient(135deg,#AB47BC,#E91E63);
+  --grad-teal:linear-gradient(135deg,#26C6DA,#43A047);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+.topbar{background:var(--pri-700);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 2rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(230,74,25,0.3);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo span{color:#FFCCBC;}
+.topbar-chip{background:rgba(255,255,255,0.18);color:white;font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:20px;}
+.topbar-right{margin-left:auto;}
+.topbar-btn{color:rgba(255,255,255,0.85);font-size:13px;font-weight:700;background:transparent;
+  border:1.5px solid rgba(255,255,255,0.35);border-radius:6px;padding:5px 12px;cursor:pointer;
+  transition:all .2s;font-family:'Nunito',sans-serif;}
+.topbar-btn:hover{background:rgba(255,255,255,0.15);color:white;}
+.topbar-btn.active{background:var(--orange);border-color:var(--orange);}
+
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:10px 2rem;display:flex;align-items:center;gap:6px;overflow-x:auto;}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
+  min-width:56px;transition:transform .15s;}
+.step-dot:hover{transform:scale(1.08);}
+.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:800;font-size:13px;background:#E0E0E0;color:#777;transition:all .25s;}
+.step-dot.active .step-circle{background:var(--pri-700);color:white;box-shadow:0 0 0 4px #FFCCBC;}
+.step-dot.done .step-circle{background:var(--green);color:white;}
+.step-dot.teacher-only .step-circle{background:var(--orange-light);color:var(--orange);border:2px solid var(--orange);}
+.step-label{font-size:10px;color:var(--text-muted);text-align:center;line-height:1.2;max-width:56px;}
+.step-conn{flex:1;height:2px;background:#E0E0E0;min-width:10px;margin-bottom:14px;}
+.step-conn.done{background:var(--green);}
+
+.main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+.step-content{display:none;}
+.step-content.active{display:block;}
+
+.hero{background:var(--grad-pri);border-radius:var(--radius-lg);padding:2.2rem 2.5rem;
+  color:white;position:relative;overflow:hidden;margin-bottom:24px;}
+.hero::before{content:'€';position:absolute;right:2rem;top:-5px;font-size:140px;
+  font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;opacity:.75;margin-bottom:6px;}
+.hero h1{font-size:22px;font-weight:900;line-height:1.25;margin-bottom:8px;}
+.hero-sub{font-size:14px;opacity:.85;margin-bottom:16px;max-width:540px;line-height:1.5;}
+.hero-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-chip{background:rgba(255,255,255,0.18);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;}
+
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:18px;
+  opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;}
+.section.visible{opacity:1;transform:none;}
+.section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.section-num{width:34px;height:34px;border-radius:10px;background:var(--pri-50);color:var(--pri-700);
+  font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section h2{font-size:17px;font-weight:900;color:var(--pri-700);line-height:1.3;}
+.section h3{font-size:14px;font-weight:800;color:var(--text);margin:16px 0 8px;}
+.section p,.section li{font-size:14px;line-height:1.65;color:var(--text-secondary);}
+.section ul{padding-left:18px;margin-top:6px;}
+.section li{margin-bottom:4px;}
+
+.sf-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:20px;
+  font-size:12px;font-weight:700;margin-bottom:12px;}
+.sf-ea{background:var(--blue-light);color:var(--blue);}
+.sf-pa{background:var(--teal-light);color:var(--teal);}
+.sf-ga{background:var(--purple-light);color:var(--purple);}
+.time-badge{margin-left:auto;background:#F5F5F5;color:var(--text-muted);padding:3px 10px;
+  border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap;}
+
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:13px 16px;margin:12px 0;font-size:13.5px;color:#581c87;}
+.book-ref strong{color:#6b21a8;font-weight:800;}
+
+.media-link{display:flex;align-items:center;gap:10px;padding:12px 15px;
+  background:var(--teal-light);border:1.5px solid #99f6e4;border-radius:var(--radius-md);
+  text-decoration:none;color:var(--teal);font-weight:700;font-size:13.5px;
+  transition:all .2s;margin-bottom:8px;}
+.media-link:hover{background:#a7f3d0;transform:translateX(2px);}
+.media-desc{font-size:12px;color:#0f766e;font-weight:400;}
+
+.info-box{border-radius:var(--radius-md);padding:13px 16px;margin:10px 0;font-size:13.5px;line-height:1.6;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.blue{background:var(--blue-light);border-left:3px solid var(--blue);color:#1e3a6e;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+
+.teacher-box{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);
+  padding:13px 16px;margin:12px 0;font-size:13.5px;color:#92400e;display:none;}
+.teacher-box.visible{display:block;}
+.teacher-box-hdr{font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
+
+.task{border:1.5px solid var(--pri-500);border-radius:var(--radius-md);overflow:hidden;margin-bottom:14px;}
+.task-hdr{background:var(--pri-700);padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-hdr-text{color:white;font-size:13px;font-weight:800;}
+.task-hdr-sub{color:rgba(255,255,255,0.75);font-size:11px;font-weight:600;margin-top:1px;}
+.task-body{background:var(--bg-page);padding:14px 16px;font-size:13.5px;color:var(--text-secondary);line-height:1.6;}
+.task-body ul{padding-left:16px;margin-top:6px;}
+.task-body li{margin-bottom:4px;}
+
+.solution-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:7px 14px;font-weight:700;color:var(--text-secondary);cursor:pointer;
+  font-family:'Nunito',sans-serif;font-size:13px;margin-top:8px;transition:all .2s;}
+.solution-btn:hover{border-color:var(--pri-700);color:var(--pri-700);background:var(--pri-50);}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);
+  border-radius:0 8px 8px 0;padding:10px 14px;color:#1b5e20;font-size:13px;
+  display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:6px;}
+.solution-reveal li{margin-bottom:4px;}
+
+/* VERGLEICHSTABELLE */
+.compare-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0;}
+.compare-table th{padding:9px 12px;font-weight:800;font-size:12px;text-align:left;}
+.compare-table th:nth-child(2){background:var(--blue);color:white;border-radius:8px 8px 0 0;}
+.compare-table th:nth-child(3){background:var(--orange);color:white;border-radius:8px 8px 0 0;}
+.compare-table td{padding:8px 12px;border-bottom:1px solid #F5F5F5;vertical-align:top;
+  line-height:1.5;color:var(--text-secondary);}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table .row-label{font-weight:700;color:var(--text);background:#F9F9F9;}
+
+/* BISMARCK/BEVERIDGE */
+.modell-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+@media(max-width:560px){.modell-grid{grid-template-columns:1fr;}}
+.modell-card{border-radius:var(--radius-md);overflow:hidden;border:1.5px solid;}
+.modell-card.bismarck{border-color:var(--pri-500);}
+.modell-card.beveridge{border-color:var(--blue);}
+.modell-card .modell-hdr{padding:10px 14px;font-weight:900;font-size:13px;}
+.modell-card.bismarck .modell-hdr{background:var(--pri-700);color:white;}
+.modell-card.beveridge .modell-hdr{background:var(--blue);color:white;}
+.modell-card .modell-body{padding:12px 14px;font-size:13px;line-height:1.55;}
+.modell-card.bismarck .modell-body{background:var(--pri-50);color:#7f1d1d;}
+.modell-card.beveridge .modell-body{background:var(--blue-light);color:#1e3a6e;}
+.modell-card .modell-body ul{padding-left:14px;margin-top:4px;}
+.modell-card .modell-body li{margin-bottom:3px;}
+
+/* RECHNER */
+.rechner-box{background:var(--bg-page);border:1.5px solid var(--border);
+  border-radius:var(--radius-lg);padding:18px;margin:14px 0;}
+.rechner-label{font-size:13px;font-weight:700;color:var(--text);display:flex;
+  justify-content:space-between;align-items:center;margin-bottom:4px;}
+.rechner-val-big{font-size:20px;font-weight:900;color:var(--pri-700);}
+input[type=range]{width:100%;accent-color:var(--pri-700);margin:4px 0 12px;}
+.beitrags-row{display:flex;justify-content:space-between;align-items:center;
+  padding:7px 10px;border-radius:8px;margin-bottom:5px;font-size:13px;font-weight:600;}
+.br-hdr{background:var(--pri-700);color:white;font-weight:800;font-size:12px;}
+.br-kv{background:var(--blue-light);color:#0D47A1;}
+.br-rv{background:var(--green-light);color:#1b5e20;}
+.br-av{background:var(--orange-light);color:#78350f;}
+.br-pv{background:var(--purple-light);color:#4a1272;}
+.br-total{background:var(--pri-50);border:1.5px solid var(--pri-400);font-weight:900;color:var(--pri-800);margin-top:6px;}
+.br-netto{background:#F5F5F5;color:var(--text);margin-top:4px;}
+.br-val{font-weight:900;}
+
+/* UMLAGEVERFAHREN */
+.umlage-vis{display:flex;align-items:center;justify-content:center;gap:10px;
+  flex-wrap:wrap;padding:18px;background:var(--green-light);border-radius:var(--radius-lg);
+  border:1.5px solid #86efac;margin:12px 0;}
+.uv-box{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;text-align:center;min-width:120px;}
+.uv-zahler{background:var(--blue-light);color:#0D47A1;border:1.5px solid var(--blue);}
+.uv-rentner{background:var(--green-light);color:#1b5e20;border:1.5px solid var(--green);}
+.uv-arrow{font-size:22px;color:#555;}
+.uv-generationenvertrag{background:white;border:1.5px solid #86efac;border-radius:10px;
+  padding:8px 12px;font-size:11.5px;color:#065f46;text-align:center;width:100%;margin-top:4px;}
+
+/* QUIZ */
+.quiz-block{border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px;}
+.quiz-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.quiz-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;
+  background:white;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left;
+  display:flex;align-items:center;gap:8px;transition:all .15s;font-family:'Nunito',sans-serif;}
+.quiz-opt:hover:not(:disabled){border-color:var(--pri-400);background:var(--pri-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.show-correct{border-color:var(--green);background:var(--green-light);opacity:.65;}
+.opt-letter{width:22px;height:22px;border-radius:6px;background:#F5F5F5;color:var(--text-muted);
+  font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.quiz-fb{padding:9px 13px;border-radius:var(--radius-sm);font-size:13px;display:none;margin-bottom:8px;}
+.quiz-fb.show{display:block;}
+.quiz-fb.correct{background:var(--green-light);color:#1b5e20;}
+.quiz-fb.wrong{background:var(--red-light);color:#7f1d1d;}
+.quiz-retry{display:none;padding:6px 14px;border-radius:var(--radius-sm);background:var(--red);
+  color:white;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;}
+.quiz-retry:hover{opacity:.85;}
+.quiz-retry.show{display:inline-flex;align-items:center;gap:5px;}
+
+/* POLL */
+.poll-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
+.poll-opt{padding:11px 14px;border-radius:var(--radius-sm);border:2px solid var(--border);
+  cursor:pointer;font-size:13.5px;font-weight:600;background:white;text-align:left;
+  width:100%;transition:all .2s;font-family:'Nunito',sans-serif;}
+.poll-opt:hover:not(:disabled){border-color:var(--pri-400);background:var(--pri-50);}
+.poll-opt.sel-correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.poll-opt.sel-wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.poll-opt.show-correct{border-color:var(--green);background:var(--green-light);opacity:.6;}
+.poll-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:13.5px;display:none;}
+.poll-fb.show{display:block;}
+.poll-fb.correct{background:var(--green-light);color:#1b5e20;border:1px solid #86efac;}
+.poll-fb.wrong{background:var(--red-light);color:#7f1d1d;border:1px solid #fca5a5;}
+.poll-retry{display:none;margin-top:8px;padding:6px 14px;border-radius:var(--radius-sm);
+  background:white;color:var(--pri-700);border:2px solid var(--pri-500);cursor:pointer;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;}
+.poll-retry:hover{background:var(--pri-50);}
+.poll-retry.show{display:inline-flex;align-items:center;gap:5px;}
+
+/* NAV */
+.nav-row{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
+.btn-prev{padding:10px 20px;border-radius:var(--radius-md);border:1.5px solid var(--border);
+  background:white;color:var(--text-secondary);cursor:pointer;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:13.5px;transition:all .2s;}
+.btn-prev:hover{border-color:var(--text);}
+.btn-next{padding:10px 20px;border-radius:var(--radius-md);border:none;
+  background:var(--pri-700);color:white;cursor:pointer;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:13.5px;transition:all .2s;}
+.btn-next:hover{background:var(--pri-800);}
+
+/* PIN MODAL */
+#modal-overlay{display:none;position:fixed;inset:0;background:rgba(180,60,20,0.5);
+  z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
+#modal-overlay.open{display:flex;}
+#pin-modal{background:white;border-radius:20px;padding:30px 26px 22px;width:300px;
+  max-width:95vw;box-shadow:var(--shadow-lg);animation:fadeUp .22s ease;}
+#pin-modal h3{font-size:18px;font-weight:900;color:var(--pri-700);text-align:center;margin-bottom:4px;}
+#pin-modal p{font-size:13px;color:var(--text-secondary);text-align:center;margin-bottom:18px;}
+.pin-dots{display:flex;justify-content:center;gap:8px;margin-bottom:18px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:#E0E0E0;transition:background .15s;}
+.pin-dot.filled{background:var(--pri-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.pin-key{padding:13px;border-radius:9px;border:1.5px solid var(--border);background:white;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:17px;color:var(--text);
+  cursor:pointer;transition:all .15s;text-align:center;}
+.pin-key:hover{border-color:var(--pri-400);background:var(--pri-50);}
+.pin-key:active{transform:scale(.95);}
+.pin-key.del{font-size:13px;color:var(--red);border-color:#FFCDD2;}
+.pin-key.del:hover{background:var(--red-light);}
+#pin-error{text-align:center;color:var(--red);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.shake{animation:shake .38s ease;}
+
+/* ABFRAGE */
+.abfrage-section{display:none;margin-top:18px;}
+.abfrage-section.visible{display:block;}
+.frage-card{border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;background:white;}
+.fk-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:800;font-family:'Nunito',sans-serif;margin-bottom:8px;}
+.fk-wissen{background:var(--blue-light);color:var(--blue);}
+.fk-kritisch{background:var(--red-light);color:var(--red);}
+.fk-komm{background:var(--teal-light);color:var(--teal);}
+.fk-kreativ{background:var(--orange-light);color:var(--orange);}
+.frage-text{font-size:14.5px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.erw-toggle{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;
+  border-radius:7px;background:#F5F5F5;color:var(--text-secondary);border:none;
+  cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;transition:all .2s;}
+.erw-toggle:hover{background:#E0E0E0;}
+.erw-content{display:none;margin-top:8px;padding:10px 13px;background:var(--orange-light);
+  border-radius:8px;font-size:13px;color:#78350f;line-height:1.55;}
+.erw-content.open{display:block;}
+.erw-content ul{padding-left:16px;margin-top:5px;}
+.erw-content li{margin-bottom:3px;}
+.print-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+  border-radius:var(--radius-sm);background:var(--orange);color:white;border:none;
+  cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;margin-top:4px;}
+.print-btn:hover{opacity:.85;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@media(max-width:640px){.main{padding:14px 12px 40px;}.section{padding:16px;}.topbar{padding:0 1rem;}}
+@media print{
+  #modal-overlay,.nav-row,.topbar,.progress-bar,.section:not(.print-section){display:none!important;}
+  .abfrage-section{display:block!important;}.erw-content{display:block!important;}
+  body{background:white;}.frage-card{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="topbar-logo" href="WR_Q12_index.html">WR <span>&</span> Recht</a>
+  <span class="topbar-chip">Q12</span>
+  <span class="topbar-chip" style="background:rgba(255,255,255,0.12);">2.3.4</span>
+  <div class="topbar-right">
+    <button class="topbar-btn" id="teacher-btn" onclick="openPinModal()">🎓 Lehrkraft</button>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar" id="progress-bar"></div>
+
+<div class="main">
+
+  <!-- ====== STEP 0: EINSTIEG ====== -->
+  <div class="step-content active" data-step="0">
+
+    <div class="hero section visible">
+      <div class="hero-label">Wirtschaft und Recht · Q12 · Stunde 4</div>
+      <h1>2.3.4 Wie wird die gesetzliche Kranken- und Rentenversicherung finanziert?</h1>
+      <div class="hero-sub">Beiträge, Bismarck vs. Beveridge und der Generationenvertrag – Finanzierung unter dem Blickwinkel sozialer Gerechtigkeit.</div>
+      <div class="hero-meta">
+        <span class="hero-chip">📖 S. 116–119</span>
+        <span class="hero-chip">⏱ 40 Min.</span>
+        <span class="hero-chip">startup.WR Bayern</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">1</div>
+        <h2>Einstieg: Ist das gerecht?</h2>
+        <span class="time-badge">⏱ 5 Min.</span>
+      </div>
+      <span class="sf-badge sf-ea">👤 Einzelarbeit</span>
+
+      <div class="book-ref">
+        <strong>📖 Sieh dir M1</strong> auf <strong>Seite 116</strong> an: die Gehaltsabrechnung einer Auszubildenden mit Bruttoverdienst 920 €.
+      </div>
+
+      <p style="margin-bottom:12px;">Eine Auszubildende verdient 920 € brutto. Nach Steuern und Sozialversicherungsbeiträgen bleiben ihr <strong>731,86 € netto</strong>. Ist diese Belastung gerecht?</p>
+
+      <div class="poll-opts" id="poll-gerecht">
+        <button class="poll-opt" onclick="pollAnswer('poll-gerecht',this,false,'Nicht ganz: Bei 920 € greift noch keine Einkommensteuer (unter Grundfreibetrag). Aber die Sozialversicherungsbeiträge greifen bereits ab dem ersten Euro – das ist ein zentrales Gerechtigkeitsproblem.')">
+          A) Ja – jeder muss ab dem ersten Euro seinen Beitrag leisten, auch Auszubildende.
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-gerecht',this,false,'Ein wichtiger Aspekt: Die Beiträge bauen auch Ansprüche auf (Rente, Krankenleistungen). Aber das Argument greift nicht bei der Gerechtigkeitsfrage: Die Belastung ist für niedrige Einkommen relativ gesehen höher.')">
+          B) Ja – die Beiträge bauen Ansprüche auf, z.B. für die spätere Rente.
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-gerecht',this,true,'Richtig! Das ist das Kernproblem: Beiträge zur Sozialversicherung wirken regressiv – sie belasten niedrige Einkommen prozentual stärker, weil es keinen Grundfreibetrag gibt. Außerdem ist 920 € kaum existenzsichernd.')">
+          C) Nein – bei einem Einkommen knapp über dem Existenzminimum sind Abzüge von fast 200 € unverhältnismäßig.
+        </button>
+        <button class="poll-opt" onclick="pollAnswer('poll-gerecht',this,false,'Interessanter Gedanke, aber: Sozialversicherung ist Pflicht – ein Opting-out ist nicht vorgesehen. Das Solidaritätsprinzip erfordert die Pflichtmitgliedschaft gerade junger und gesunder Menschen.')">
+          D) Die Auszubildende sollte selbst entscheiden dürfen, ob sie versichert sein will.
+        </button>
+      </div>
+      <div class="poll-fb" id="poll-gerecht-fb"></div>
+      <button class="poll-retry" id="poll-gerecht-retry" style="display:none;" onclick="retryPoll('poll-gerecht')">↩ Nochmal</button>
+
+      <div class="teacher-box">
+        <div class="teacher-box-hdr">🎓 Einstieg / Buchaufgabe 1 (S. 119)</div>
+        Buchaufgabe 1 (S. 119) stellt dieselbe Frage. Der Einstieg bereitet sie vor. Wichtige Ergänzung für das Unterrichtsgespräch: Bei 920 € wird tatsächlich keine Lohnsteuer fällig (unter Grundfreibetrag 2024: 11.604 €/Jahr). Die Belastung sind reine Sozialversicherungsbeiträge (AN-Anteil ≈ 188 €). Das unterstreicht das Gerechtigkeitsproblem noch stärker.
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-next" onclick="nextStep()">Weiter: Beitragsrechner →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 1: BEITRAGSRECHNER & FINANZIERUNG ====== -->
+  <div class="step-content" data-step="1">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">2</div>
+        <h2>Erarbeitung: Wie viel zahlt man eigentlich?</h2>
+        <span class="time-badge">⏱ 10 Min.</span>
+      </div>
+      <span class="sf-badge sf-pa">👥 Partnerarbeit</span>
+
+      <div class="book-ref">
+        <strong>📖 Lest M1 und M3</strong> auf <strong>Seite 116–117</strong>: Gehaltsabrechnung (M1) und „Neue Formen der Finanzierung" (M3). Bearbeitet Aufgaben 1 und 3 (S. 119).
+      </div>
+
+      <a href="https://www.ccbuchner.de/clip_code/82023-226" target="_blank" class="media-link">
+        <span style="font-size:20px;">🔗</span>
+        <div>
+          <div>Digitale Materialien 82023-226 (C.C. Buchner)</div>
+          <div class="media-desc">Online-Materialien zu 2.3.4 · Aufgaben S. 119</div>
+        </div>
+      </a>
+
+      <h3>Interaktiver Beitragsrechner (2024)</h3>
+      <div class="rechner-box">
+        <div class="rechner-label">
+          <span>Bruttolohn pro Monat:</span>
+          <span class="rechner-val-big" id="brutto-val">2.500 €</span>
+        </div>
+        <input type="range" min="500" max="7000" step="50" value="2500" id="brutto-slider" oninput="updateRechner()">
+        <div id="rechner-warnung" style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px;display:none;"></div>
+        <div class="beitrags-row br-hdr">
+          <span>Versicherungszweig (AN-Anteil)</span><span>mtl. Betrag</span>
+        </div>
+        <div class="beitrags-row br-kv">
+          <span>🏥 Krankenversicherung (7,3 % + ø 0,65 % Zusatz)</span>
+          <span class="br-val" id="r-kv">–</span>
+        </div>
+        <div class="beitrags-row br-rv">
+          <span>👴 Rentenversicherung (9,3 %)</span>
+          <span class="br-val" id="r-rv">–</span>
+        </div>
+        <div class="beitrags-row br-av">
+          <span>💼 Arbeitslosenversicherung (1,3 %)</span>
+          <span class="br-val" id="r-av">–</span>
+        </div>
+        <div class="beitrags-row br-pv">
+          <span>🛁 Pflegeversicherung (1,7 %)</span>
+          <span class="br-val" id="r-pv">–</span>
+        </div>
+        <div class="beitrags-row br-total">
+          <span>Gesamt AN-Beiträge</span>
+          <span class="br-val" id="r-total">–</span>
+        </div>
+        <div class="beitrags-row br-netto">
+          <span>≈ Nettolohn (ohne Steuern)</span>
+          <span class="br-val" id="r-netto">–</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--text-muted);margin-top:8px;">* Vereinfachte Berechnung ohne Kirchensteuer und individuelle Steuerklasse. Beitragsbemessungsgrenze KV: 5.175 €/Monat.</div>
+      </div>
+
+      <!-- Aufgabe 1 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">1</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 119, Aufg. 1 · Stellungnahme</div>
+            <div class="task-hdr-sub">Einzelarbeit · Schriftlich</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Nehmt Stellung: Ist die Belastung einer Auszubildenden mit Steuern und Sozialversicherungsbeiträgen (M1) <strong>gerecht</strong>? Bezieht sowohl das Leistungsfähigkeitsprinzip als auch das Solidaritätsprinzip in eure Argumentation ein.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-b1')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-b1">
+              <strong>Argument für Ungerechtigkeit:</strong> 920 € deckt kaum das Existenzminimum → Belastung mit ca. 188 € Sozialversicherungsbeiträgen erscheint unverhältnismäßig. Beiträge wirken regressiv (kein Grundfreibetrag).<br><br>
+              <strong>Gegenargument:</strong> Beiträge bauen Ansprüche auf (Rente, Krankenleistungen). Durch die Beiträge wird auch langfristig Vorsorge getroffen – ein Vorteil für die Auszubildende selbst.<br><br>
+              <strong>Abwägung:</strong> Das Leistungsfähigkeitsprinzip spricht für einen Grundfreibetrag. Das Solidaritätsprinzip erfordert andererseits eine breite Beitragsbasis.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 3 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">3</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 119, Aufg. 3 · Kreislaufwirkung</div>
+            <div class="task-hdr-sub">Partnerarbeit · Analyse</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Zeigt die Auswirkungen von <strong>Lohnerhöhungen</strong> bzw. <strong>gesamtwirtschaftlichen Krisen</strong> auf die Finanzierung der Sozialversicherung auf (M3).
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-b3')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-b3">
+              <strong>Lohnerhöhungen:</strong> Höhere Löhne → höhere Beitragseinnahmen der SV. Andererseits sind Renten an Lohnniveau gekoppelt → Ausgaben steigen ebenfalls.<br><br>
+              <strong>Gesamtwirtschaftliche Krisen:</strong> Rückgang der Beschäftigung → weniger Beitragszahler → Einnahmen sinken. Gleichzeitig steigen Ausgaben der Arbeitslosenversicherung → doppelte Belastung (kontraktiver Effekt).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-box">
+        <div class="teacher-box-hdr">🎓 Hinweis Rechner</div>
+        Der Rechner nutzt die AN-Sätze 2024. Wichtig: Über der Beitragsbemessungsgrenze KV (5.175 €/Monat) werden keine weiteren KV-Beiträge erhoben – deshalb sinkt die relative Belastung bei Hochverdienern. Das ist das Regressivitätsproblem.
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+      <button class="btn-next" onclick="nextStep()">Weiter: Bismarck vs. Beveridge →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 2: BISMARCK / BEVERIDGE + REFORM ====== -->
+  <div class="step-content" data-step="2">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">3</div>
+        <h2>Vertiefung: Bismarck vs. Beveridge + Reformansätze</h2>
+        <span class="time-badge">⏱ 12 Min.</span>
+      </div>
+      <span class="sf-badge sf-ga">👨‍👩‍👧 Gruppenarbeit</span>
+
+      <div class="book-ref">
+        <strong>📖 Lest M2</strong> „Finanzierung zwischen Bismarck und Beveridge" auf <strong>Seite 116/117</strong> sowie M3 (S. 117). Bearbeitet Aufgaben 2 und 4 (S. 119).
+      </div>
+
+      <h3>Zwei Modelle der Sozialfinanzierung</h3>
+      <div class="modell-grid">
+        <div class="modell-card bismarck">
+          <div class="modell-hdr">🏛 Bismarck-Modell (Deutschland)</div>
+          <div class="modell-body">
+            <strong>Prinzip:</strong> Beitragsfinanzierung durch Erwerbstätige<br><br>
+            <strong>Vorteile:</strong>
+            <ul>
+              <li>Äquivalenzprinzip: Leistung nach Beitrags&shy;dauer und -höhe</li>
+              <li>Mitversicherung von Ehepartnern und Kindern (GKV)</li>
+              <li>Starke Anspruchsposition der Versicherten</li>
+            </ul>
+            <strong>Nachteile:</strong>
+            <ul>
+              <li>Außerhalb des Beschäftigungssystems Stehende erhalten weniger</li>
+              <li>Beitragsbasis schrumpft bei Rückgang der Beschäftigung</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modell-card beveridge">
+          <div class="modell-hdr">🇬🇧 Beveridge-Modell (Großbritannien)</div>
+          <div class="modell-body">
+            <strong>Prinzip:</strong> Steuerfinanzierung für alle Staatsbürger<br><br>
+            <strong>Vorteile:</strong>
+            <ul>
+              <li>Universale Versorgung – unabhängig vom Beschäftigungsstatus</li>
+              <li>Steuerprogression verteilt Last gerechter</li>
+              <li>Gesamte Gesellschaft wird einbezogen</li>
+            </ul>
+            <strong>Nachteile:</strong>
+            <ul>
+              <li>Orientierung am Fürsorgeprinzip → schwächere Anspruchsposition</li>
+              <li>Abhängig von staatlichen Haushaltsentscheidungen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3>Das Umlageverfahren der Rentenversicherung</h3>
+      <div class="umlage-vis">
+        <div class="uv-box uv-zahler">👷 Erwerbstätige<br><small>zahlen Beiträge</small></div>
+        <span class="uv-arrow">→</span>
+        <div class="uv-box" style="background:white;border:2px solid #86efac;color:#065f46;padding:10px 16px;border-radius:10px;font-weight:800;">🔄 Umlageverfahren</div>
+        <span class="uv-arrow">→</span>
+        <div class="uv-box uv-rentner">👴 Rentner<br><small>erhalten Renten</small></div>
+        <div class="uv-generationenvertrag">
+          ⚖️ <strong>Generationenvertrag:</strong> Die arbeitende Generation finanziert die Renten der älteren Generation – in der Erwartung, selbst später versorgt zu werden.
+        </div>
+      </div>
+
+      <!-- Aufgabe 2 -->
+      <div class="task" style="margin-top:16px;">
+        <div class="task-hdr">
+          <div class="task-num">2</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 119, Aufg. 2 · Bismarck vs. Beveridge</div>
+            <div class="task-hdr-sub">Gruppenarbeit · Vergleich</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Arbeitet Vor- und Nachteile der Finanzierung nach dem <strong>Bismarck-Modell</strong> bzw. dem <strong>Beveridge-Modell</strong> heraus (M2).
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-b2')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-b2">
+              <table style="width:100%;font-size:12.5px;border-collapse:collapse;">
+                <tr><th style="background:#E64A19;color:white;padding:6px 10px;text-align:left;width:20%;">Kriterium</th><th style="background:#D32F2F;color:white;padding:6px 10px;text-align:left;">Bismarck (Beitrag)</th><th style="background:#1976D2;color:white;padding:6px 10px;text-align:left;">Beveridge (Steuer)</th></tr>
+                <tr style="background:#FFF3E0;"><td style="padding:5px 10px;font-weight:700;">Gerechtigkeit</td><td style="padding:5px 10px;">Leistungsgerechtigkeit (Äquivalenz)</td><td style="padding:5px 10px;">Lastenverteilung via Progression</td></tr>
+                <tr style="background:#F9F9F9;"><td style="padding:5px 10px;font-weight:700;">Zugang</td><td style="padding:5px 10px;">Nur Beschäftigte + Mitversicherte</td><td style="padding:5px 10px;">Alle Staatsbürger</td></tr>
+                <tr style="background:#FFF3E0;"><td style="padding:5px 10px;font-weight:700;">Anspruch</td><td style="padding:5px 10px;">Stark (Versicherungsanspruch)</td><td style="padding:5px 10px;">Schwächer (Fürsorgeprinzip)</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 4 -->
+      <div class="task">
+        <div class="task-hdr">
+          <div class="task-num">4</div>
+          <div>
+            <div class="task-hdr-text">Buchaufgabe S. 119, Aufg. 4 · Reformansätze beurteilen</div>
+            <div class="task-hdr-sub">Gruppenarbeit · Beurteilung</div>
+          </div>
+        </div>
+        <div class="task-body">
+          Arbeitet aus M3 Ansätze für eine Reform der Finanzierung der gesetzlichen Sozialversicherung heraus. Beurteilt, inwiefern diese Ansätze geeignet sind, das Beitragsaufkommen zu erhöhen bzw. Grundsätze der sozialen Gerechtigkeit zu verwirklichen.
+          <div style="margin-top:10px;">
+            <button class="solution-btn" onclick="toggleSolution('sol-b4')">📋 Musterlösung</button>
+            <div class="solution-reveal" id="sol-b4">
+              <strong>Reformansatz 1: Freibeträge / progressive Beitragssätze</strong><br>
+              Wirkung: Beitragsaufkommen aus niedrigen Einkommen sinkt, ggf. durch höhere Sätze oben kompensiert. Gerechtigkeit: Stärkt Leistungsfähigkeitsprinzip.<br><br>
+              <strong>Reformansatz 2: Einbeziehung von Beamten und Selbstständigen</strong><br>
+              Wirkung: Deutlich mehr Beitragszahler. Aber: Ausgangsansprüche müssen übertragen werden → Ausgaben steigen auch. Gerechtigkeit: Gleichbehandlung aller Erwerbstätigen.<br><br>
+              <strong>Reformansatz 3: Einbeziehung von Kapital- und Vermögenseinkünften</strong><br>
+              Wirkung: Breitere Beitragsbasis. Gerechtigkeit: Konsequente Umsetzung des Leistungsfähigkeitsprinzips – aber sachfremd für Arbeitslosenversicherung.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-box">
+        <div class="teacher-box-hdr">🎓 Hinweis Aufgabe 4</div>
+        Die drei Reformansätze aus M3 (S. 117, Z. 45ff., 107ff., 14ff.) sind der Kern dieser Aufgabe. Wichtig für die Q12: Schüler sollen sowohl die fiskalische Wirkung (Beitragsaufkommen) als auch die normative Dimension (Gerechtigkeit nach Leistungs-, Chancen-, Bedarfsgerechtigkeit) analysieren.
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">✓</div>
+        <h2>Selbstcheck: Finanzierung der Sozialversicherung</h2>
+        <span class="time-badge">⏱ 5 Min.</span>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">1. Was versteht man unter dem <em>Umlageverfahren</em> der Rentenversicherung?</div>
+        <div class="quiz-opts" id="rq1">
+          <button class="quiz-opt" onclick="quizAnswer('rq1',this,false)"><span class="opt-letter">A</span> Jeder Versicherte spart für seine eigene Rente auf einem persönlichen Kapitalstock.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq1',this,true)"><span class="opt-letter">B</span> Die Beiträge der aktuell Erwerbstätigen finanzieren direkt die laufenden Renten – kein Kapitalstock wird aufgebaut.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq1',this,false)"><span class="opt-letter">C</span> Der Staat schießt aus dem Haushalt den Rentenkassen fehlende Mittel zu.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq1',this,false)"><span class="opt-letter">D</span> Rentenbeiträge werden in Staatsanleihen investiert und zum Renteneintritt ausgezahlt.</button>
+        </div>
+        <div class="quiz-fb" id="rq1-fb"></div>
+        <button class="quiz-retry" id="rq1-retry" onclick="retryQuiz('rq1')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">2. Was ist die <em>Beitragsbemessungsgrenze</em> in der gesetzlichen Krankenversicherung?</div>
+        <div class="quiz-opts" id="rq2">
+          <button class="quiz-opt" onclick="quizAnswer('rq2',this,false)"><span class="opt-letter">A</span> Das Mindestgehalt, ab dem man überhaupt Beiträge zahlen muss.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq2',this,false)"><span class="opt-letter">B</span> Das Gehalt, ab dem man zwingend in die private Krankenversicherung wechseln muss.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq2',this,true)"><span class="opt-letter">C</span> Das maximale Bruttoeinkommen, bis zu dem Beiträge erhoben werden – darüber liegendes Einkommen ist beitragsfrei.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq2',this,false)"><span class="opt-letter">D</span> Die Grenze, ab der Arbeitnehmer mehr als der Arbeitgeber zahlen müssen.</button>
+        </div>
+        <div class="quiz-fb" id="rq2-fb"></div>
+        <button class="quiz-retry" id="rq2-retry" onclick="retryQuiz('rq2')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">3. Worin unterscheiden sich das Bismarck- und das Beveridge-Modell grundlegend?</div>
+        <div class="quiz-opts" id="rq3">
+          <button class="quiz-opt" onclick="quizAnswer('rq3',this,false)"><span class="opt-letter">A</span> Bismarck finanziert über Steuern, Beveridge über Beiträge.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq3',this,true)"><span class="opt-letter">B</span> Bismarck finanziert über lohnbezogene Beiträge für Beschäftigte; Beveridge über Steuern für alle Staatsbürger.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq3',this,false)"><span class="opt-letter">C</span> Beide Modelle sind inhaltlich identisch – nur die historischen Namen unterscheiden sich.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq3',this,false)"><span class="opt-letter">D</span> Im Bismarck-Modell wird nur Pflege, im Beveridge-Modell nur Rente finanziert.</button>
+        </div>
+        <div class="quiz-fb" id="rq3-fb"></div>
+        <button class="quiz-retry" id="rq3-retry" onclick="retryQuiz('rq3')">↩ Nochmal</button>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">4. Was bedeutet es, dass die Sozialversicherungsbeiträge <em>regressiv</em> wirken?</div>
+        <div class="quiz-opts" id="rq4">
+          <button class="quiz-opt" onclick="quizAnswer('rq4',this,false)"><span class="opt-letter">A</span> Höhere Einkommen zahlen prozentual mehr Beiträge als niedrige.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq4',this,false)"><span class="opt-letter">B</span> Die Beitragssätze sinken mit zunehmendem Einkommen.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq4',this,true)"><span class="opt-letter">C</span> Durch die Beitragsbemessungsgrenze sinkt die relative Beitragsbelastung oberhalb dieser Grenze – Hohe Einkommen zahlen prozentual weniger.</button>
+          <button class="quiz-opt" onclick="quizAnswer('rq4',this,false)"><span class="opt-letter">D</span> Nur Arbeitnehmer zahlen Beiträge, Arbeitgeber sind ausgenommen.</button>
+        </div>
+        <div class="quiz-fb" id="rq4-fb"></div>
+        <button class="quiz-retry" id="rq4-retry" onclick="retryQuiz('rq4')">↩ Nochmal</button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+      <button class="btn-next" onclick="nextStep()">Abschluss & Sicherung →</button>
+    </div>
+  </div>
+
+  <!-- ====== STEP 3: SICHERUNG ====== -->
+  <div class="step-content" data-step="3">
+
+    <div class="section">
+      <div class="section-hdr">
+        <div class="section-num">4</div>
+        <h2>Sicherung: Das hast du heute gelernt</h2>
+      </div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Mündliche Abfrage durch die Lehrkraft (10 Min.).</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="info-box orange">
+          <strong>📚 Erklären können:</strong><br>
+          Umlageverfahren + Generationenvertrag · Beitragsbemessungsgrenze · Versicherungspflichtgrenze · Bismarck vs. Beveridge · Was ist Regressivität?
+        </div>
+        <div class="info-box green">
+          <strong>💬 Beurteilen können:</strong><br>
+          Ist das Bismarck-Modell gerecht? · Reformansätze einschätzen · Auswirkungen von Lohnerhöhungen / Krisen auf die SV-Finanzierung
+        </div>
+      </div>
+    </div>
+
+    <!-- ABFRAGE -->
+    <div class="abfrage-section" id="abfrage-234">
+      <div class="section" style="border:2px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+          <span style="font-size:22px;">🎓</span>
+          <h2 style="color:var(--orange);">Mündliche Abfrage · 2.3.4 (10 Min.)</h2>
+          <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨️ Drucken</button>
+        </div>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:18px;">4K-Modell: Wissen · Kritisches Denken · Kommunikation · Kreativität</p>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-wissen">💡 Wissen</span>
+          <div class="frage-text">Erkläre das Umlageverfahren der Rentenversicherung. Was versteht man unter dem „Generationenvertrag"?</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <ul>
+              <li>Umlageverfahren: Beiträge der aktuell Erwerbstätigen finanzieren direkt die laufenden Renten – kein Kapitalstock wird aufgebaut</li>
+              <li>Gegensatz: Kapitaldeckungsverfahren (privat angespartes Kapital)</li>
+              <li>Generationenvertrag: impliziter Vertrag zwischen Generationen – Arbeitende finanzieren Rentner in Erwartung, selbst versorgt zu werden</li>
+              <li>Problem: Funktioniert nur bei stabiler oder wachsender Erwerbsbevölkerung</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-kritisch">🧠 Kritisches Denken</span>
+          <div class="frage-text">Entscheide dich: Ist das Bismarck-Modell (Beitragsfinanzierung) oder das Beveridge-Modell (Steuerfinanzierung) gerechter? Begründe deine Position unter Rückgriff auf Gerechtigkeitsprinzipien.</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <strong>Bismarck (Leistungsgerechtigkeit):</strong>
+            <ul>
+              <li>Äquivalenzprinzip: Wer mehr einzahlt, bekommt mehr → entspricht Leistungsgerechtigkeit</li>
+              <li>Aber: schließt Nicht-Beschäftigte aus → Chancenungerechtigkeit</li>
+            </ul>
+            <strong>Beveridge (Bedarfs- und Chancengerechtigkeit):</strong>
+            <ul>
+              <li>Universale Versorgung → Bedarfsgerechtigkeit</li>
+              <li>Steuerfinanzierung via Progression → Belastung nach Leistungsfähigkeit</li>
+              <li>Aber: schwächere Anspruchsposition</li>
+            </ul>
+            Abwägung: Eigenständige Positionierung mit nachvollziehbarer Begründung erwartet.
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-komm">🗣 Kommunikation</span>
+          <div class="frage-text">Fasse in 2–3 Sätzen zusammen: Welchen Reformansatz aus Aufgabe 4 hält eure Gruppe für am überzeugendsten – und warum?</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <ul>
+              <li>Klare Benennung des Reformansatzes</li>
+              <li>Nachvollziehbare Begründung mit Bezug auf Beitragsaufkommen UND Gerechtigkeit</li>
+              <li>Nennung eines Gegenarguments / einer Einschränkung</li>
+              <li>Sprachlich flüssig, in vollständigen Sätzen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="frage-card">
+          <span class="fk-badge fk-kreativ">✨ Kreativität</span>
+          <div class="frage-text">Denk dir ein konkretes Szenario aus: In welcher wirtschaftlichen Situation würde das Umlageverfahren der Rentenversicherung besonders stark unter Druck geraten – und was wäre dein Lösungsvorschlag?</div>
+          <button class="erw-toggle" onclick="toggleErw(this)">▶ Erwartungshorizont</button>
+          <div class="erw-content">
+            <strong>Szenarien unter Druck:</strong>
+            <ul>
+              <li>Starker Geburtenrückgang (weniger Beitragszahler)</li>
+              <li>Baby-Boomer-Renteneintritt (~2025–2035)</li>
+              <li>Massenautomatisierung → weniger SV-pflichtige Beschäftigung</li>
+              <li>Tiefe Rezession → Einbruch der Beitragseinnahmen</li>
+            </ul>
+            <strong>Lösungsansätze:</strong> Rentenalter erhöhen, Kapitaldeckungsverfahren ergänzen, Einwanderung qualifizierter Arbeitskräfte, Versicherungspflicht ausweiten, Steuerfinanzierung.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-prev" onclick="prevStep()">← Zurück</button>
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<!-- PIN MODAL -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div id="pin-modal">
+    <h3>🎓 Lehrkraft-Login</h3>
+    <p>Bitte 6-stelligen PIN eingeben</p>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+      <div class="pin-dot" id="d4"></div><div class="pin-dot" id="d5"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinInput('1')">1</button>
+      <button class="pin-key" onclick="pinInput('2')">2</button>
+      <button class="pin-key" onclick="pinInput('3')">3</button>
+      <button class="pin-key" onclick="pinInput('4')">4</button>
+      <button class="pin-key" onclick="pinInput('5')">5</button>
+      <button class="pin-key" onclick="pinInput('6')">6</button>
+      <button class="pin-key" onclick="pinInput('7')">7</button>
+      <button class="pin-key" onclick="pinInput('8')">8</button>
+      <button class="pin-key" onclick="pinInput('9')">9</button>
+      <button class="pin-key del" onclick="pinDelete()">⌫</button>
+      <button class="pin-key" onclick="pinInput('0')">0</button>
+      <button class="pin-key del" onclick="closePinModal()" style="font-size:12px;color:var(--text-muted);">✕</button>
+    </div>
+    <div id="pin-error"></div>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN='123456';
+const STEPS=[{label:'Einstieg'},{label:'Beiträge'},{label:'Bismarck/Beveridge'},{label:'Abfrage',teacherOnly:true}];
+let currentStep=0,isTeacher=false,pinBuf='';
+
+const quizCorrect={rq1:'B',rq2:'C',rq3:'B',rq4:'C'};
+const quizExp={
+  rq1:{c:'Richtig! Umlageverfahren = Beiträge der Erwerbstätigen fließen direkt als Renten aus. Kein Kapitalstock – das unterscheidet es vom Kapitaldeckungsverfahren.',w:'Nicht ganz. Im Umlageverfahren gibt es keinen persönlichen Kapitalstock. Beiträge werden sofort an heutige Rentner weitergeleitet.'},
+  rq2:{c:'Richtig! Die Beitragsbemessungsgrenze (2024: 5.175 €/Monat) ist das maximale Einkommen, auf das Beiträge erhoben werden. Einkommen darüber ist beitragsfrei.',w:'Nicht die Beitragsbemessungsgrenze – das ist die Versicherungspflichtgrenze. Die Beitragsbemessungsgrenze ist das Maximum für die Beitragsberechnung.'},
+  rq3:{c:'Richtig! Bismarck = lohnbezogene Beiträge, nur Beschäftigte. Beveridge = Steuerfinanzierung, alle Staatsbürger. Das ist der grundlegende Unterschied.',w:'Bismarck und Beveridge unterscheiden sich fundamental: Bismarck nutzt Beiträge, Beveridge Steuern.'},
+  rq4:{c:'Richtig! Regressivität entsteht durch die Beitragsbemessungsgrenze: Oberhalb dieser Grenze zahlt man keinen Cent mehr – die relative Belastung sinkt also bei Hochverdienern.',w:'Regressiv bedeutet: Höhere Einkommen zahlen relativ weniger. Das passiert durch die Beitragsbemessungsgrenze – ab 5.175 €/Monat keine weiteren KV-Beiträge.'}
+};
+
+function renderProgress(){
+  const bar=document.getElementById('progress-bar');bar.innerHTML='';
+  STEPS.forEach((s,i)=>{
+    if(s.teacherOnly&&!isTeacher)return;
+    if(i>0){const c=document.createElement('div');c.className='step-conn'+(i<=currentStep?' done':'');bar.appendChild(c);}
+    const dot=document.createElement('div');
+    dot.className='step-dot'+(i===currentStep?' active':'')+(i<currentStep?' done':'')+(s.teacherOnly?' teacher-only':'');
+    dot.onclick=()=>goToStep(i);
+    dot.innerHTML=`<div class="step-circle">${i<currentStep?'✓':i+1}</div><div class="step-label">${s.label}</div>`;
+    bar.appendChild(dot);
+  });
+}
+function goToStep(n){
+  document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
+  const t=document.querySelector(`[data-step="${n}"]`);
+  if(t){t.classList.add('active');currentStep=n;renderProgress();}
+  setTimeout(()=>{if(t)t.querySelectorAll('.section').forEach(s=>s.classList.add('visible'));},60);
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateTeacher();
+}
+function nextStep(){goToStep(currentStep+1);}
+function prevStep(){if(currentStep>0)goToStep(currentStep-1);}
+function updateTeacher(){
+  document.querySelectorAll('.teacher-box').forEach(b=>b.classList.toggle('visible',isTeacher));
+  document.querySelectorAll('.abfrage-section').forEach(b=>b.classList.toggle('visible',isTeacher));
+}
+
+// RECHNER
+function updateRechner(){
+  const brutto=parseInt(document.getElementById('brutto-slider').value);
+  document.getElementById('brutto-val').textContent=brutto.toLocaleString('de-DE')+' €';
+  const bbgKV=5175,vfKV=5775;
+  const basis=Math.min(brutto,bbgKV);
+  const kv=basis*0.0795;
+  const rv=brutto*0.093;
+  const av=brutto*0.013;
+  const pv=brutto*0.017;
+  const total=kv+rv+av+pv;
+  const netto=brutto-total;
+  document.getElementById('r-kv').textContent=kv.toFixed(2).replace('.',',')+' €';
+  document.getElementById('r-rv').textContent=rv.toFixed(2).replace('.',',')+' €';
+  document.getElementById('r-av').textContent=av.toFixed(2).replace('.',',')+' €';
+  document.getElementById('r-pv').textContent=pv.toFixed(2).replace('.',',')+' €';
+  document.getElementById('r-total').textContent=total.toFixed(2).replace('.',',')+' €';
+  document.getElementById('r-netto').textContent=netto.toFixed(2).replace('.',',')+' €';
+  const warn=document.getElementById('rechner-warnung');
+  if(brutto>=vfKV){warn.style.display='block';warn.textContent='ℹ️ Ab '+vfKV.toLocaleString('de-DE')+' €: Wechsel in PKV möglich (Versicherungspflichtgrenze)';}
+  else if(brutto>=bbgKV){warn.style.display='block';warn.textContent='ℹ️ KV-Beiträge werden nur bis zur Beitragsbemessungsgrenze ('+bbgKV.toLocaleString('de-DE')+' €) erhoben.';}
+  else{warn.style.display='none';}
+}
+
+// PIN
+function openPinModal(){
+  if(isTeacher){isTeacher=false;document.getElementById('teacher-btn').textContent='🎓 Lehrkraft';document.getElementById('teacher-btn').classList.remove('active');updateTeacher();renderProgress();return;}
+  pinBuf='';updatePinDots();document.getElementById('pin-error').textContent='';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closePinModal(){document.getElementById('modal-overlay').classList.remove('open');pinBuf='';updatePinDots();}
+function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closePinModal();}
+function pinInput(d){if(pinBuf.length>=6)return;pinBuf+=d;updatePinDots();if(pinBuf.length===6)setTimeout(checkPin,180);}
+function pinDelete(){pinBuf=pinBuf.slice(0,-1);updatePinDots();}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('d'+i).classList.toggle('filled',i<pinBuf.length);}
+function checkPin(){
+  if(pinBuf===TEACHER_PIN){
+    closePinModal();isTeacher=true;
+    document.getElementById('teacher-btn').textContent='🎓 Lehrkraft ✓';
+    document.getElementById('teacher-btn').classList.add('active');
+    updateTeacher();renderProgress();
+  } else {
+    document.getElementById('pin-error').textContent='Falscher PIN.';
+    document.getElementById('pin-modal').classList.add('shake');
+    setTimeout(()=>{document.getElementById('pin-modal').classList.remove('shake');pinBuf='';updatePinDots();},450);
+  }
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('modal-overlay').classList.contains('open'))return;
+  if(e.key>='0'&&e.key<='9')pinInput(e.key);
+  if(e.key==='Backspace')pinDelete();
+  if(e.key==='Escape')closePinModal();
+});
+
+// POLL
+function pollAnswer(gid,btn,ok,exp){
+  const g=document.getElementById(gid);if(g.dataset.answered)return;g.dataset.answered='1';
+  g.querySelectorAll('.poll-opt').forEach(o=>{o.disabled=true;o.style.cursor='default';});
+  btn.classList.add(ok?'sel-correct':'sel-wrong');
+  if(!ok)g.querySelectorAll('.poll-opt').forEach(o=>{if(o.getAttribute('onclick')&&o.getAttribute('onclick').includes(',true,'))o.classList.add('show-correct');});
+  const fb=document.getElementById(gid+'-fb');
+  fb.textContent=(ok?'✅ ':'❌ ')+exp;fb.className='poll-fb show '+(ok?'correct':'wrong');
+  if(!ok){const r=document.getElementById(gid+'-retry');if(r)r.style.display='inline-flex';}
+}
+function retryPoll(gid){
+  const g=document.getElementById(gid);delete g.dataset.answered;
+  g.querySelectorAll('.poll-opt').forEach(o=>{o.disabled=false;o.style.cursor='pointer';o.classList.remove('sel-correct','sel-wrong','show-correct');});
+  const fb=document.getElementById(gid+'-fb');fb.className='poll-fb';fb.textContent='';
+  const r=document.getElementById(gid+'-retry');if(r)r.style.display='none';
+}
+
+// QUIZ
+function quizAnswer(qid,btn,ok){
+  const g=document.getElementById(qid);if(g.dataset.answered)return;g.dataset.answered='1';
+  const opts=g.querySelectorAll('.quiz-opt');opts.forEach(o=>{o.disabled=true;o.style.cursor='default';});
+  const letters=['A','B','C','D'];
+  opts.forEach((o,i)=>{if(letters[i]===quizCorrect[qid])o.classList.add(ok?'correct':'show-correct');});
+  if(!ok)btn.classList.add('wrong');
+  const fb=document.getElementById(qid+'-fb');
+  fb.textContent=(ok?'✅ ':'❌ ')+(ok?quizExp[qid].c:quizExp[qid].w);
+  fb.className='quiz-fb show '+(ok?'correct':'wrong');
+  if(!ok)document.getElementById(qid+'-retry').classList.add('show');
+}
+function retryQuiz(qid){
+  const g=document.getElementById(qid);delete g.dataset.answered;
+  g.querySelectorAll('.quiz-opt').forEach(o=>{o.disabled=false;o.style.cursor='pointer';o.classList.remove('correct','wrong','show-correct');});
+  document.getElementById(qid+'-fb').className='quiz-fb';
+  document.getElementById(qid+'-retry').classList.remove('show');
+}
+function toggleSolution(id){
+  const el=document.getElementById(id);const btn=el.previousElementSibling;
+  el.classList.toggle('visible');
+  btn.textContent=el.classList.contains('visible')?'📋 Musterlösung schließen':'📋 Musterlösung';
+}
+function toggleErw(btn){
+  const c=btn.nextElementSibling;c.classList.toggle('open');
+  btn.textContent=c.classList.contains('open')?'▼ Erwartungshorizont':'▶ Erwartungshorizont';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProgress();updateRechner();
+  setTimeout(()=>{document.querySelectorAll('[data-step="0"] .section').forEach(s=>s.classList.add('visible'));},80);
+});
+</script>
+</body>
+</html>
