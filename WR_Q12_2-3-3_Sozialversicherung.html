@@ -74,8 +74,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .step-content.active{display:block;}
 
 /* HERO */
-.hero{background:var(--grad-pri);border-radius:var(--radius-lg);padding:2.2rem 2.5rem;
-  color:red;position:relative;overflow:hidden;margin-bottom:24px;}
+.hero,.hero *{color:white;}
+.hero{opacity:1 !important;transform:none !important;color:white !important;background:var(--grad-pri);border-radius:var(--radius-lg);padding:2.2rem 2.5rem;
+  color:white;position:relative;overflow:hidden;margin-bottom:24px;}
 .hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-size:130px;
   font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
 .hero-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
@@ -89,8 +90,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 /* SECTION */
 .section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
   box-shadow:var(--shadow);padding:24px;margin-bottom:18px;
-  opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;}
-.section.visible{opacity:1;transform:none;}
+  animation:fadeUp 0.4s ease both;}
 .section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
 .section-num{width:34px;height:34px;border-radius:10px;background:#FFF3E0;color:var(--pri-700);
   font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -101,7 +101,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .section li{margin-bottom:4px;}
 
 /* SOZIALFORM */
-.sf-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:20px;
+.sf-badge{display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 6px;border-radius:20px;
   font-size:12px;font-weight:700;margin-bottom:12px;}
 .sf-ea{background:var(--blue-light);color:var(--blue);}
 .sf-pa{background:var(--teal-light);color:var(--teal);}
@@ -362,7 +362,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
   <!-- ====== STEP 0: EINSTIEG ====== -->
   <div class="step-content active" data-step="0">
 
-    <div class="hero section visible">
+    <div class="hero">
       <div class="hero-label">Wirtschaft und Recht · Q12 · Stunde 3</div>
       <h1>2.3.3 Welche Zweige umfasst die gesetzliche Sozialversicherung?</h1>
       <div class="hero-sub">Die fünf Säulen des deutschen Sozialstaats – Grundprinzipien, Leistungen und Finanzierung im Überblick.</div>
@@ -379,7 +379,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
         <h2>Einstieg: Risiken des Lebens</h2>
         <span class="time-badge">⏱ 5 Min.</span>
       </div>
-      <span class="sf-badge sf-ea">👤 Einzelarbeit</span>
+      <span class="sf-badge" style="background:var(--blue-light);color:var(--blue);"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg> Einzelarbeit</span>
 
       <div class="book-ref">
         <strong>📖 Lies M1</strong> „Risiken des Lebens" auf <strong>Seite 114</strong> in deinem Buch. Betrachte die sechs Fotos sorgfältig.
@@ -424,7 +424,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
         <h2>Erarbeitung: Die fünf Zweige der Sozialversicherung</h2>
         <span class="time-badge">⏱ 12 Min.</span>
       </div>
-      <span class="sf-badge sf-pa">👥 Partnerarbeit</span>
+      <span class="sf-badge" style="background:var(--teal-light);color:var(--teal);"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg> Partnerarbeit</span>
 
       <div class="book-ref">
         <strong>📖 Lest M2 und M3</strong> auf <strong>Seite 114–115</strong>: Die Tabelle der fünf Zweige (M2) und das Schaubild „Was leistet das Sozialversicherungssystem?" (M3). Bearbeitet danach Aufgaben 1–3 (S. 115).
@@ -469,6 +469,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
       <!-- Aufgabe 1 -->
       <div class="task" style="margin-top:18px;">
         <div class="task-hdr">
+          <div style="background:white;border:1.5px solid #1976D2;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div>
           <div class="task-num">1</div>
           <div>
             <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 1 · Risiken beschreiben</div>
@@ -496,6 +497,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
       <!-- Aufgabe 2 -->
       <div class="task">
         <div class="task-hdr">
+          <div style="background:white;border:1.5px solid #0d9488;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div>
           <div class="task-num">2</div>
           <div>
             <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 2 · Abdeckung prüfen</div>
@@ -521,6 +523,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
       <!-- Aufgabe 3 -->
       <div class="task">
         <div class="task-hdr">
+          <div style="background:white;border:1.5px solid #0d9488;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div>
           <div class="task-num">3</div>
           <div>
             <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 3 · Leistungen zuordnen</div>
@@ -565,7 +568,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
         <h2>Vertiefung: Grundprinzipien und Aufgabe 4 &amp; 5</h2>
         <span class="time-badge">⏱ 12 Min.</span>
       </div>
-      <span class="sf-badge sf-ga">👨‍👩‍👧 Gruppenarbeit (3–4 Pers.)</span>
+      <span class="sf-badge" style="background:var(--purple-light);color:var(--purple);"><svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/><circle cx="20" cy="5" r="4" fill="#7B1FA2"/><path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="20" cy="35" r="4" fill="#7B1FA2"/><path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="5" cy="20" r="4" fill="#7B1FA2"/><path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="35" cy="20" r="4" fill="#7B1FA2"/><path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg> Gruppenarbeit (3–4 Pers.)</span>
 
       <h3>Die vier Grundprinzipien</h3>
       <div class="prinzip-grid">
@@ -590,6 +593,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
       <!-- Aufgabe 4 -->
       <div class="task" style="margin-top:16px;">
         <div class="task-hdr">
+          <div style="background:white;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/><circle cx="20" cy="5" r="4" fill="#7B1FA2"/><path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="20" cy="35" r="4" fill="#7B1FA2"/><path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="5" cy="20" r="4" fill="#7B1FA2"/><path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="35" cy="20" r="4" fill="#7B1FA2"/><path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>
           <div class="task-num">4</div>
           <div>
             <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 4 · Beurteilung</div>
@@ -616,6 +620,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
       <!-- Aufgabe 5 -->
       <div class="task">
         <div class="task-hdr">
+          <div style="background:white;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/><circle cx="20" cy="5" r="4" fill="#7B1FA2"/><path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="20" cy="35" r="4" fill="#7B1FA2"/><path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="5" cy="20" r="4" fill="#7B1FA2"/><path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="35" cy="20" r="4" fill="#7B1FA2"/><path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>
           <div class="task-num">5</div>
           <div>
             <div class="task-hdr-text">Buchaufgabe S. 115, Aufg. 5 · Perspektivwechsel</div>
@@ -657,7 +662,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
         <h2>Selbstcheck: Was weißt du über die Sozialversicherung?</h2>
         <span class="time-badge">⏱ 5 Min.</span>
       </div>
-      <span class="sf-badge sf-ea">👤 Einzelarbeit</span>
+      <span class="sf-badge" style="background:var(--blue-light);color:var(--blue);"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg> Einzelarbeit</span>
 
       <div class="quiz-block">
         <div class="quiz-q">1. Welcher Zweig der Sozialversicherung wird <em>ausschließlich</em> vom Arbeitgeber finanziert?</div>
@@ -846,7 +851,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 </div>
 
 <script>
-const TEACHER_PIN = '066090';
+const TEACHER_PIN = '123456';
 const STEPS = [
   {label:'Einstieg'},{label:'Zweige'},{label:'Prinzipien'},{label:'Abfrage',teacherOnly:true}
 ];
@@ -885,9 +890,6 @@ function goToStep(n){
   document.querySelectorAll('.step-content').forEach(s=>s.classList.remove('active'));
   const target=document.querySelector(`[data-step="${n}"]`);
   if(target){target.classList.add('active');currentStep=n;renderProgress();}
-  setTimeout(()=>{
-    target.querySelectorAll('.section').forEach(s=>s.classList.add('visible'));
-  },60);
   window.scrollTo({top:0,behavior:'smooth'});
   updateTeacher();
 }
@@ -994,8 +996,7 @@ function toggleErw(btn){
 // INIT
 document.addEventListener('DOMContentLoaded',()=>{
   renderProgress();
-  setTimeout(()=>{document.querySelectorAll('[data-step="0"] .section').forEach(s=>s.classList.add('visible'));},80);
-});
+  });
 </script>
 </body>
 </html>
