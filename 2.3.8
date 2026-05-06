@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR 12 · 2.3.8 Kompetenzcheck & Sicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font: 'Nunito', sans-serif;
+  /* Stunde 8: Grün – Abschluss/Sicherung */
+  --primary:       #2E7D32;
+  --primary-light: #388E3C;
+  --primary-dark:  #1B5E20;
+  --accent:        #A5D6A7;
+  --grad-primary:  linear-gradient(135deg, #1B5E20, #43A047);
+
+  --blue-900:#0D47A1; --blue-800:#1565C0; --blue-700:#1976D2;
+  --blue-400:#29B6F6; --blue-50:#E3F2FD;
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --red:#E53935;     --red-light:#FFEBEE;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --amber:#D97706;   --amber-light:#FFFBEB;
+
+  --text:#1A1A1A; --text-secondary:#555555; --text-muted:#AAAAAA;
+  --border:#E0E0E0; --bg-card:#FFFFFF; --bg-page:#F0F4F8;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+.topbar{background:var(--primary);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 1.5rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(27,94,32,0.35);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;white-space:nowrap;}
+.topbar-logo span{color:var(--accent);}
+.topbar-chip{background:rgba(255,255,255,0.15);color:white;font-weight:700;font-size:12px;
+  border-radius:20px;padding:3px 10px;margin:0 auto;}
+.topbar-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+  color:white;border-radius:var(--radius-sm);padding:6px 14px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.topbar-btn:hover{background:rgba(255,255,255,0.25);}
+
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:0.6rem 1.5rem;display:flex;gap:6px;align-items:center;overflow-x:auto;}
+.step-btn{flex:1;min-width:0;border:none;background:transparent;cursor:pointer;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  color:var(--text-muted);padding:6px 4px;border-radius:var(--radius-sm);transition:all 0.2s;white-space:nowrap;}
+.step-btn.active{color:var(--primary);background:#e8f5e9;}
+.step-btn::after{content:'';display:block;height:3px;border-radius:2px;background:var(--border);margin-top:4px;}
+.step-btn.active::after{background:var(--primary);}
+.step-btn.teacher-step{color:var(--amber);}
+.step-btn.teacher-step::after{background:var(--amber);}
+.step-btn.teacher-step.active{background:var(--amber-light);color:var(--amber);}
+
+main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+
+.hero{background:var(--grad-primary) !important;border-radius:var(--radius-lg);
+  padding:2.2rem 2rem;color:white !important;position:relative;overflow:hidden;margin-bottom:1.5rem;}
+.hero *{color:white !important;}
+.hero::before{content:'✓';position:absolute;right:1.5rem;top:0.5rem;
+  font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:0.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-sub{font-size:14px;opacity:0.85;font-weight:600;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.hero-tag{background:rgba(255,255,255,0.18);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;}
+
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;animation:fadeUp 0.4s ease both;}
+.section-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.section-num{width:28px;height:28px;border-radius:50%;background:var(--grad-primary);color:white;
+  font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section-title{font-weight:800;font-size:16px;}
+.section-body{padding:1.25rem;}
+
+.step{display:none;}
+.step.active{display:block;}
+
+.task{border:1.5px solid var(--accent);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.task-header{background:var(--primary);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-weight:800;font-size:14px;color:white;flex:1;}
+.task-sub{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;display:block;margin-top:1px;}
+.task-icons{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.task-icon-tile{background:white;border:1.5px solid rgba(255,255,255,0.5);border-radius:8px;
+  padding:7px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+.task-body{background:#F0F4F8;padding:1.1rem 1.2rem;}
+
+.info-box{border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.info-box.blue  {background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green {background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red   {background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal  {background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box-title{font-weight:800;font-size:13px;margin-bottom:4px;}
+.info-box p,.info-box li{font-size:13.5px;line-height:1.55;}
+.info-box ul{padding-left:16px;margin-top:4px;}
+
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:0.75rem;}
+.book-ref-icon{font-size:18px;flex-shrink:0;}
+.book-ref-title{color:#6b21a8;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;}
+.book-ref-text{color:#581c87;font-size:13px;font-weight:600;}
+
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 14px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;text-align:left;transition:all 0.2s;font-family:var(--font);}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:#e8f5e9;}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong  {border-color:var(--red);  background:var(--red-light); color:#7f1d1d;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-result{margin-top:8px;font-size:13px;font-weight:700;padding:8px 12px;border-radius:var(--radius-sm);display:none;}
+.quiz-result.show{display:block;}
+.quiz-result.ok {background:var(--green-light);color:#1b5e20;}
+.quiz-result.err{background:var(--red-light);color:#7f1d1d;}
+
+.solution-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:8px 16px;font-weight:700;font-size:13px;color:var(--text-secondary);
+  cursor:pointer;font-family:var(--font);transition:all 0.2s;margin-top:8px;}
+.solution-btn:hover{border-color:var(--primary);color:var(--primary);background:#e8f5e9;}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;
+  padding:10px 14px;color:#1b5e20;font-size:13px;display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:4px;}
+.solution-reveal li{margin-bottom:3px;}
+
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;font-family:var(--font);font-size:14px;resize:vertical;min-height:80px;background:white;}
+.answer-area:focus{outline:none;border-color:var(--primary);}
+
+/* ── WIEDERHOLUNG: Themenraster ── */
+.themen-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0.75rem 0;}
+@media(max-width:600px){.themen-grid{grid-template-columns:1fr;}}
+.thema-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid;cursor:pointer;transition:all 0.2s;}
+.thema-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.thema-card.t1{background:#fef2f2;border-color:#fca5a5;}
+.thema-card.t2{background:#eff6ff;border-color:#93c5fd;}
+.thema-card.t3{background:#fdf4ff;border-color:#d8b4fe;}
+.thema-card.t4{background:#fff7ed;border-color:#fdba74;}
+.thema-card.t5{background:#f0fdf4;border-color:#86efac;}
+.thema-card.t6{background:#fff3e0;border-color:#fbbf24;}
+.thema-num{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.thema-card.t1 .thema-num{color:#b91c1c;}
+.thema-card.t2 .thema-num{color:#1d4ed8;}
+.thema-card.t3 .thema-num{color:#7e22ce;}
+.thema-card.t4 .thema-num{color:#c2410c;}
+.thema-card.t5 .thema-num{color:#166534;}
+.thema-card.t6 .thema-num{color:#92400e;}
+.thema-title{font-weight:800;font-size:14px;margin-bottom:4px;}
+.thema-card p{font-size:12px;line-height:1.45;color:var(--text-secondary);}
+
+/* ── KOMPETENZCHECK BOX ── */
+.check-box{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);
+  padding:1.1rem;margin-bottom:0.75rem;}
+.check-box-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.check-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;
+  font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.check-question{font-weight:700;font-size:14px;flex:1;}
+.check-type{font-size:11px;font-weight:800;border-radius:20px;padding:3px 9px;white-space:nowrap;}
+.ct-analyse{background:#dbeafe;color:#1d4ed8;}
+.ct-beurteilen{background:#fce7f3;color:#9d174d;}
+.ct-diskutieren{background:#d1fae5;color:#065f46;}
+
+/* ── SYNTHESE-PFEIL ── */
+.synthese-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0.75rem 0;
+  background:#f8fafc;border-radius:var(--radius-md);padding:1rem;}
+.syn-box{background:white;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:7px 12px;font-size:12px;font-weight:700;text-align:center;flex:1;min-width:80px;}
+.syn-arrow{font-size:18px;color:var(--text-muted);flex-shrink:0;}
+.syn-box.highlight{border-color:var(--primary);background:#e8f5e9;color:var(--primary);}
+
+/* ── TEACHER ── */
+.teacher-only{display:none;}
+body.teacher-mode .teacher-only{display:block;}
+body.teacher-mode .teacher-step{display:flex !important;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.teacher-note-header{font-weight:800;font-size:12px;color:#92400e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.teacher-note p,.teacher-note li{font-size:13px;color:#78350f;line-height:1.55;}
+.teacher-note ul{padding-left:16px;}
+
+/* ── ABFRAGE ── */
+.abfrage-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.abfrage-card-header{padding:0.8rem 1rem;display:flex;align-items:center;gap:10px;}
+.abfrage-k-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;color:white;white-space:nowrap;}
+.k-wissen{background:var(--blue-700);}
+.k-kritisch{background:var(--red);}
+.k-komm{background:var(--green);}
+.k-kreativ{background:var(--purple);}
+.abfrage-question{font-weight:800;font-size:14px;flex:1;}
+.abfrage-reveal{background:#F0F4F8;padding:0.9rem 1rem;border-top:1px solid var(--border);display:none;}
+.abfrage-reveal.visible{display:block;}
+.abfrage-reveal-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;}
+.abfrage-reveal ul{padding-left:16px;}
+.abfrage-reveal li{font-size:13px;line-height:1.6;margin-bottom:3px;}
+.expand-btn{background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0;}
+.expand-btn.open{transform:rotate(180deg);}
+
+.btn{border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-primary{background:var(--primary);color:white;}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--text);border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-retry{background:#e8f5e9;color:#166534;border:1.5px solid #86efac;border-radius:var(--radius-sm);
+  padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);margin-top:8px;}
+
+/* ── FACHWISSEN KARTEN ── */
+.fw-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;}
+@media(max-width:600px){.fw-grid{grid-template-columns:1fr;}}
+.fw-card{background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:0.9rem;}
+.fw-card-title{font-weight:800;font-size:13px;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.fw-card ul{padding-left:16px;}
+.fw-card li{font-size:12.5px;line-height:1.5;margin-bottom:2px;}
+
+@media print{
+  .topbar,.progress-bar,.btn,.solution-btn,.expand-btn{display:none!important;}
+  .step{display:block!important;}
+  .abfrage-reveal{display:block!important;}
+  .solution-reveal{display:block!important;}
+  body{background:white;}
+}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:var(--radius-lg);padding:2rem;width:320px;box-shadow:var(--shadow-lg);text-align:center;}
+.modal h3{font-weight:900;font-size:18px;margin-bottom:6px;}
+.modal p{font-size:13px;color:var(--text-secondary);margin-bottom:1.25rem;}
+.pin-display{font-size:28px;font-weight:900;letter-spacing:8px;color:var(--primary);
+  background:#e8f5e9;border-radius:var(--radius-sm);padding:10px;margin-bottom:1rem;min-height:52px;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.numpad-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:12px;font-size:18px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
+.numpad-btn:hover{border-color:var(--primary);color:var(--primary);background:#e8f5e9;}
+.pin-error{color:var(--red);font-size:13px;font-weight:700;height:18px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.modal.shake{animation:shake 0.4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.nav-footer{display:flex;justify-content:space-between;margin-top:1.5rem;gap:1rem;}
+@media(max-width:600px){main{padding:16px 12px 48px;}.hero{padding:1.5rem 1.2rem;}.section-body{padding:1rem;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="WR_Q12_index.html" class="topbar-logo">WR<span>&</span>Recht</a>
+  <div class="topbar-chip">2.3.8</div>
+  <button class="topbar-btn" onclick="openPinModal()" id="teacherToggle">🔒 Lehrkraft</button>
+</nav>
+
+<div class="progress-bar">
+  <button class="step-btn active" id="step-btn-1" onclick="showStep(1)">1 · Wiederholung</button>
+  <button class="step-btn" id="step-btn-2" onclick="showStep(2)">2 · Kompetenzcheck</button>
+  <button class="step-btn" id="step-btn-3" onclick="showStep(3)">3 · Synthese</button>
+  <button class="step-btn teacher-step" id="step-btn-4" style="display:none" onclick="showStep(4)">4 · Abfrage 🔒</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 1 – WIEDERHOLUNG -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step active" id="step-1">
+
+  <div class="hero">
+    <div class="hero-eyebrow">WR 12 · Kapitel 2.3 · Abschlussstunde</div>
+    <h1>Kompetenzcheck & Sicherung</h1>
+    <div class="hero-sub">Einkommen und soziale Sicherung – Wiederholung, Synthese und Abschluss</div>
+    <div class="hero-tags">
+      <span class="hero-tag">📚 S. 131–135</span>
+      <span class="hero-tag">⏱ ca. 30 Min.</span>
+      <span class="hero-tag">Stunden 1–7 im Blick</span>
+    </div>
+  </div>
+
+  <!-- Themenübersicht -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">→</div>
+      <div class="section-title">Was haben wir in Kapitel 2.3 gelernt?</div>
+    </div>
+    <div class="section-body">
+      <div class="themen-grid">
+        <div class="thema-card t1">
+          <div class="thema-num">Std. 1 · 2.3.1</div>
+          <div class="thema-title">Positionen der Tarifparteien</div>
+          <p>Tarifautonomie, Gewerkschafts- und Arbeitgeberargumente, Lohnquote, Kaufkraftargument</p>
+        </div>
+        <div class="thema-card t2">
+          <div class="thema-num">Std. 2 · 2.3.2</div>
+          <div class="thema-title">Auswirkungen von Tarifabschlüssen</div>
+          <p>Nachfrage- vs. angebotsorientierte Sicht, Lohn-Preis-Spirale, Gewinn-Preis-Spirale</p>
+        </div>
+        <div class="thema-card t3">
+          <div class="thema-num">Std. 3 · 2.3.3</div>
+          <div class="thema-title">Überblick Sozialversicherung</div>
+          <p>5 Zweige, Versicherungs- und Solidaritätsprinzip, Beitragsprinzip, Umlageverfahren</p>
+        </div>
+        <div class="thema-card t4">
+          <div class="thema-num">Std. 4 · 2.3.4</div>
+          <div class="thema-title">Kranken- und Rentenversicherung</div>
+          <p>GKV vs. PKV, Beitragsbemessungsgrenze, Rentenpunkte, Generationenvertrag</p>
+        </div>
+        <div class="thema-card t5">
+          <div class="thema-num">Std. 5–6 · 2.3.5–6</div>
+          <div class="thema-title">Herausforderungen & Reformansätze KV</div>
+          <p>Demografischer Wandel, Moral Hazard, Fallpauschalen, Eigenbeteiligung, Markt vs. Staat</p>
+        </div>
+        <div class="thema-card t6">
+          <div class="thema-num">Std. 7 · 2.3.7</div>
+          <div class="thema-title">Herausforderungen Rentenversicherung</div>
+          <p>Baby-Boomer, Generationengerechtigkeit, MCGPI-Kriterien, Reformoptionen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blitzwiederholung Quiz -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">1</div>
+      <div style="flex:1">
+        <span class="task-title">Blitzwiederholung – Kernbegriffe</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">1. Was versteht man unter „Tarifautonomie"?</p>
+        <div class="quiz-opts" id="q1-opts">
+          <button class="quiz-opt" onclick="quizAnswer('q1','A',false,this)">A – Der Staat legt Mindestlöhne per Gesetz fest</button>
+          <button class="quiz-opt" onclick="quizAnswer('q1','B',true,this)">B – Gewerkschaften und Arbeitgeberverbände verhandeln Löhne und Arbeitsbedingungen ohne staatliche Einflussnahme</button>
+          <button class="quiz-opt" onclick="quizAnswer('q1','C',false,this)">C – Arbeitnehmer können ihren Lohn frei mit dem Arbeitgeber verhandeln</button>
+        </div>
+        <div class="quiz-result" id="q1-result"></div>
+        <button class="btn-retry" id="q1-retry" style="display:none" onclick="retryQuiz('q1')">↩ Nochmal</button>
+      </div>
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">2. Was ist der Unterschied zwischen Versicherungsprinzip und Solidaritätsprinzip?</p>
+        <div class="quiz-opts" id="q2-opts">
+          <button class="quiz-opt" onclick="quizAnswer('q2','A',true,this)">A – Beim Versicherungsprinzip hängen Leistungen von Beiträgen ab; beim Solidaritätsprinzip werden Leistungen nach Bedarf gewährt, unabhängig von eingezahlten Beiträgen</button>
+          <button class="quiz-opt" onclick="quizAnswer('q2','B',false,this)">B – Das Versicherungsprinzip gilt nur für die Rentenversicherung, das Solidaritätsprinzip nur für die Krankenversicherung</button>
+          <button class="quiz-opt" onclick="quizAnswer('q2','C',false,this)">C – Beide Prinzipien sind identisch, nur unterschiedlich benannt</button>
+        </div>
+        <div class="quiz-result" id="q2-result"></div>
+        <button class="btn-retry" id="q2-retry" style="display:none" onclick="retryQuiz('q2')">↩ Nochmal</button>
+      </div>
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">3. Wie funktioniert das Umlageverfahren der Rentenversicherung?</p>
+        <div class="quiz-opts" id="q3-opts">
+          <button class="quiz-opt" onclick="quizAnswer('q3','A',false,this)">A – Beiträge werden am Kapitalmarkt angelegt und später ausgezahlt</button>
+          <button class="quiz-opt" onclick="quizAnswer('q3','B',true,this)">B – Die Beiträge der aktuell Erwerbstätigen finanzieren direkt die laufenden Renten der heutigen Rentner</button>
+          <button class="quiz-opt" onclick="quizAnswer('q3','C',false,this)">C – Der Staat zahlt die Renten aus dem allgemeinen Steueraufkommen</button>
+        </div>
+        <div class="quiz-result" id="q3-result"></div>
+        <button class="btn-retry" id="q3-retry" style="display:none" onclick="retryQuiz('q3')">↩ Nochmal</button>
+      </div>
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">4. Was ist Moral Hazard im Kontext der Krankenversicherung?</p>
+        <div class="quiz-opts" id="q4-opts">
+          <button class="quiz-opt" onclick="quizAnswer('q4','A',false,this)">A – Wenn Ärzte ihre Patienten falsch behandeln</button>
+          <button class="quiz-opt" onclick="quizAnswer('q4','B',false,this)">B – Wenn Versicherungsnehmer ihre Beiträge nicht zahlen</button>
+          <button class="quiz-opt" onclick="quizAnswer('q4','C',true,this)">C – Wenn Versicherte aufgrund des Versicherungsschutzes riskanter handeln oder Leistungen übermäßig in Anspruch nehmen, weil sie die Kosten nicht selbst tragen</button>
+        </div>
+        <div class="quiz-result" id="q4-result"></div>
+        <button class="btn-retry" id="q4-retry" style="display:none" onclick="retryQuiz('q4')">↩ Nochmal</button>
+      </div>
+
+      <div>
+        <p style="font-size:14px;font-weight:700;">5. Welche der drei MCGPI-Kriterien gilt bei der deutschen Rentenversicherung als besondere Schwäche?</p>
+        <div class="quiz-opts" id="q5-opts">
+          <button class="quiz-opt" onclick="quizAnswer('q5','A',false,this)">A – Integrität</button>
+          <button class="quiz-opt" onclick="quizAnswer('q5','B',true,this)">B – Nachhaltigkeit</button>
+          <button class="quiz-opt" onclick="quizAnswer('q5','C',false,this)">C – Angemessenheit</button>
+        </div>
+        <div class="quiz-result" id="q5-result"></div>
+        <button class="btn-retry" id="q5-retry" style="display:none" onclick="retryQuiz('q5')">↩ Nochmal</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Fachwissen-Karten -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">📋</div>
+      <div class="section-title">Fachwissen S. 131–134 – Kernaussagen im Überblick</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:0.75rem;">Lesen Sie das Fachwissen auf S. 131–134 durch. Die wichtigsten Aussagen sind hier zusammengefasst.</p>
+      <div class="fw-grid">
+        <div class="fw-card">
+          <div class="fw-card-title">💬 Tarifverhandlungen</div>
+          <ul>
+            <li>Tarifautonomie: Kernbestandteil der Sozialen Marktwirtschaft</li>
+            <li>Kaufkraftargument (Gewerkschaft) vs. Lohnstückkostenargument (Arbeitgeber)</li>
+            <li>Lohn-Preis-Spirale vs. Gewinn-Preis-Spirale</li>
+            <li>Produktivität als Maßstab für vertretbare Lohnerhöhungen</li>
+          </ul>
+        </div>
+        <div class="fw-card">
+          <div class="fw-card-title">🏥 Sozialversicherung: Grundprinzipien</div>
+          <ul>
+            <li>5 Zweige: KV, RV, AV, PV, UV</li>
+            <li>Beitragsprinzip: je zur Hälfte AN und AG</li>
+            <li>Solidaritätsprinzip → Bürgergeld, Kindergeld</li>
+            <li>Subsidiaritätsprinzip: persönliche Vorsorge zuerst</li>
+          </ul>
+        </div>
+        <div class="fw-card">
+          <div class="fw-card-title">💊 Herausforderungen KV</div>
+          <ul>
+            <li>Moral Hazard: Principal-Agent-Problem, hidden action</li>
+            <li>Fallpauschalen: Effizienzgewinn mit Fehlanreizen</li>
+            <li>Eigenbeteiligung: Eigenverantwortung vs. Verteilungsgerechtigkeit</li>
+            <li>Markt vs. Staat: Transparenz-Dilemma im Gesundheitsmarkt</li>
+          </ul>
+        </div>
+        <div class="fw-card">
+          <div class="fw-card-title">👴 Herausforderungen RV</div>
+          <ul>
+            <li>Umlageverfahren unter demografischem Druck</li>
+            <li>2,1 Beitragszahler je Rentner (2024); Trend fallend</li>
+            <li>Baby-Boomer: schlagartige Verschlechterung ab 2025</li>
+            <li>MCGPI: Nachhaltigkeit als Schwachstelle Deutschlands</li>
+          </ul>
+        </div>
+        <div class="fw-card">
+          <div class="fw-card-title">⚖️ Gerechtigkeitsdimensionen</div>
+          <ul>
+            <li>Chancengerechtigkeit: gleiche Startbedingungen</li>
+            <li>Bedarfsgerechtigkeit: Leistung nach Bedarf</li>
+            <li>Leistungsgerechtigkeit: Äquivalenzprinzip</li>
+            <li>Generationengerechtigkeit: faire Lastenverteilung über Generationen</li>
+          </ul>
+        </div>
+        <div class="fw-card">
+          <div class="fw-card-title">🔧 Reformansätze</div>
+          <ul>
+            <li>Einnahmenseite: Beitragsbemessungsgrenze, Bürgerversicherung</li>
+            <li>Ausgabenseite: Zuzahlungen, Leistungskürzungen</li>
+            <li>Strukturell: Kapitaldeckung, Arbeitsmarktpolitik</li>
+            <li>Kein Einzelinstrument ausreichend – Kombinationen nötig</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <div></div>
+    <button class="btn btn-primary" onclick="showStep(2)">Weiter → Kompetenzcheck</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 2 – KOMPETENZCHECK S. 135 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-2">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">✓</div>
+      <div class="section-title">Kompetenzcheck – S. 135 „Bescheidenheit ist keine Zier"</div>
+    </div>
+    <div class="section-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 135, Kompetenzcheck – M1 „Bescheidenheit ist keine Zier" (Spiegel-Artikel, Müller, 16.10.2022): 3 Aufgaben zur Synthese von Tarifpolitik und Sozialversicherung</div>
+        </div>
+      </div>
+      <div class="info-box blue">
+        <div class="info-box-title">Worum geht es im Text M1?</div>
+        <p>Der Artikel beschreibt eine Situation hoher Inflation (ca. 8–8,8 %) in Deutschland 2022. Unternehmen erhöhen Preise über die Inflationsrate hinaus. Gewerkschaften fordern eine „nachhaltige Kaufkraftsteigerung" von 10 % oder mehr. Der Artikel fragt nach dem gesellschaftlichen Sprengstoff der Inflationsdynamik und den Auswirkungen hoher Lohnforderungen auf Wachstum und Sozialversicherung.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 1 -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">2</div>
+      <div style="flex:1">
+        <span class="task-title">Kompetenzcheck Aufgabe 1 – Sozialer Sprengstoff der Inflation</span>
+        <span class="task-sub">Buchaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:700;margin-bottom:0.75rem;">Zeigen Sie auf, dass in der Inflationsdynamik „sozialer Sprengstoff" (Z. 15 f.) steckt.</p>
+      <textarea class="answer-area" placeholder="Wer verliert bei Inflation, wer kann profitieren? Welche Verteilungskonflikte entstehen? …"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-k1')">💡 Musterlösung</button>
+      <div class="solution-reveal" id="sol-k1">
+        Die Inflationsdynamik birgt erheblichen sozialen Sprengstoff, weil dadurch Verteilungskämpfe entstehen, die die Gesellschaft spalten können.<br><br>
+        <strong>Benachteiligt</strong> sind insbesondere niedrige Einkommensgruppen: Sie geben einen sehr großen Teil ihres Einkommens für Güter aus, die besonders von Preissteigerungen betroffen sind – vor allem Energie und Grundnahrungsmittel. Ihr Reallohn sinkt überproportional.<br><br>
+        <strong>Profitieren</strong> können hingegen Unternehmen und Unternehmerhaushalte, wenn die Inflation genutzt wird, um Preise noch stärker als die Inflationsrate anzuheben und damit Gewinnmargen zu erhöhen (Gewinn-Preis-Spirale).<br><br>
+        Die resultierende Ungleichheit bei der Lastenverteilung der Inflation kann gesellschaftliche Spannungen erzeugen.
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 2 -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">3</div>
+      <div style="flex:1">
+        <span class="task-title">Kompetenzcheck Aufgabe 2 – Gewerkschaftliche Kaufkraftsteigerung begründen</span>
+        <span class="task-sub">Buchaufgabe · Partnerarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+            <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+            <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+            <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:700;margin-bottom:0.75rem;">Begründen Sie die hohen Lohnforderungen der Gewerkschaften unter Rückgriff auf das Kaufkraftargument und den demografischen Kontext.</p>
+      <textarea class="answer-area" placeholder="Kaufkraftargument: Wie wirken höhere Löhne auf Nachfrage und Beschäftigung? Demografischer Kontext: Warum sind höhere Löhne auch für den Arbeitsmarkt ein Argument? …"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-k2')">💡 Musterlösung</button>
+      <div class="solution-reveal" id="sol-k2">
+        <strong>Kaufkraftargument:</strong> Eine „nachhaltige Kaufkraftsteigerung" lässt sich damit begründen, dass durch höhere Einkommen der Konsum der Haushalte steigt. Produktion und Beschäftigung nehmen zu, was wiederum ein höheres Faktoreinkommen bewirkt – ein expansiver Effekt wird ausgelöst (nachfrageorientierte Argumentation).<br><br>
+        <strong>Demografischer Kontext:</strong> Die Gewerkschaften können zudem mit dem wachsenden Bedarf an Arbeitskräften in einer alternden Bevölkerung argumentieren. Höhere Löhne sind erforderlich, um qualifizierte Arbeitskräfte anzuziehen – auch aus dem Ausland. Damit erhöht sich langfristig auch die Beitragsbasis der Sozialversicherung.
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 3 – Synthese-Aufgabe -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">4</div>
+      <div style="flex:1">
+        <span class="task-title">Kompetenzcheck Aufgabe 3 – Lohnerhöhungen & Sozialversicherung</span>
+        <span class="task-sub">Kreativaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Kreativaufgabe -->
+          <svg width="22" height="22" viewBox="0 0 36 40" fill="none">
+            <path d="M18 4C11.373 4 6 9.373 6 16c0 4.136 2.022 7.789 5.1 10.053C12.2 27.26 13 28.5 13 30h10c0-1.5.8-2.74 1.9-3.947C27.978 23.789 30 20.136 30 16c0-6.627-5.373-12-12-12z" fill="#FFC107" stroke="#FF9800" stroke-width="2"/>
+            <rect x="13" y="30" width="10" height="3" rx="1" fill="#9E9E9E"/>
+            <rect x="14" y="33" width="8" height="3" rx="1" fill="#9E9E9E"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:700;margin-bottom:0.75rem;">Diskutieren Sie die Auswirkungen von Lohnerhöhungen auf die Finanzierung der gesetzlichen Sozialversicherung. Berücksichtigen Sie dabei sowohl positive als auch negative Effekte.</p>
+      <div class="info-box teal" style="margin-bottom:0.75rem;">
+        <div class="info-box-title">Denkanstoß: Zwei Wirkungskanäle</div>
+        <p>Lohnerhöhungen wirken gleichzeitig auf die <strong>Einnahmenseite</strong> (mehr Beitragseinkommen) und die <strong>Ausgabenseite</strong> (höhere Rentenansprüche, ggf. höhere Arbeitslosigkeit) der Sozialversicherung. Welcher Effekt überwiegt?</p>
+      </div>
+      <textarea class="answer-area" style="min-height:100px;" placeholder="Positive Effekte auf die Sozialversicherung: … Negative / dämpfende Effekte: … Gesamturteil: …"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-k3')">💡 Musterlösung</button>
+      <div class="solution-reveal" id="sol-k3">
+        <strong>Positive Effekte:</strong> Lohnerhöhungen erhöhen unmittelbar das Faktoreinkommen und damit das Beitragsaufkommen der Sozialversicherung – vorausgesetzt, die Unternehmen fahren die Beschäftigung nicht aufgrund höherer Kosten stark zurück.<br><br>
+        <strong>Negative / dämpfende Effekte:</strong>
+        <ul>
+          <li>Da Renten an das Lohnniveau gekoppelt sind, führen Lohnerhöhungen auch zu höheren Rentenausgaben.</li>
+          <li>Werden aufgrund höherer Lohnkosten Arbeitnehmer entlassen, steigen die Ausgaben der Arbeitslosenversicherung.</li>
+          <li>Gleichzeitig sinkt die Beitragsbasis durch weniger Beschäftigte.</li>
+        </ul>
+        <strong>Gesamtbild:</strong> Der Netttoeffekt auf die Finanzierungssituation der Sozialversicherung ist somit ambivalent – er hängt entscheidend davon ab, ob Unternehmen die höheren Lohnkosten durch Produktivitätssteigerungen auffangen oder durch Stellenabbau reagieren.
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(1)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(3)">Weiter → Synthese</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 3 – SYNTHESE & ABSCHLUSS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-3">
+
+  <!-- Synthese-Visualisierung -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">∑</div>
+      <div class="section-title">Synthese: Tarifpolitik ↔ Sozialversicherung</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13.5px;margin-bottom:0.75rem;">Der Kompetenzcheck zeigt: Tarifpolitik und Sozialversicherung sind eng miteinander verbunden. Lohnentscheidungen haben direkte Konsequenzen für die Finanzierbarkeit des Sozialstaats.</p>
+      <div class="synthese-flow">
+        <div class="syn-box">Tarifabschluss<br><small>Lohnerhöhung</small></div>
+        <div class="syn-arrow">→</div>
+        <div class="syn-box">Mehr Beitrags­einkommen<br><small>Einnahmenseite ↑</small></div>
+        <div class="syn-arrow">→</div>
+        <div class="syn-box highlight">Sozialversicherung<br><small>Einnahmen & Ausgaben</small></div>
+        <div class="syn-arrow">←</div>
+        <div class="syn-box">Höhere Renten­ansprüche<br><small>Ausgabenseite ↑</small></div>
+        <div class="syn-arrow">←</div>
+        <div class="syn-box">Ggf. weniger Beschäftigte<br><small>Beitragsbasis ↓</small></div>
+      </div>
+      <div class="info-box green">
+        <div class="info-box-title">Kernkompetenz aus LehrplanPLUS WR12 2.3</div>
+        <ul>
+          <li>Tarifpartner-Forderungen hinsichtlich ihrer Wirkung auf <strong>Wachstum und Beschäftigung</strong> beurteilen</li>
+          <li>Sozialversicherungszweige hinsichtlich ihrer Fähigkeit bewerten, <strong>aktuellen und zukünftigen Herausforderungen</strong> zu begegnen</li>
+          <li>Finanzierbarkeit als zentrales Kriterium</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Abschluss-Quiz -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">5</div>
+      <div style="flex:1">
+        <span class="task-title">Abschluss-Quiz – Kapitel 2.3 gesamt</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">1. Warum kann ein hoher Tarifabschluss die Finanzierungssituation der Rentenversicherung sowohl verbessern als auch verschlechtern?</p>
+        <div class="quiz-opts" id="qa1-opts">
+          <button class="quiz-opt" onclick="quizAnswer('qa1','A',false,this)">A – Er verbessert sie immer, weil mehr Beiträge fließen</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa1','B',false,this)">B – Er verschlechtert sie immer, weil Lohnkosten steigen</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa1','C',true,this)">C – Er erhöht Beitragseinnahmen, führt aber auch zu höheren Rentenansprüchen und ggf. weniger Beschäftigten – der Nettoeffekt ist ambivalent</button>
+        </div>
+        <div class="quiz-result" id="qa1-result"></div>
+        <button class="btn-retry" id="qa1-retry" style="display:none" onclick="retryQuiz('qa1')">↩ Nochmal</button>
+      </div>
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">2. Welches Reforminstrument stärkt primär die Einnahmenseite der GKV, ohne Moral Hazard zu verstärken?</p>
+        <div class="quiz-opts" id="qa2-opts">
+          <button class="quiz-opt" onclick="quizAnswer('qa2','A',false,this)">A – Fallpauschalen für Krankenhäuser</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa2','B',true,this)">B – Anhebung der Beitragsbemessungsgrenze</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa2','C',false,this)">C – Einführung einer Praxisgebühr</button>
+        </div>
+        <div class="quiz-result" id="qa2-result"></div>
+        <button class="btn-retry" id="qa2-retry" style="display:none" onclick="retryQuiz('qa2')">↩ Nochmal</button>
+      </div>
+
+      <div style="margin-bottom:1.2rem;">
+        <p style="font-size:14px;font-weight:700;">3. Worin liegt der Zielkonflikt zwischen Bedarfsgerechtigkeit und Leistungsgerechtigkeit im Rentensystem?</p>
+        <div class="quiz-opts" id="qa3-opts">
+          <button class="quiz-opt" onclick="quizAnswer('qa3','A',true,this)">A – Bedarfsgerechtigkeit würde gleiche Mindestleistungen für alle fordern, Leistungsgerechtigkeit aber höhere Renten für höhere Einzahlungen – beide können nicht gleichzeitig vollständig erfüllt werden</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa3','B',false,this)">B – Es gibt keinen Zielkonflikt, weil beide Prinzipien dieselbe Zielrichtung haben</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa3','C',false,this)">C – Bedarfsgerechtigkeit gilt nur für die Pflegeversicherung, Leistungsgerechtigkeit nur für die Rentenversicherung</button>
+        </div>
+        <div class="quiz-result" id="qa3-result"></div>
+        <button class="btn-retry" id="qa3-retry" style="display:none" onclick="retryQuiz('qa3')">↩ Nochmal</button>
+      </div>
+
+      <div>
+        <p style="font-size:14px;font-weight:700;">4. Welche Maßnahme wirkt strukturell langfristig am stärksten auf die Finanzierbarkeit der Sozialversicherung?</p>
+        <div class="quiz-opts" id="qa4-opts">
+          <button class="quiz-opt" onclick="quizAnswer('qa4','A',false,this)">A – Kurzfristige Erhöhung der Beitragssätze</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa4','B',false,this)">B – Einmalige Steuerfinanzierung der Rentenversicherung</button>
+          <button class="quiz-opt" onclick="quizAnswer('qa4','C',true,this)">C – Erhöhung der Zahl sozialversicherungspflichtig Beschäftigter durch Arbeitsmarktpolitik, Zuwanderung und bessere Erwerbsbeteiligung</button>
+        </div>
+        <div class="quiz-result" id="qa4-result"></div>
+        <button class="btn-retry" id="qa4-retry" style="display:none" onclick="retryQuiz('qa4')">↩ Nochmal</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Abschluss -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">🎓</div>
+      <div class="section-title">Abschluss – Kapitel 2.3 abgeschlossen</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box green">
+        <div class="info-box-title">Sie haben in diesem Kapitel gelernt …</div>
+        <ul>
+          <li>… die Positionen der Tarifparteien zu erläutern und nachfrage- sowie angebotsorientierte Argumente gegenüberzustellen.</li>
+          <li>… Tarifabschlüsse hinsichtlich ihrer Auswirkungen auf Wachstum, Beschäftigung und Sozialversicherung zu beurteilen.</li>
+          <li>… die fünf Zweige der Sozialversicherung und ihre Grundprinzipien zu erklären.</li>
+          <li>… Kranken- und Rentenversicherung unter den Kriterien Effizienz, Gerechtigkeit und Finanzierbarkeit zu bewerten.</li>
+          <li>… aktuelle und zukünftige Herausforderungen (demografischer Wandel, Digitalisierung, Moral Hazard) zu analysieren und Reformansätze zu beurteilen.</li>
+        </ul>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Abschluss des Kapitels</div>
+          <p>Mit dieser Stunde ist WR12 2.3 vollständig abgedeckt (ca. 8 Stunden gemäß LehrplanPLUS). Der Kompetenzcheck S. 135 eignet sich auch als Grundlage für eine schriftliche Kurzüberprüfung oder als Stegreifaufgaben-Vorbereitung. Die 4K-Abfrage in Step 4 fasst alle Kernkompetenzen des Kapitels zusammen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(2)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(1)">↑ Zum Anfang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 4 – MÜNDLICHE ABFRAGE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step teacher-only" id="step-4">
+
+  <div class="hero" style="background:linear-gradient(135deg,#92400e,#D97706) !important;">
+    <div class="hero-eyebrow">Nur Lehrkraft · Schritt 4</div>
+    <h1>Mündliche Abfrage – 2.3 gesamt</h1>
+    <div class="hero-sub">4K-Modell · Abschlussabfrage für das gesamte Kapitel</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ ca. 10 Min.</span>
+      <span class="hero-tag">1 Schüler/in</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-body">
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-wissen">Wissen</span>
+          <div class="abfrage-question">Erläutern Sie die drei Gerechtigkeitsdimensionen (Chancen-, Bedarfs-, Leistungsgerechtigkeit) und zeigen Sie an einem Beispiel aus der Sozialversicherung, wie sie in Konflikt geraten können.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li><strong>Chancengerechtigkeit:</strong> Gleiche Startbedingungen – z. B. GKV nimmt alle unabhängig von Vorerkrankungen auf</li>
+            <li><strong>Bedarfsgerechtigkeit:</strong> Leistung nach Bedarf – z. B. chronisch Kranke erhalten mehr Leistungen, zahlen aber gleich viel</li>
+            <li><strong>Leistungsgerechtigkeit:</strong> Höhere Beiträge → höhere Rente (Rentenversicherung: Äquivalenzprinzip)</li>
+            <li><strong>Zielkonflikt:</strong> z. B. Praxisgebühr stärkt Leistungsgerechtigkeit (wer nutzt, zahlt), schwächt aber Bedarfsgerechtigkeit (einkommensschwache Gruppen meiden Arztbesuche)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kritisch">Kritisches Denken</span>
+          <div class="abfrage-question">Beurteilen Sie: Ist ein hoher Tarifabschluss (z. B. 10 % Lohnerhöhung) in einer Phase hoher Inflation unter dem Gesichtspunkt der Finanzierbarkeit der Sozialversicherung eher positiv oder negativ zu bewerten? Berücksichtigen Sie dabei die Sichtweisen beider Tarifparteien.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li><strong>Positiv (Gewerkschaftsposition):</strong> Höhere Löhne → mehr Beitragseinnahmen; Kaufkraftargument stärkt Nachfrage und Beschäftigung; qualifizierte Fachkräfte bleiben im Land</li>
+            <li><strong>Negativ (Arbeitgeberposition):</strong> Höhere Lohnkosten → ggf. Stellenabbau → weniger Beitragszahler; Renten an Löhne gekoppelt → Ausgabenerhöhung; Lohn-Preis-Spirale möglich</li>
+            <li><strong>Differenziertes Urteil:</strong> Der Nettoeffekt hängt davon ab, ob Unternehmen Lohnerhöhungen durch Produktivität auffangen oder durch Beschäftigungsabbau reagieren – kein pauschales Urteil möglich</li>
+            <li>Bezug: Kompetenzcheck Aufgabe 3 (S. 135)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-komm">Kommunikation</span>
+          <div class="abfrage-question">Erklären Sie einem Elternteil, das kein Wirtschaftswissen hat, warum die gesetzliche Rentenversicherung trotz scheinbar stabiler Finanzlage unter erheblichem Druck steht und welche Reform Sie persönlich für sinnvoll halten.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Umlageverfahren verständlich erklären: „Wer heute arbeitet, zahlt für heutige Rentner"</li>
+            <li>Demografisches Problem in Alltagssprache: 1965 zahlten 5 Personen für 1 Rentner – heute nur noch 2</li>
+            <li>Baby-Boomer: „Die geburtenstarken Jahrgänge gehen gerade alle gleichzeitig in Rente"</li>
+            <li>Reform: eigene begründete Position, z. B. Arbeitsmarktpolitik oder Kapitaldeckung – mit Vor- und Nachteilen</li>
+            <li>Kommunikationskriterium: laiengerechte Sprache, Alltagsbeispiele, strukturierter Aufbau</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kreativ">Kreativität</span>
+          <div class="abfrage-question">Entwickeln Sie ein konsistentes wirtschaftspolitisches Konzept, das gleichzeitig faire Tarifabschlüsse ermöglicht und die langfristige Finanzierbarkeit der Sozialversicherung sichert. Benennen Sie Ihre wichtigsten Maßnahmen und die unvermeidbaren Zielkonflikte.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont (offen – Kohärenz und Reflexionstiefe bewertet)</div>
+          <ul>
+            <li>Tarifpolitik: z. B. produktivitätsorientierte Lohnleitlinien als Orientierungsrahmen (keine Staatliche Lohnfestsetzung); Inflationsausgleichsprämien als steuerfreie Einmalzahlungen</li>
+            <li>Sozialversicherung Einnahmenseite: Bürgerversicherung (Einbeziehung aller); Anhebung der Beitragsbemessungsgrenze; mehr Erwerbstätige durch Zuwanderung und bessere Kita-Infrastruktur</li>
+            <li>Sozialversicherung Ausgabenseite: qualitätsorientierte statt mengenmäßige Krankenhausvergütung; einkommensabhängige moderate Zuzahlungen</li>
+            <li>Unvermeidliche Zielkonflikte benennen: Eigenverantwortung vs. Bedarfsgerechtigkeit; Produktivitätsbindung vs. Kaufkrafterhalt; Kapitaldeckung vs. Integrität</li>
+            <li>Kreativitätskriterium: Originalität, interne Konsistenz, Reflexion von Umsetzungshürden</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Drucken</button>
+    <button class="btn btn-secondary" onclick="showStep(3)">← Zurück zu Schritt 3</button>
+  </div>
+</div>
+
+</main>
+
+<!-- PIN MODAL -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal" id="pinModalBox">
+    <h3>🔒 Lehrkraft-Modus</h3>
+    <p>Bitte geben Sie die 6-stellige PIN ein.</p>
+    <div class="pin-display" id="pinDisplay">——————</div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinKey('1')">1</button>
+      <button class="numpad-btn" onclick="pinKey('2')">2</button>
+      <button class="numpad-btn" onclick="pinKey('3')">3</button>
+      <button class="numpad-btn" onclick="pinKey('4')">4</button>
+      <button class="numpad-btn" onclick="pinKey('5')">5</button>
+      <button class="numpad-btn" onclick="pinKey('6')">6</button>
+      <button class="numpad-btn" onclick="pinKey('7')">7</button>
+      <button class="numpad-btn" onclick="pinKey('8')">8</button>
+      <button class="numpad-btn" onclick="pinKey('9')">9</button>
+      <button class="numpad-btn" onclick="pinDel()">⌫</button>
+      <button class="numpad-btn" onclick="pinKey('0')">0</button>
+      <button class="numpad-btn" onclick="closePinModal()">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN = '123456';
+let pinBuffer = '';
+let currentStep = 1;
+let teacherMode = false;
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  document.getElementById('step-btn-' + n).classList.add('active');
+  currentStep = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function openPinModal() {
+  if (teacherMode) {
+    teacherMode = false;
+    document.body.classList.remove('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔒 Lehrkraft';
+    document.getElementById('step-btn-4').style.display = 'none';
+    if (currentStep === 4) showStep(1);
+    return;
+  }
+  pinBuffer = '';
+  updatePinDisplay();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('open');
+}
+function closePinModal() { document.getElementById('pinModal').classList.remove('open'); pinBuffer = ''; }
+function pinKey(k) { if (pinBuffer.length >= 6) return; pinBuffer += k; updatePinDisplay(); if (pinBuffer.length === 6) setTimeout(checkPin, 200); }
+function pinDel() { pinBuffer = pinBuffer.slice(0, -1); updatePinDisplay(); }
+function updatePinDisplay() {
+  let d = ''; for (let i = 0; i < 6; i++) d += i < pinBuffer.length ? '●' : '—';
+  document.getElementById('pinDisplay').textContent = d;
+}
+function checkPin() {
+  if (pinBuffer === TEACHER_PIN) {
+    teacherMode = true;
+    document.body.classList.add('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔓 Lehrkraft aktiv';
+    document.getElementById('step-btn-4').style.display = 'flex';
+    closePinModal();
+  } else {
+    document.getElementById('pinError').textContent = 'Falsche PIN. Bitte erneut versuchen.';
+    const m = document.getElementById('pinModalBox');
+    m.classList.add('shake');
+    setTimeout(() => m.classList.remove('shake'), 400);
+    pinBuffer = '';
+    updatePinDisplay();
+  }
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('pinModal').classList.contains('open')) return;
+  if (e.key >= '0' && e.key <= '9') pinKey(e.key);
+  if (e.key === 'Backspace') pinDel();
+  if (e.key === 'Escape') closePinModal();
+});
+document.getElementById('pinModal').addEventListener('click', function(e) { if (e.target === this) closePinModal(); });
+
+function quizAnswer(id, val, correct, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => o.disabled = true);
+  const res = document.getElementById(`${id}-result`);
+  if (correct) {
+    btn.classList.add('correct');
+    res.className = 'quiz-result show ok';
+    res.textContent = '✓ Richtig!';
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(o => { if (!o.classList.contains('wrong')) o.classList.add('correct'); });
+    res.className = 'quiz-result show err';
+    res.textContent = '✗ Nicht ganz – die richtige Antwort ist hervorgehoben.';
+    document.getElementById(`${id}-retry`).style.display = 'inline-block';
+  }
+}
+function retryQuiz(id) {
+  document.querySelectorAll(`#${id}-opts .quiz-opt`).forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+function toggleSolution(id) { document.getElementById(id).classList.toggle('visible'); }
+function toggleAbfrage(btn) {
+  btn.closest('.abfrage-card').querySelector('.abfrage-reveal').classList.toggle('visible');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
