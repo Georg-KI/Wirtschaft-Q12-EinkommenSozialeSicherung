@@ -23,19 +23,19 @@
   --grad-purple:linear-gradient(135deg,#AB47BC,#E91E63);
   --grad-teal:linear-gradient(135deg,#26C6DA,#43A047);
   --grad-violet:linear-gradient(135deg,#7B1FA2,#1976D2);
+  --grad-deepred:linear-gradient(135deg,#880E4F,#E91E63);
+  --grad-indigo:linear-gradient(135deg,#283593,#5C6BC0);
+  --grad-teal2:linear-gradient(135deg,#00695C,#26C6DA);
+  --grad-crimson:linear-gradient(135deg,#4A148C,#AB47BC);
+  --grad-burnt:linear-gradient(135deg,#BF360C,#FF7043);
+  --grad-forest:linear-gradient(135deg,#1B5E20,#43A047);
   --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
   --shadow:0 2px 8px rgba(0,0,0,0.08);
   --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg-page);
-  color: var(--text);
-  min-height: 100vh;
-}
+body { font-family: 'Nunito', sans-serif; background: var(--bg-page); color: var(--text); min-height: 100vh; }
 
 /* ===== TOPBAR ===== */
 .topbar {
@@ -50,15 +50,7 @@ body {
   gap: 1rem;
   box-shadow: 0 2px 12px rgba(25,118,210,0.25);
 }
-.topbar-logo {
-  font-weight: 900;
-  font-size: 15px;
-  color: white;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.topbar-logo { font-weight: 900; font-size: 15px; color: white; text-decoration: none; }
 .topbar-logo span { color: var(--blue-400); }
 .topbar-chip {
   background: rgba(255,255,255,0.15);
@@ -68,29 +60,9 @@ body {
   padding: 3px 10px;
   border-radius: 20px;
 }
-.topbar-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.topbar-link {
-  color: rgba(255,255,255,0.75);
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 5px 12px;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-.topbar-link:hover { background: rgba(255,255,255,0.15); color: white; }
 
 /* ===== MAIN ===== */
-.main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 32px 20px 60px;
-}
+.main { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
 
 /* ===== HERO ===== */
 .hero {
@@ -106,47 +78,18 @@ body {
 .hero::before {
   content: '§';
   position: absolute;
-  right: 1.5rem;
-  top: -10px;
+  right: 1.5rem; top: -10px;
   font-size: 140px;
   font-weight: 900;
   color: rgba(255,255,255,0.06);
   line-height: 1;
   pointer-events: none;
 }
-.hero-label {
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.75;
-  margin-bottom: 8px;
-}
-.hero h1 {
-  font-size: 26px;
-  font-weight: 900;
-  line-height: 1.25;
-  margin-bottom: 10px;
-}
-.hero-subtitle {
-  font-size: 15px;
-  opacity: 0.85;
-  margin-bottom: 20px;
-  max-width: 560px;
-  line-height: 1.5;
-}
-.hero-meta {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.hero-chip {
-  background: rgba(255,255,255,0.18);
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 700;
-}
+.hero-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.75; margin-bottom: 8px; }
+.hero h1 { font-size: 26px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+.hero-subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 20px; max-width: 560px; line-height: 1.5; }
+.hero-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-chip { background: rgba(255,255,255,0.18); padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
 
 /* ===== KOMPETENZ BOX ===== */
 .kompetenz-box {
@@ -158,67 +101,29 @@ body {
   margin-bottom: 28px;
   animation: fadeUp 0.4s 0.1s ease both;
 }
-.kompetenz-box h2 {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--blue-700);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.kompetenz-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
+.kompetenz-box h2 { font-size: 15px; font-weight: 800; color: var(--blue-700); margin-bottom: 14px; }
+.kompetenz-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 640px) { .kompetenz-list { grid-template-columns: 1fr; } }
 .kompetenz-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  display: flex; align-items: flex-start; gap: 10px;
   padding: 10px 14px;
   background: var(--blue-50);
   border-radius: var(--radius-sm);
-  font-size: 13.5px;
-  color: var(--blue-800);
-  line-height: 1.45;
+  font-size: 13.5px; color: var(--blue-800); line-height: 1.45;
 }
-.kompetenz-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--blue-700);
-  flex-shrink: 0;
-  margin-top: 5px;
-}
+.kompetenz-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue-700); flex-shrink: 0; margin-top: 5px; }
 
 /* ===== SECTION HEADER ===== */
 .section-title {
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-secondary);
-  margin-bottom: 14px;
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 13px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-secondary);
+  margin-bottom: 14px; margin-top: 32px;
+  display: flex; align-items: center; gap: 8px;
 }
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 1.5px;
-  background: var(--border);
-}
+.section-title::after { content: ''; flex: 1; height: 1.5px; background: var(--border); }
 
 /* ===== STUNDEN GRID ===== */
-.stunden-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
+.stunden-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 @media (max-width: 640px) { .stunden-grid { grid-template-columns: 1fr; } }
 
 /* ===== STUNDEN KARTE ===== */
@@ -233,129 +138,62 @@ body {
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
-.stunde-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-.stunde-card.coming-soon {
-  opacity: 0.55;
-  pointer-events: none;
-  cursor: default;
-}
-
-.card-accent {
-  height: 5px;
-  width: 100%;
-}
-
-.card-body {
-  padding: 18px 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
+.stunde-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.card-accent { height: 5px; width: 100%; }
+.card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
 .card-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 20px;
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 20px;
 }
-
-.card-meta {
-  flex: 1;
-}
-.card-stunde {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text-muted);
-  margin-bottom: 3px;
-}
-.card-title {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.3;
-}
-.card-subtitle {
-  font-size: 12.5px;
-  color: var(--text-secondary);
-  font-style: italic;
-  margin-top: 2px;
-}
-
-.card-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin-bottom: 14px;
-  flex: 1;
-}
-
+.card-meta { flex: 1; }
+.card-stunde { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 3px; }
+.card-title { font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.3; }
+.card-subtitle { font-size: 12.5px; color: var(--text-secondary); font-style: italic; margin-top: 2px; }
+.card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 14px; flex: 1; }
 .card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  margin-top: auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 12px; border-top: 1px solid var(--border); margin-top: auto;
 }
-.card-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.card-tag {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-.card-status {
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.status-ready { color: var(--green); }
-.status-soon  { color: var(--text-muted); }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.card-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.lock-indicator { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 5px; color: var(--text-muted); white-space: nowrap; }
+.stunde-card.unlocked .lock-indicator { color: var(--green); }
 
-/* color variants */
-.accent-blue   { background: var(--grad-blue); }
-.accent-teal   { background: var(--grad-teal); }
-.accent-green  { background: var(--grad-green); }
-.accent-orange { background: var(--grad-orange); }
-.accent-purple { background: var(--grad-purple); }
-.accent-violet { background: var(--grad-violet); }
+/* accent gradients */
+.accent-blue    { background: var(--grad-blue); }
+.accent-teal    { background: var(--grad-teal); }
+.accent-green   { background: var(--grad-green); }
+.accent-orange  { background: var(--grad-orange); }
+.accent-purple  { background: var(--grad-purple); }
+.accent-violet  { background: var(--grad-violet); }
+.accent-deepred { background: var(--grad-deepred); }
+.accent-indigo  { background: var(--grad-indigo); }
+.accent-teal2   { background: var(--grad-teal2); }
+.accent-crimson { background: var(--grad-crimson); }
+.accent-burnt   { background: var(--grad-burnt); }
+.accent-forest  { background: var(--grad-forest); }
 
-.icon-blue   { background: var(--blue-50);    border: 1.5px solid var(--blue-400); }
-.icon-teal   { background: var(--teal-light); border: 1.5px solid var(--teal); }
-.icon-green  { background: var(--green-light);border: 1.5px solid var(--green); }
+/* icon backgrounds */
+.icon-blue   { background: var(--blue-50);     border: 1.5px solid var(--blue-400); }
+.icon-teal   { background: var(--teal-light);  border: 1.5px solid var(--teal); }
+.icon-green  { background: var(--green-light); border: 1.5px solid var(--green); }
 .icon-orange { background: var(--orange-light);border: 1.5px solid var(--orange); }
 .icon-purple { background: var(--purple-light);border: 1.5px solid var(--purple); }
+.icon-red    { background: #fef2f2;             border: 1.5px solid #fca5a5; }
 
-.tag-blue   { background: var(--blue-50);    color: var(--blue-800); }
-.tag-teal   { background: var(--teal-light); color: #065f46; }
-.tag-green  { background: var(--green-light);color: #1b5e20; }
+/* tag colors */
+.tag-blue   { background: var(--blue-50);     color: var(--blue-800); }
+.tag-teal   { background: var(--teal-light);  color: #065f46; }
+.tag-green  { background: var(--green-light); color: #1b5e20; }
 .tag-orange { background: var(--orange-light);color: #78350f; }
 .tag-purple { background: var(--purple-light);color: #4a1272; }
+.tag-red    { background: #fef2f2;             color: #b91c1c; }
 
-/* ===== INFO FOOTER ===== */
+/* ===== INFO STRIP ===== */
 .info-strip {
   margin-top: 36px;
   background: white;
@@ -369,39 +207,13 @@ body {
   animation: fadeUp 0.4s 0.3s ease both;
 }
 @media (max-width: 640px) { .info-strip { grid-template-columns: 1fr; } }
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-.info-icon {
-  font-size: 22px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.info-label {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text-muted);
-  margin-bottom: 2px;
-}
-.info-value {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--text);
-}
+.info-item { display: flex; align-items: flex-start; gap: 10px; }
+.info-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.info-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 2px; }
+.info-value { font-size: 13.5px; font-weight: 700; color: var(--text); }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes shake {
-  0%,100%{transform:translateX(0);}
-  20%,60%{transform:translateX(-7px);}
-  40%,80%{transform:translateX(7px);}
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes shake { 0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);} }
 
 /* ===== CODE MODAL ===== */
 .modal-overlay {
@@ -425,130 +237,56 @@ body {
   animation: fadeUp 0.22s ease;
 }
 .modal-box.shake { animation: shake 0.38s ease; }
-.modal-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.modal-stunde-label {
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-.modal-title {
-  font-size: 17px;
-  font-weight: 900;
-  color: var(--blue-700);
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
-.modal-hint {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 6px;
-}
-.modal-input-row {
-  display: flex;
-  gap: 7px;
-  justify-content: center;
-  margin: 18px 0 6px;
-}
+.modal-header { text-align: center; margin-bottom: 20px; }
+.modal-stunde-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; }
+.modal-title { font-size: 17px; font-weight: 900; color: var(--blue-700); line-height: 1.3; margin-bottom: 4px; }
+.modal-hint { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+.modal-input-row { display: flex; gap: 7px; justify-content: center; margin: 18px 0 6px; }
 .code-char {
-  width: 38px;
-  height: 46px;
+  width: 38px; height: 46px;
   border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
-  font-weight: 900;
-  text-align: center;
-  text-transform: uppercase;
+  font-size: 18px; font-weight: 900;
+  text-align: center; text-transform: uppercase;
   color: var(--blue-700);
   background: var(--bg-page);
   outline: none;
   transition: border-color 0.15s;
-  caret-color: var(--blue-400);
 }
 .code-char:focus { border-color: var(--blue-700); background: white; }
 .code-char.filled { border-color: var(--blue-400); background: var(--blue-50); }
 .code-char.error  { border-color: var(--red); background: var(--red-light); color: var(--red); }
-.modal-error {
-  text-align: center;
-  font-size: 13px;
-  color: var(--red);
-  font-weight: 700;
-  min-height: 18px;
-  margin-bottom: 10px;
-}
-.modal-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-}
+.modal-error { text-align: center; font-size: 13px; color: var(--red); font-weight: 700; min-height: 18px; margin-bottom: 10px; }
+.modal-actions { display: flex; gap: 8px; margin-top: 4px; }
 .modal-btn-primary {
-  flex: 1;
-  padding: 11px;
-  background: var(--blue-700);
-  color: white;
-  border: none;
+  flex: 1; padding: 11px;
+  background: var(--blue-700); color: white; border: none;
   border-radius: var(--radius-md);
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+  cursor: pointer; transition: background 0.2s;
 }
 .modal-btn-primary:hover { background: var(--blue-800); }
 .modal-btn-cancel {
   padding: 11px 16px;
-  background: white;
-  color: var(--text-secondary);
+  background: white; color: var(--text-secondary);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  transition: border-color 0.2s;
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px;
+  cursor: pointer; transition: border-color 0.2s;
 }
 .modal-btn-cancel:hover { border-color: var(--blue-700); color: var(--blue-700); }
-
-/* ===== LOCKED CARD OVERLAY ===== */
-.stunde-card.locked {
-  cursor: pointer;
-  pointer-events: auto;
-  opacity: 1;
-}
-.stunde-card.locked:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-.lock-indicator {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-.stunde-card.unlocked .lock-indicator { color: var(--green); }
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <nav class="topbar">
-  <a class="topbar-logo" href="#">
-    WR <span>&</span> Recht
-  </a>
+  <a class="topbar-logo" href="#">WR <span>&</span> Recht</a>
   <span class="topbar-chip">Q12</span>
   <span class="topbar-chip" style="background:rgba(255,255,255,0.1);">Kapitel 2.3</span>
-
 </nav>
 
-<!-- MAIN -->
 <div class="main">
 
   <!-- HERO -->
@@ -557,7 +295,7 @@ body {
     <h1>2.3 Einkommen und<br>soziale Sicherung</h1>
     <div class="hero-subtitle">Tarifparteien, Lohnpolitik und die Zukunft der Sozialversicherung – Unterrichtseinheit für die gymnasiale Oberstufe.</div>
     <div class="hero-meta">
-      <span class="hero-chip">📚 startup.WR Bayern · S. 104–131</span>
+      <span class="hero-chip">📚 startup.WR Bayern · S. 104–135</span>
       <span class="hero-chip">⏱ ca. 8 Unterrichtsstunden</span>
       <span class="hero-chip">LehrplanPLUS WR12 2.3</span>
     </div>
@@ -578,7 +316,9 @@ body {
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════ -->
   <!-- BLOCK 1: TARIFPOLITIK -->
+  <!-- ═══════════════════════════════════════════ -->
   <div class="section-title">
     <span>📋 Block 1 · Tarifpolitik und Lohnentwicklung</span>
   </div>
@@ -586,11 +326,11 @@ body {
   <div class="stunden-grid">
 
     <!-- Stunde 1 -->
-    <div class="stunde-card locked" data-stunde="1" onclick="openModal(1)" style="animation-delay:0.05s">
-      <div class="card-accent accent-blue"></div>
+    <div class="stunde-card" data-stunde="1" onclick="openModal(1)" style="animation-delay:0.05s">
+      <div class="card-accent accent-deepred"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-blue">⚖️</div>
+          <div class="card-icon icon-red">⚖️</div>
           <div class="card-meta">
             <div class="card-stunde">Stunde 1 · S. 104–109</div>
             <div class="card-title">2.3.1 Welche Ziele verfolgen die Tarifparteien?</div>
@@ -602,8 +342,8 @@ body {
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-blue">Partnerarbeit</span>
-            <span class="card-tag tag-blue">Rollenspiel</span>
+            <span class="card-tag tag-red">Partnerarbeit</span>
+            <span class="card-tag tag-red">Rollenspiel</span>
             <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-1">🔒 Code eingeben</div>
@@ -612,11 +352,11 @@ body {
     </div>
 
     <!-- Stunde 2 -->
-    <div class="stunde-card locked" data-stunde="2" onclick="openModal(2)" style="animation-delay:0.10s">
-      <div class="card-accent accent-teal"></div>
+    <div class="stunde-card" data-stunde="2" onclick="openModal(2)" style="animation-delay:0.10s">
+      <div class="card-accent accent-indigo"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-teal">📈</div>
+          <div class="card-icon icon-blue">📈</div>
           <div class="card-meta">
             <div class="card-stunde">Stunde 2 · S. 110–113</div>
             <div class="card-title">2.3.2 Auswirkungen von Tarifabschlüssen</div>
@@ -628,9 +368,9 @@ body {
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-teal">Gruppenarbeit</span>
-            <span class="card-tag tag-teal">Lückendiagramm</span>
-            <span class="card-tag tag-blue">Quiz</span>
+            <span class="card-tag tag-blue">Gruppenarbeit</span>
+            <span class="card-tag tag-blue">Lückendiagramm</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-2">🔒 Code eingeben</div>
         </div>
@@ -639,19 +379,21 @@ body {
 
   </div>
 
-  <!-- BLOCK 2: SOZIALVERSICHERUNG -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BLOCK 2: GRUNDLAGEN SOZIALVERSICHERUNG -->
+  <!-- ═══════════════════════════════════════════ -->
   <div class="section-title" style="margin-top:36px;">
-    <span>🏥 Block 2 · Gesetzliche Sozialversicherung</span>
+    <span>🛡️ Block 2 · Grundlagen der Sozialversicherung</span>
   </div>
 
   <div class="stunden-grid">
 
     <!-- Stunde 3 -->
-    <div class="stunde-card locked" data-stunde="3" onclick="openModal(3)" style="animation-delay:0.15s">
-      <div class="card-accent accent-green"></div>
+    <div class="stunde-card" data-stunde="3" onclick="openModal(3)" style="animation-delay:0.15s">
+      <div class="card-accent accent-teal2"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-green">🛡️</div>
+          <div class="card-icon icon-teal">🛡️</div>
           <div class="card-meta">
             <div class="card-stunde">Stunde 3 · S. 114–117</div>
             <div class="card-title">2.3.3 Überblick: Zweige der Sozialversicherung</div>
@@ -659,12 +401,13 @@ body {
           </div>
         </div>
         <div class="card-desc">
-          Die fünf Zweige der gesetzlichen Sozialversicherung: Kranken-, Pflege-, Renten-, Unfall- und Arbeitslosenversicherung. Grundprinzipien und Finanzierungsformen im Überblick.
+          Die fünf Zweige der gesetzlichen Sozialversicherung. Versicherungs-, Solidaritäts- und Subsidiaritätsprinzip. Beitrags- vs. Steuerfinanzierung. Bismarck vs. Beveridge-Modell.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-green">Einzelarbeit</span>
-            <span class="card-tag tag-green">Diagramm</span>
+            <span class="card-tag tag-teal">Einzelarbeit</span>
+            <span class="card-tag tag-teal">Diagramm</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-3">🔒 Code eingeben</div>
         </div>
@@ -672,49 +415,62 @@ body {
     </div>
 
     <!-- Stunde 4 -->
-    <div class="stunde-card locked" data-stunde="4" onclick="openModal(4)" style="animation-delay:0.20s">
-      <div class="card-accent accent-green"></div>
+    <div class="stunde-card" data-stunde="4" onclick="openModal(4)" style="animation-delay:0.20s">
+      <div class="card-accent accent-orange"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-green">🏥</div>
+          <div class="card-icon icon-orange">🏥</div>
           <div class="card-meta">
-            <div class="card-stunde">Stunde 4 · S. 118–123</div>
-            <div class="card-title">2.3.4 Gesetzliche Krankenversicherung</div>
-            <div class="card-subtitle">GKV · PKV · Leistungen · Finanzierung</div>
+            <div class="card-stunde">Stunde 4 · S. 118–119</div>
+            <div class="card-title">2.3.4 Kranken- und Rentenversicherung</div>
+            <div class="card-subtitle">GKV · PKV · Rentenpunkte · Generationenvertrag</div>
           </div>
         </div>
         <div class="card-desc">
-          Struktur und Leistungen der GKV, Unterschiede zur PKV, Beitragsfinanzierung und aktuelle Herausforderungen wie steigende Kosten und demographischer Wandel.
+          GKV vs. PKV im Vergleich: Beitragsbemessungsgrenze, Familienversicherung, Solidarität. Rentenversicherung: Umlageverfahren, Rentenpunkte, Anpassung und Rentenniveau.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-green">Partnerarbeit</span>
+            <span class="card-tag tag-orange">Partnerarbeit</span>
             <span class="card-tag tag-orange">Fallanalyse</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-4">🔒 Code eingeben</div>
         </div>
       </div>
     </div>
 
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BLOCK 3: HERAUSFORDERUNGEN & REFORMEN -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title" style="margin-top:36px;">
+    <span>⚠️ Block 3 · Herausforderungen und Reformansätze</span>
+  </div>
+
+  <div class="stunden-grid">
+
     <!-- Stunde 5 -->
-    <div class="stunde-card locked" data-stunde="5" onclick="openModal(5)" style="animation-delay:0.25s">
-      <div class="card-accent accent-orange"></div>
+    <div class="stunde-card" data-stunde="5" onclick="openModal(5)" style="animation-delay:0.25s">
+      <div class="card-accent accent-teal2"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-orange">👴</div>
+          <div class="card-icon icon-teal">⚠️</div>
           <div class="card-meta">
-            <div class="card-stunde">Stunde 5 · S. 124–127</div>
-            <div class="card-title">2.3.5 Gesetzliche Rentenversicherung</div>
-            <div class="card-subtitle">Umlageverfahren · Generationenvertrag · Rentenniveau</div>
+            <div class="card-stunde">Stunde 5 · S. 120–123</div>
+            <div class="card-title">2.3.5 Herausforderungen der Sozialversicherung</div>
+            <div class="card-subtitle">Demografischer Wandel · Digitalisierung · Moral Hazard</div>
           </div>
         </div>
         <div class="card-desc">
-          Das Umlageverfahren und der Generationenvertrag als Grundprinzipien. Rentenniveau, Rentenpunkte und die Frage: Ist das System noch zukunftsfähig?
+          Demografischer Wandel, Baby-Boomer-Effekt und Automatisierung als Bedrohung der Beitragsbasis. Moral Hazard und die Principal-Agent-Theorie im Versicherungssystem.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-orange">Einzelarbeit</span>
-            <span class="card-tag tag-orange">Berechnung</span>
+            <span class="card-tag tag-teal">Einzelarbeit</span>
+            <span class="card-tag tag-teal">Zuordnung</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-5">🔒 Code eingeben</div>
         </div>
@@ -722,24 +478,25 @@ body {
     </div>
 
     <!-- Stunde 6 -->
-    <div class="stunde-card locked" data-stunde="6" onclick="openModal(6)" style="animation-delay:0.30s">
-      <div class="card-accent accent-orange"></div>
+    <div class="stunde-card" data-stunde="6" onclick="openModal(6)" style="animation-delay:0.30s">
+      <div class="card-accent accent-crimson"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-orange">💰</div>
+          <div class="card-icon icon-purple">⚕️</div>
           <div class="card-meta">
-            <div class="card-stunde">Stunde 6 · S. 126–129</div>
-            <div class="card-title">2.3.6 Finanzierung: Steuern, Beiträge, Verfahren</div>
-            <div class="card-subtitle">Umlage- vs. Kapitaldeckungsverfahren</div>
+            <div class="card-stunde">Stunde 6 · S. 124–126</div>
+            <div class="card-title">2.3.6 Reformansätze der Krankenversicherung</div>
+            <div class="card-subtitle">Effizienz · Gerechtigkeit · Markt vs. Staat</div>
           </div>
         </div>
         <div class="card-desc">
-          Unterschied zwischen Umlage- und Kapitaldeckungsverfahren. Steuer- vs. Beitragsfinanzierung. Vor- und Nachteile beider Systeme im Vergleich.
+          Variable Beiträge, Fallpauschalen, Praxisgebühr und marktbasiertes System im Vergleich. Bewertung nach den Kriterien marktwirtschaftliche Effizienz und soziale Gerechtigkeit.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-orange">Partnerarbeit</span>
-            <span class="card-tag tag-teal">Vergleich</span>
+            <span class="card-tag tag-purple">Partnerarbeit</span>
+            <span class="card-tag tag-purple">Bewertungstabelle</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-6">🔒 Code eingeben</div>
         </div>
@@ -747,24 +504,25 @@ body {
     </div>
 
     <!-- Stunde 7 -->
-    <div class="stunde-card locked" data-stunde="7" onclick="openModal(7)" style="animation-delay:0.35s">
-      <div class="card-accent accent-purple"></div>
+    <div class="stunde-card" data-stunde="7" onclick="openModal(7)" style="animation-delay:0.35s">
+      <div class="card-accent accent-burnt"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-purple">🤖</div>
+          <div class="card-icon icon-orange">👴</div>
           <div class="card-meta">
-            <div class="card-stunde">Stunde 7 · S. 128–131</div>
-            <div class="card-title">2.3.7 Herausforderungen der Sozialversicherung</div>
-            <div class="card-subtitle">Demographischer Wandel · Digitalisierung · Automatisierung</div>
+            <div class="card-stunde">Stunde 7 · S. 127–130</div>
+            <div class="card-title">2.3.7 Herausforderungen der Rentenversicherung</div>
+            <div class="card-subtitle">Generationengerechtigkeit · MCGPI · Reformoptionen</div>
           </div>
         </div>
         <div class="card-desc">
-          Demographischer Wandel, Digitalisierung und Automatisierung als Herausforderungen für die Finanzierbarkeit. Reformoptionen und ihre gesellschaftliche Bewertung.
+          Baby-Boomer-Effekt, sinkende Beitragszahler und steigende Rentenbezugsdauer. Internationaler Vergleich nach MCGPI-Kriterien: Angemessenheit, Nachhaltigkeit, Integrität.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-purple">Gruppenarbeit</span>
-            <span class="card-tag tag-purple">Diskussion</span>
+            <span class="card-tag tag-orange">Partnerarbeit</span>
+            <span class="card-tag tag-orange">Statistikanalyse</span>
+            <span class="card-tag tag-teal">Quiz</span>
           </div>
           <div class="lock-indicator" id="lock-7">🔒 Code eingeben</div>
         </div>
@@ -772,24 +530,25 @@ body {
     </div>
 
     <!-- Stunde 8 -->
-    <div class="stunde-card locked" data-stunde="8" onclick="openModal(8)" style="animation-delay:0.40s">
-      <div class="card-accent accent-violet"></div>
+    <div class="stunde-card" data-stunde="8" onclick="openModal(8)" style="animation-delay:0.40s">
+      <div class="card-accent accent-forest"></div>
       <div class="card-body">
         <div class="card-top">
-          <div class="card-icon icon-purple">🎯</div>
+          <div class="card-icon icon-green">🎓</div>
           <div class="card-meta">
-            <div class="card-stunde">Stunde 8 · Wiederholung</div>
-            <div class="card-title">2.3 Sicherung &amp; Vorbereitung</div>
-            <div class="card-subtitle">Wiederholung · Transferaufgaben · Klausurvorbereitung</div>
+            <div class="card-stunde">Stunde 8 · S. 131–135</div>
+            <div class="card-title">2.3.8 Kompetenzcheck &amp; Sicherung</div>
+            <div class="card-subtitle">Synthese · Kompetenzcheck S. 135 · Prüfungsvorbereitung</div>
           </div>
         </div>
         <div class="card-desc">
-          Gesamtwiederholung Kapitel 2.3: Tarifpolitik und Sozialversicherung. Transferaufgaben mit aktuellen Fällen. Vorbereitung auf schriftliche und mündliche Prüfungen.
+          Gesamtwiederholung Kapitel 2.3. Kompetenzcheck S. 135: Inflationsdynamik, Lohnforderungen und ihre Auswirkungen auf die Sozialversicherung. Transferaufgaben zur Synthese.
         </div>
         <div class="card-footer">
           <div class="card-tags">
-            <span class="card-tag tag-purple">Einzelarbeit</span>
-            <span class="card-tag tag-blue">Transfer</span>
+            <span class="card-tag tag-green">Einzelarbeit</span>
+            <span class="card-tag tag-green">Synthese</span>
+            <span class="card-tag tag-green">Kompetenzcheck</span>
           </div>
           <div class="lock-indicator" id="lock-8">🔒 Code eingeben</div>
         </div>
@@ -850,25 +609,21 @@ body {
 </div>
 
 <script>
-  // ===== CODES & ZIELE =====
-  // Format: Stunde → { code, url, label, title }
+  // ===== STUNDEN-DATEN =====
   const STUNDEN = {
-    1: { code: 'TARI01', url: 'WR_Q12_2-3-1_Tarifparteien.html',           label: 'Stunde 1 · S. 104–109', title: 'Ziele der Tarifparteien' },
-    2: { code: 'LOHN02', url: 'WR_Q12_2-3-2_Tarifabschluesse.html',        label: 'Stunde 2 · S. 110–113', title: 'Auswirkungen von Tarifabschlüssen' },
-    3: { code: 'SOZI03', url: 'WR_Q12_2-3-3_Sozialversicherung.html',       label: 'Stunde 3 · S. 114–115', title: 'Zweige der Sozialversicherung' },
-    4: { code: 'KRAN04', url: 'WR_Q12_2-3-4_Kranken_Rentenversicherung.html', label: 'Stunde 4 · S. 116–119', title: 'Kranken- und Rentenversicherung' },
-    5: { code: 'HERA05', url: '#',                                           label: 'Stunde 5 · S. 126–127', title: 'Herausforderungen der Sozialversicherung' },
-    6: { code: 'DEMO06', url: '#',                                           label: 'Stunde 6 · S. 128–131', title: 'Demographischer Wandel & Digitalisierung' },
-    7: { code: 'REFO07', url: '#',                                           label: 'Stunde 7 · S. 132–134', title: 'Reformansätze & Gerechtigkeitsprinzipien' },
-    8: { code: 'SICH08', url: '#',                                           label: 'Stunde 8 · Wiederholung', title: 'Sicherung & Vorbereitung' },
+    1: { code: 'TARI01', url: 'WR_Q12_2-3-1_Tarifparteien.html',              label: 'Stunde 1 · S. 104–109', title: 'Ziele der Tarifparteien' },
+    2: { code: 'LOHN02', url: 'WR_Q12_2-3-2_Tarifabschluesse.html',           label: 'Stunde 2 · S. 110–113', title: 'Auswirkungen von Tarifabschlüssen' },
+    3: { code: 'SOZI03', url: 'WR_Q12_2-3-3_Sozialversicherung.html',         label: 'Stunde 3 · S. 114–117', title: 'Zweige der Sozialversicherung' },
+    4: { code: 'KRAN04', url: 'WR_Q12_2-3-4_Kranken_Rentenversicherung.html', label: 'Stunde 4 · S. 118–119', title: 'Kranken- und Rentenversicherung' },
+    5: { code: 'HERA05', url: 'WR_Q12_2-3-5_Herausforderungen.html',          label: 'Stunde 5 · S. 120–123', title: 'Herausforderungen der Sozialversicherung' },
+    6: { code: 'DEMO06', url: 'WR_Q12_2-3-6_Reformansaetze.html',             label: 'Stunde 6 · S. 124–126', title: 'Reformansätze der Krankenversicherung' },
+    7: { code: 'REFO07', url: 'WR_Q12_2-3-7_Rentenversicherung.html',         label: 'Stunde 7 · S. 127–130', title: 'Herausforderungen der Rentenversicherung' },
+    8: { code: 'SICH08', url: 'WR_Q12_2-3-8_Kompetenzcheck.html',             label: 'Stunde 8 · S. 131–135', title: 'Kompetenzcheck & Sicherung' },
   };
 
-  // Session-Speicher: einmal freigeschaltet bleibt es bis Tab-Schließen
   const unlocked = new Set(JSON.parse(sessionStorage.getItem('wr_q12_unlocked') || '[]'));
-
   let activeStunde = null;
 
-  // Init: bereits freigeschaltete Karten markieren
   document.addEventListener('DOMContentLoaded', () => {
     unlocked.forEach(n => markUnlocked(n));
   });
@@ -880,19 +635,13 @@ body {
     if (lock) lock.innerHTML = '✅ Freigeschaltet';
   }
 
-  // ===== MODAL =====
   function openModal(n) {
-    // Wenn bereits freigeschaltet: direkt navigieren
-    if (unlocked.has(n)) {
-      navigateTo(n);
-      return;
-    }
+    if (unlocked.has(n)) { navigateTo(n); return; }
     activeStunde = n;
     const s = STUNDEN[n];
     document.getElementById('modal-stunde-label').textContent = s.label;
     document.getElementById('modal-title').textContent = s.title;
     document.getElementById('modal-error').textContent = '';
-    // clear inputs
     for (let i = 0; i < 6; i++) {
       const el = document.getElementById(`ci${i}`);
       el.value = '';
@@ -911,7 +660,6 @@ body {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
   }
 
-  // ===== INPUT HANDLING =====
   function charInput(i) {
     const el = document.getElementById(`ci${i}`);
     const val = el.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
@@ -919,21 +667,14 @@ body {
     el.classList.toggle('filled', val.length > 0);
     el.classList.remove('error');
     document.getElementById('modal-error').textContent = '';
-    if (val.length === 1 && i < 5) {
-      document.getElementById(`ci${i+1}`).focus();
-    }
-    if (i === 5 && val.length === 1) {
-      // auto-submit when last char filled
-      setTimeout(submitCode, 120);
-    }
+    if (val.length === 1 && i < 5) document.getElementById(`ci${i+1}`).focus();
+    if (i === 5 && val.length === 1) setTimeout(submitCode, 120);
   }
 
   function charKeydown(e, i) {
     if (e.key === 'Backspace') {
       const el = document.getElementById(`ci${i}`);
-      if (el.value === '' && i > 0) {
-        document.getElementById(`ci${i-1}`).focus();
-      }
+      if (el.value === '' && i > 0) document.getElementById(`ci${i-1}`).focus();
     }
     if (e.key === 'Escape') closeModal();
     if (e.key === 'Enter') submitCode();
@@ -942,26 +683,19 @@ body {
   function submitCode() {
     if (!activeStunde) return;
     let code = '';
-    for (let i = 0; i < 6; i++) {
-      code += document.getElementById(`ci${i}`).value.toUpperCase();
-    }
+    for (let i = 0; i < 6; i++) code += document.getElementById(`ci${i}`).value.toUpperCase();
     if (code.length < 6) {
       document.getElementById('modal-error').textContent = 'Bitte alle 6 Zeichen eingeben.';
       return;
     }
-    const expected = STUNDEN[activeStunde].code;
-    if (code === expected) {
-      // Freischalten
+    if (code === STUNDEN[activeStunde].code) {
       unlocked.add(activeStunde);
       sessionStorage.setItem('wr_q12_unlocked', JSON.stringify([...unlocked]));
       markUnlocked(activeStunde);
       closeModal();
       setTimeout(() => navigateTo(activeStunde), 150);
     } else {
-      // Fehler
-      for (let i = 0; i < 6; i++) {
-        document.getElementById(`ci${i}`).classList.add('error');
-      }
+      for (let i = 0; i < 6; i++) document.getElementById(`ci${i}`).classList.add('error');
       document.getElementById('modal-error').textContent = 'Falscher Code – bitte nochmal versuchen.';
       const box = document.getElementById('modal-box');
       box.classList.add('shake');
@@ -969,8 +703,7 @@ body {
         box.classList.remove('shake');
         for (let i = 0; i < 6; i++) {
           const el = document.getElementById(`ci${i}`);
-          el.value = '';
-          el.classList.remove('filled','error');
+          el.value = ''; el.classList.remove('filled','error');
         }
         document.getElementById('ci0').focus();
       }, 420);
@@ -979,20 +712,7 @@ body {
 
   function navigateTo(n) {
     const url = STUNDEN[n].url;
-    if (url && url !== '#') {
-      window.location.href = url;
-    } else {
-      // Stunde noch nicht verfügbar
-      document.getElementById('modal-error').textContent = '';
-      // Show brief info without opening modal again
-      const lock = document.getElementById(`lock-${n}`);
-      if (lock) {
-        const orig = lock.innerHTML;
-        lock.innerHTML = '🚧 Noch nicht verfügbar';
-        lock.style.color = 'var(--orange)';
-        setTimeout(() => { lock.innerHTML = orig; lock.style.color = ''; }, 2200);
-      }
-    }
+    if (url && url !== '#') window.location.href = url;
   }
 </script>
 </body>
