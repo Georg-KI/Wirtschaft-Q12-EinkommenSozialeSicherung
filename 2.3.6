@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR 12 · 2.3.6 Reformansätze der Krankenversicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font: 'Nunito', sans-serif;
+  /* Stunde 6: Purple/Violett */
+  --primary:       #6A1B9A;
+  --primary-light: #8E24AA;
+  --primary-dark:  #4A148C;
+  --accent:        #CE93D8;
+  --grad-primary:  linear-gradient(135deg, #4A148C, #AB47BC);
+
+  --blue-900:#0D47A1; --blue-800:#1565C0; --blue-700:#1976D2;
+  --blue-400:#29B6F6; --blue-50:#E3F2FD;
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --red:#E53935;     --red-light:#FFEBEE;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --amber:#D97706;   --amber-light:#FFFBEB;
+
+  --text:#1A1A1A; --text-secondary:#555555; --text-muted:#AAAAAA;
+  --border:#E0E0E0; --bg-card:#FFFFFF; --bg-page:#F0F4F8;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--primary);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 1.5rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(74,20,140,0.35);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;white-space:nowrap;}
+.topbar-logo span{color:var(--accent);}
+.topbar-chip{background:rgba(255,255,255,0.15);color:white;font-weight:700;font-size:12px;
+  border-radius:20px;padding:3px 10px;margin:0 auto;}
+.topbar-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+  color:white;border-radius:var(--radius-sm);padding:6px 14px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.topbar-btn:hover{background:rgba(255,255,255,0.25);}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:0.6rem 1.5rem;display:flex;gap:6px;align-items:center;overflow-x:auto;}
+.step-btn{flex:1;min-width:0;border:none;background:transparent;cursor:pointer;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  color:var(--text-muted);padding:6px 4px;border-radius:var(--radius-sm);
+  transition:all 0.2s;white-space:nowrap;}
+.step-btn.active{color:var(--primary);background:#f3e5f5;}
+.step-btn.done{color:var(--primary);opacity:0.7;}
+.step-btn::after{content:'';display:block;height:3px;border-radius:2px;
+  background:var(--border);margin-top:4px;transition:background 0.2s;}
+.step-btn.active::after{background:var(--primary);}
+.step-btn.done::after{background:var(--primary);opacity:0.5;}
+.step-btn.teacher-step{color:var(--amber);}
+.step-btn.teacher-step::after{background:var(--amber);}
+.step-btn.teacher-step.active{background:var(--amber-light);color:var(--amber);}
+
+/* ── MAIN ── */
+main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+
+/* ── HERO ── */
+.hero{background:var(--grad-primary) !important;border-radius:var(--radius-lg);
+  padding:2.2rem 2rem;color:white !important;position:relative;overflow:hidden;margin-bottom:1.5rem;}
+.hero *{color:white !important;}
+.hero::before{content:'§';position:absolute;right:1.2rem;top:-15px;
+  font-size:140px;font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  opacity:0.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-sub{font-size:14px;opacity:0.85;font-weight:600;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.hero-tag{background:rgba(255,255,255,0.18);border-radius:20px;
+  padding:4px 12px;font-size:12px;font-weight:700;}
+
+/* ── SECTION ── */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;
+  animation:fadeUp 0.4s ease both;}
+.section-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;}
+.section-num{width:28px;height:28px;border-radius:50%;
+  background:var(--grad-primary);color:white;font-weight:900;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section-title{font-weight:800;font-size:16px;}
+.section-body{padding:1.25rem;}
+
+/* ── STEP ── */
+.step{display:none;}
+.step.active{display:block;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--accent);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.task-header{background:var(--primary);padding:0.75rem 1.1rem;
+  display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-weight:800;font-size:14px;color:white;flex:1;}
+.task-sub{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;display:block;margin-top:1px;}
+.task-icons{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.task-icon-tile{background:white;border:1.5px solid rgba(255,255,255,0.5);border-radius:8px;
+  padding:7px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+.task-body{background:#F0F4F8;padding:1.1rem 1.2rem;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.info-box.blue  {background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green {background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red   {background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.teal  {background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box-title{font-weight:800;font-size:13px;margin-bottom:4px;}
+.info-box p, .info-box li{font-size:13.5px;line-height:1.55;}
+.info-box ul{padding-left:16px;margin-top:4px;}
+
+/* ── BUCHVERWEIS ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:0.75rem;}
+.book-ref-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.book-ref-title{color:#6b21a8;font-weight:800;font-size:12px;text-transform:uppercase;
+  letter-spacing:0.5px;margin-bottom:2px;}
+.book-ref-text{color:#581c87;font-size:13px;font-weight:600;}
+
+/* ── QUIZ ── */
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 14px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;text-align:left;transition:all 0.2s;font-family:var(--font);}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:#f3e5f5;}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong  {border-color:var(--red);  background:var(--red-light); color:#7f1d1d;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-result{margin-top:8px;font-size:13px;font-weight:700;padding:8px 12px;
+  border-radius:var(--radius-sm);display:none;}
+.quiz-result.show{display:block;}
+.quiz-result.ok {background:var(--green-light);color:#1b5e20;}
+.quiz-result.err{background:var(--red-light);color:#7f1d1d;}
+
+/* ── SOLUTION ── */
+.solution-btn{border:1.5px solid var(--border);background:white;
+  border-radius:var(--radius-sm);padding:8px 16px;font-weight:700;font-size:13px;
+  color:var(--text-secondary);cursor:pointer;font-family:var(--font);transition:all 0.2s;margin-top:8px;}
+.solution-btn:hover{border-color:var(--primary);color:var(--primary);background:#f3e5f5;}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);
+  border-radius:0 8px 8px 0;padding:10px 14px;color:#1b5e20;
+  font-size:13px;display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:4px;}
+.solution-reveal li{margin-bottom:3px;}
+
+/* ── ANSWER AREA ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;font-family:var(--font);font-size:14px;resize:vertical;
+  min-height:80px;background:white;transition:border 0.2s;}
+.answer-area:focus{outline:none;border-color:var(--primary);}
+
+/* ── POLL ── */
+.poll-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:0.75rem;}
+.poll-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:9px 18px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;font-family:var(--font);}
+.poll-opt:hover:not(:disabled){border-color:var(--accent);background:#f3e5f5;}
+.poll-opt.selected{border-color:var(--primary);background:#f3e5f5;color:var(--primary);}
+
+/* ── REFORM TABLE ── */
+.reform-table{width:100%;border-collapse:collapse;font-size:13px;margin:0.75rem 0;}
+.reform-table th{background:var(--primary);color:white;padding:9px 12px;
+  font-weight:800;text-align:left;font-size:12px;}
+.reform-table th:first-child{width:30%;}
+.reform-table th:nth-child(2), .reform-table th:nth-child(3){width:35%;}
+.reform-table td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;
+  font-size:13px;line-height:1.5;}
+.reform-table tr:nth-child(even) td{background:#faf9ff;}
+.reform-table td:first-child{font-weight:700;color:var(--primary-dark);}
+.badge-eff{display:inline-block;background:#e0f2fe;color:#0369a1;border-radius:20px;
+  padding:2px 8px;font-size:11px;font-weight:800;margin-bottom:4px;}
+.badge-ger{display:inline-block;background:#fce7f3;color:#9d174d;border-radius:20px;
+  padding:2px 8px;font-size:11px;font-weight:800;margin-bottom:4px;}
+
+/* ── INTERACTIVE TABLE (fill-in) ── */
+.fill-table{width:100%;border-collapse:collapse;font-size:13px;margin:0.75rem 0;}
+.fill-table th{background:var(--primary);color:white;padding:9px 12px;font-weight:800;font-size:12px;text-align:left;}
+.fill-table td{padding:6px 8px;border:1px solid var(--border);vertical-align:top;}
+.fill-table td:first-child{font-weight:700;color:var(--primary-dark);font-size:13px;background:#faf9ff;}
+.fill-input{width:100%;border:1.5px solid var(--border);border-radius:6px;
+  padding:6px 8px;font-family:var(--font);font-size:13px;background:white;resize:none;min-height:60px;}
+.fill-input:focus{outline:none;border-color:var(--primary);}
+.fill-input.correct-cell{border-color:var(--green);background:var(--green-light);}
+.fill-input.wrong-cell  {border-color:var(--red);  background:var(--red-light);}
+
+/* ── DEBATE CARDS ── */
+.debate-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0.75rem 0;}
+@media(max-width:600px){.debate-grid{grid-template-columns:1fr;}}
+.debate-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid transparent;}
+.debate-card.pro{background:#f0fdf4;border-color:#86efac;}
+.debate-card.contra{background:#fef2f2;border-color:#fca5a5;}
+.debate-card-title{font-weight:800;font-size:13px;margin-bottom:6px;}
+.debate-card.pro .debate-card-title{color:#166534;}
+.debate-card.contra .debate-card-title{color:#b91c1c;}
+.debate-card ul{padding-left:16px;}
+.debate-card li{font-size:13px;line-height:1.5;margin-bottom:3px;}
+
+/* ── REFORM CARDS ── */
+.reform-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0.75rem 0;}
+@media(max-width:600px){.reform-cards{grid-template-columns:1fr;}}
+.reform-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid;}
+.rc-a{background:#faf5ff;border-color:#d8b4fe;}
+.rc-b{background:#fff7ed;border-color:#fdba74;}
+.rc-c{background:#f0fdf4;border-color:#86efac;}
+.rc-d{background:#eff6ff;border-color:#93c5fd;}
+.rc-title{font-weight:800;font-size:13px;margin-bottom:4px;}
+.rc-a .rc-title{color:#6b21a8;}
+.rc-b .rc-title{color:#c2410c;}
+.rc-c .rc-title{color:#166534;}
+.rc-d .rc-title{color:#1d4ed8;}
+.rc-text{font-size:13px;line-height:1.5;}
+
+/* ── SCALE WIDGET ── */
+.scale-widget{margin:0.75rem 0;}
+.scale-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:4px;}
+.scale-input{width:100%;accent-color:var(--primary);}
+.scale-value{text-align:center;font-size:13px;font-weight:800;color:var(--primary);margin-top:4px;}
+
+/* ── TEACHER ── */
+.teacher-only{display:none;}
+body.teacher-mode .teacher-only{display:block;}
+body.teacher-mode .teacher-step{display:flex !important;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);
+  padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.teacher-note-header{font-weight:800;font-size:12px;color:#92400e;
+  text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.teacher-note p,.teacher-note li{font-size:13px;color:#78350f;line-height:1.55;}
+.teacher-note ul{padding-left:16px;}
+
+/* ── ABFRAGE ── */
+.abfrage-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.abfrage-card-header{padding:0.8rem 1rem;display:flex;align-items:center;gap:10px;}
+.abfrage-k-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;color:white;white-space:nowrap;}
+.k-wissen   {background:var(--blue-700);}
+.k-kritisch {background:var(--red);}
+.k-komm     {background:var(--green);}
+.k-kreativ  {background:var(--purple);}
+.abfrage-question{font-weight:800;font-size:14px;flex:1;}
+.abfrage-reveal{background:#F0F4F8;padding:0.9rem 1rem;border-top:1px solid var(--border);display:none;}
+.abfrage-reveal.visible{display:block;}
+.abfrage-reveal-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  color:var(--text-muted);margin-bottom:6px;}
+.abfrage-reveal ul{padding-left:16px;}
+.abfrage-reveal li{font-size:13px;line-height:1.6;margin-bottom:3px;}
+.expand-btn{background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);
+  transition:transform 0.2s;flex-shrink:0;}
+.expand-btn.open{transform:rotate(180deg);}
+
+/* ── BUTTONS ── */
+.btn{border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-primary{background:var(--primary);color:white;}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--text);border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-retry{background:#fdf4ff;color:#7e22ce;border:1.5px solid #d8b4fe;border-radius:var(--radius-sm);
+  padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);margin-top:8px;}
+
+/* ── PRINT ── */
+@media print{
+  .topbar,.progress-bar,.btn,.solution-btn,.expand-btn{display:none!important;}
+  .step{display:block!important;}
+  .abfrage-reveal{display:block!important;}
+  body{background:white;}
+}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:999;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:var(--radius-lg);padding:2rem;width:320px;
+  box-shadow:var(--shadow-lg);text-align:center;}
+.modal h3{font-weight:900;font-size:18px;margin-bottom:6px;}
+.modal p{font-size:13px;color:var(--text-secondary);margin-bottom:1.25rem;}
+.pin-display{font-size:28px;font-weight:900;letter-spacing:8px;color:var(--primary);
+  background:#f3e5f5;border-radius:var(--radius-sm);padding:10px;margin-bottom:1rem;min-height:52px;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.numpad-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:12px;font-size:18px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
+.numpad-btn:hover{border-color:var(--primary);color:var(--primary);background:#f3e5f5;}
+.numpad-del{font-size:14px;}
+.pin-error{color:var(--red);font-size:13px;font-weight:700;height:18px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.modal.shake{animation:shake 0.4s ease;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:600px){
+  main{padding:16px 12px 48px;}
+  .hero{padding:1.5rem 1.2rem;}
+  .section-body{padding:1rem;}
+  .reform-table{font-size:12px;}
+  .reform-table td, .reform-table th{padding:7px 8px;}
+}
+
+.nav-footer{display:flex;justify-content:space-between;margin-top:1.5rem;gap:1rem;}
+
+/* ── GERECHTIGKEITS-DIMENSION BOX ── */
+.gj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin:0.75rem 0;}
+@media(max-width:600px){.gj-grid{grid-template-columns:1fr;}}
+.gj-card{border-radius:var(--radius-md);padding:0.9rem;text-align:center;border:1.5px solid;}
+.gj-card.chance{background:#f0fdf4;border-color:#86efac;}
+.gj-card.bedarf {background:#eff6ff;border-color:#93c5fd;}
+.gj-card.leist  {background:#fdf4ff;border-color:#d8b4fe;}
+.gj-card-label{font-weight:900;font-size:13px;margin-bottom:4px;}
+.gj-card.chance .gj-card-label{color:#166534;}
+.gj-card.bedarf  .gj-card-label{color:#1d4ed8;}
+.gj-card.leist   .gj-card-label{color:#7e22ce;}
+.gj-card p{font-size:12px;line-height:1.45;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="WR_Q12_index.html" class="topbar-logo">WR<span>&</span>Recht</a>
+  <div class="topbar-chip">2.3.6</div>
+  <button class="topbar-btn" onclick="openPinModal()" id="teacherToggle">🔒 Lehrkraft</button>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar">
+  <button class="step-btn active" id="step-btn-1" onclick="showStep(1)">1 · Einstieg</button>
+  <button class="step-btn" id="step-btn-2" onclick="showStep(2)">2 · Reformansätze</button>
+  <button class="step-btn" id="step-btn-3" onclick="showStep(3)">3 · Bewertung</button>
+  <button class="step-btn teacher-step" id="step-btn-4" style="display:none" onclick="showStep(4)">4 · Abfrage 🔒</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 1 – EINSTIEG -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step active" id="step-1">
+
+  <div class="hero">
+    <div class="hero-eyebrow">WR 12 · Kapitel 2.3.6</div>
+    <h1>Welche Lösungen für die Probleme der Krankenversicherung werden diskutiert?</h1>
+    <div class="hero-sub">Reformansätze zwischen Effizienz und sozialer Gerechtigkeit</div>
+    <div class="hero-tags">
+      <span class="hero-tag">📚 S. 124–126</span>
+      <span class="hero-tag">⏱ ca. 30 Min.</span>
+      <span class="hero-tag">3 Schritte</span>
+    </div>
+  </div>
+
+  <!-- Lernziel -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">→</div>
+      <div class="section-title">Kompetenzerwartung</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box purple">
+        <p>Sie <strong>diskutieren Lösungsansätze</strong> im Bereich der gesetzlichen Krankenversicherung vor dem Hintergrund sozialer Gerechtigkeit und Finanzierbarkeit.</p>
+      </div>
+      <div class="gj-grid">
+        <div class="gj-card chance">
+          <div class="gj-card-label">Chancengerechtigkeit</div>
+          <p>Gleiche Ausgangsbedingungen für alle – unabhängig von Herkunft oder Einkommen</p>
+        </div>
+        <div class="gj-card bedarf">
+          <div class="gj-card-label">Bedarfsgerechtigkeit</div>
+          <p>Wer mehr Bedarf hat, bekommt mehr Leistung – unabhängig von eingezahlten Beiträgen</p>
+        </div>
+        <div class="gj-card leist">
+          <div class="gj-card-label">Leistungsgerechtigkeit</div>
+          <p>Höhere Leistung → höhere Belohnung: Wer mehr einzahlt, erhält mehr zurück</p>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:0.5rem;">Diese drei Gerechtigkeitsdimensionen stehen bei der Bewertung von Reformansätzen häufig in einem <strong>Zielkonflikt</strong> zueinander.</p>
+    </div>
+  </div>
+
+  <!-- Einstiegs-Poll -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">?</div>
+      <div class="section-title">Einstiegsfrage</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.5rem;">Welcher Reformansatz erscheint Ihnen auf den ersten Blick am sinnvollsten, um die Probleme der gesetzlichen Krankenversicherung zu lösen?</p>
+      <div class="poll-opts" id="poll1-opts">
+        <button class="poll-opt" onclick="pollVote('poll1',this)">A – Mehr Eigenverantwortung: Zuzahlungen und Praxisgebühr</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">B – Mehr Solidarität: Beitragsbemessungsgrenze anheben</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">C – Mehr Markt: Wettbewerb zwischen Versicherungen zulassen</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">D – Strukturreform: Fallpauschalen und Qualitätswettbewerb</button>
+      </div>
+      <div id="poll1-result" class="quiz-result"></div>
+      <button id="poll1-retry" class="btn-retry" style="display:none" onclick="retryPoll('poll1')">↩ Neue Abstimmung</button>
+      <div class="teacher-only">
+        <div class="teacher-note" style="margin-top:0.75rem;">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Einstieg</div>
+          <p>Ergebnis im Plenum besprechen: Welche Verteilung zeigt sich? Hinweis an die Klasse: Die eigene Einschätzung wird am Ende der Stunde erneut hinterfragt – hat die Auseinandersetzung mit den Materialien die Einschätzung verändert?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Überblick Reformansätze -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Überblick: Vier Reformansätze</div>
+    </div>
+    <div class="section-body">
+      <div class="reform-cards">
+        <div class="reform-card rc-a">
+          <div class="rc-title">📊 Variable Beiträge</div>
+          <div class="rc-text">Beiträge richten sich nach individuellem Risikoprofil (z. B. Lebensstil, Vorerkrankungen) – stärker am Versicherungsprinzip orientiert.</div>
+        </div>
+        <div class="reform-card rc-b">
+          <div class="rc-title">🏥 Fallpauschalen</div>
+          <div class="rc-text">Krankenhäuser erhalten einheitliche Vergütung je Diagnosegruppe statt Tagessätzen → soll Effizienz steigern, hat aber bekannte Nebenwirkungen.</div>
+        </div>
+        <div class="reform-card rc-c">
+          <div class="rc-title">💊 Praxisgebühr & Eigenbeteiligung</div>
+          <div class="rc-text">Patienten zahlen Anteil selbst → soll Nachfrage dämpfen und Eigenverantwortung stärken (Reduktion von Moral Hazard).</div>
+        </div>
+        <div class="reform-card rc-d">
+          <div class="rc-title">📈 Marktbasiertes System</div>
+          <div class="rc-text">Wettbewerb, freie Preisbildung und Transparenz sollen Effizienz und Qualität verbessern – Kritik: soziale Gerechtigkeit gefährdet.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <div></div>
+    <button class="btn btn-primary" onclick="showStep(2)">Weiter → Reformansätze analysieren</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 2 – REFORMANSÄTZE ANALYSIEREN -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-2">
+
+  <!-- Aufgabe 1: Karikatur -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">1</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 1 – Karikatur M1 (S. 124)</span>
+        <span class="task-sub">Buchaufgabe · Partnerarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Partnerarbeit teal -->
+          <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+            <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+            <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+            <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Buchaufgabe blau -->
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 124, Aufgabe 1 – Karikatur M1 „Variable Beiträge?" und M2 „Lösungsansätze: Markt oder Staat?"</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Beschreiben und interpretieren Sie die Karikatur M1 – auch vor dem Hintergrund der Informationen in M2. Begründen Sie, dass die dargestellte Situation im System der gesetzlichen Krankenkassen nicht möglich wäre.</p>
+      <label style="font-size:13px;font-weight:800;color:var(--text-secondary);display:block;margin-bottom:4px;">Ihre Analyse:</label>
+      <textarea class="answer-area" id="karikatur-antwort" placeholder="Beschreiben Sie die Szene der Karikatur ... Was kritisiert sie? Warum ist dies im GKV-System strukturell ausgeschlossen?"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-karikatur')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-karikatur">
+        <strong>Beschreibung:</strong> Die Karikatur zeigt ein Beratungsgespräch bei einer – vermutlich privaten – Krankenversicherung. Der Berater fragt nach Risikofaktoren (u. a. „zivilcouragiertes Verhalten"), die zu höheren Beiträgen führen würden.<br><br>
+        <strong>Interpretation:</strong> Die Karikatur spielt auf die Tendenz zu variablen, risikoadjustierten Beiträgen an. In der GKV sind solche Beiträge strukturell nicht möglich: Beiträge richten sich ausschließlich nach dem Einkommen, nicht nach Risikofaktoren. „Schlechte Risiken" werden zu denselben Konditionen wie gesunde Versicherte aufgenommen – das ist Ausdruck des Solidaritätsprinzips.<br><br>
+        <strong>Abgrenzung zur PKV:</strong> In der privaten Krankenversicherung hingegen werden individuelle Risikofaktoren geprüft und in die Beitragskalkulation einbezogen – was zu Risikoselektion führen kann.
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 2: Marktbasiertes System -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">2</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgaben 2 & 3 – M2 Markt oder Staat (S. 124–125)</span>
+        <span class="task-sub">Buchaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Einzelarbeit blau -->
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 124–125, Aufgaben 2 und 3 – M2 „Lösungsansätze: Markt oder Staat?"</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;"><strong>Aufgabe 2:</strong> Erläutern Sie, warum der Autor bei der „Transformation zu einem marktbasierten Versicherungssystem" (M2) der Transparenz des Marktes sowie einem System freier Preisbildung einen hohen Stellenwert einräumt.</p>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:0.75rem;font-weight:600;"><strong>Aufgabe 3:</strong> Beurteilen Sie die „Transformation zu einem marktbasierten Versicherungssystem" (M2) unter den Aspekten soziale Gerechtigkeit und Effizienz. Zeigen Sie auf, wie sich dabei das Problem des Moral Hazard reduzieren könnte.</p>
+
+      <!-- Pro/Contra Markt-System -->
+      <div class="debate-grid" style="margin-bottom:0.75rem;">
+        <div class="debate-card pro">
+          <div class="debate-card-title">✓ Argumente FÜR marktbasiertes System</div>
+          <ul>
+            <li>Freie Preisbildung → Anreize, Kosten gering zu halten</li>
+            <li>Wettbewerb unter Anbietern → besseres Preis-Leistungs-Verhältnis</li>
+            <li>Risikoadjustierte Beiträge → weniger Moral Hazard</li>
+            <li>Bürokratiereduktion durch Gewinnorientierung</li>
+          </ul>
+        </div>
+        <div class="debate-card contra">
+          <div class="debate-card-title">✗ Argumente GEGEN marktbasiertes System</div>
+          <ul>
+            <li>Gesundheitsleistungen sind schwer vergleichbar (Informationsasymmetrie bleibt)</li>
+            <li>Risikoselektion: Schlechte Risiken werden gemieden</li>
+            <li>Untere Einkommensgruppen könnten sich Leistungen nicht leisten</li>
+            <li>Gesundheit als Menschenwürde – nicht als Marktware</li>
+          </ul>
+        </div>
+      </div>
+      <button class="solution-btn" onclick="toggleSolution('sol-markt')">💡 Musterlösung Aufgabe 2 & 3</button>
+      <div class="solution-reveal" id="sol-markt">
+        <strong>Aufgabe 2 – Transparenz und freie Preisbildung:</strong><br>
+        Der Autor sieht in Transparenz und freier Preisbildung die Voraussetzung für effiziente Entscheidungen. Wenn Verbraucher Preise vergleichen können, entstehen Anreize, Gesundheitskosten gering zu halten. Anbieter würden bei Gewinnorientierung Bürokratie reduzieren und Kosten senken. Bisher fehlt diese Preistransparenz im staatlich regulierten GKV-System.<br><br>
+        <strong>Aufgabe 3 – Beurteilung:</strong><br>
+        <em>Effizienz:</em> Ein marktbasiertes System kann Effizienz steigern, wenn Informationsasymmetrien tatsächlich abgebaut werden. Dies ist bei Gesundheitsleistungen jedoch besonders schwierig, da Qualität für Laien kaum beurteilbar ist.<br>
+        <em>Gerechtigkeit:</em> Fraglich bleibt, ob untere Einkommensgruppen dieselben Zugangsmöglichkeiten hätten. Das Solidaritätsprinzip der GKV würde aufgegeben.<br>
+        <em>Moral Hazard:</em> Risikoadjustierte Beiträge und Selbstbeteiligung könnten Fehlanreize reduzieren, da Versicherte stärker für ihr Verhalten zur Verantwortung gezogen würden.
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Reformansätze -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">3</div>
+      <div style="flex:1">
+        <span class="task-title">Quiz – Fallpauschalen und Eigenbeteiligung</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">1. Welches Problem der Fallpauschalen (M3) wird im Text besonders deutlich hervorgehoben?</p>
+        <div class="quiz-opts" id="quiz1-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','A',false,this)">A – Fallpauschalen sind zu teuer für kleine Krankenhäuser</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','B',true,this)">B – Sie setzen falsche Anreize: Krankenhäuser optimieren Finanzlage statt Patientenversorgung (z. B. durch vorzeitige Entlassungen oder häufige Operationen)</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','C',false,this)">C – Sie führen zu mehr bürokratischem Aufwand als das alte Tagessatzsystem</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','D',false,this)">D – Sie bevorzugen Privatpatienten gegenüber Kassenpatienten</button>
+        </div>
+        <div class="quiz-result" id="quiz1-result"></div>
+        <button class="btn-retry" id="quiz1-retry" style="display:none" onclick="retryQuiz('quiz1')">↩ Nochmal versuchen</button>
+      </div>
+
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">2. Warum sind Fallpauschalen in der Kinderheilkunde besonders problematisch?</p>
+        <div class="quiz-opts" id="quiz2-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','A',false,this)">A – Weil Kinder häufiger krank sind als Erwachsene</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','B',false,this)">B – Weil für Kinder höhere Beiträge gezahlt werden müssen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','C',true,this)">C – Weil Eingriffe bei Kindern wenig Umsatz bringen, die schwächsten der Gesellschaft damit benachteiligt werden und dies der sozialen Gerechtigkeit widerspricht</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','D',false,this)">D – Weil Kinderärzte keine Fallpauschalen berechnen dürfen</button>
+        </div>
+        <div class="quiz-result" id="quiz2-result"></div>
+        <button class="btn-retry" id="quiz2-retry" style="display:none" onclick="retryQuiz('quiz2')">↩ Nochmal versuchen</button>
+      </div>
+
+      <div>
+        <p style="font-size:14px;font-weight:700;">3. Die Anhebung der Beitragsbemessungsgrenze (M4) dient primär welchem Ziel?</p>
+        <div class="quiz-opts" id="quiz3-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','A',false,this)">A – Reduktion von Moral Hazard durch höhere Eigenverantwortung</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','B',false,this)">B – Verringerung der Beitragsbelastung für mittlere Einkommen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','C',true,this)">C – Stärkung der Einnahmenseite der GKV durch Einbeziehung höherer Einkommensanteile in die Solidargemeinschaft</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','D',false,this)">D – Abschaffung der privaten Krankenversicherung</button>
+        </div>
+        <div class="quiz-result" id="quiz3-result"></div>
+        <button class="btn-retry" id="quiz3-retry" style="display:none" onclick="retryQuiz('quiz3')">↩ Nochmal versuchen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(1)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(3)">Weiter → Bewertung</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 3 – BEWERTUNG: EFFIZIENZ vs. GERECHTIGKEIT -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-3">
+
+  <!-- Aufgabe 4: Tabelle Effizienz vs. Gerechtigkeit -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">4</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 4 – Reformansätze bewerten (S. 126)</span>
+        <span class="task-sub">Buchaufgabe · Gruppenarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Gruppenarbeit lila -->
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="5" r="4" fill="#7B1FA2"/>
+            <path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="20" cy="35" r="4" fill="#7B1FA2"/>
+            <path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="5" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="35" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 126, Aufgabe 4 – Reformansätze M3 und M4 nach den Kriterien Effizienz und Gerechtigkeit beurteilen</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Beurteilen Sie die in M3 und M4 beschriebenen Reformansätze nach den Kriterien <strong>„marktwirtschaftliche Effizienz"</strong> und <strong>„Gerechtigkeit"</strong>. Tragen Sie Ihre Einschätzungen in die Tabelle ein.</p>
+
+      <table class="fill-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Reformansatz</th>
+            <th style="width:36%"><span class="badge-eff">Marktwirtschaftliche Effizienz</span></th>
+            <th style="width:36%"><span class="badge-ger">Gerechtigkeit</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fallpauschalen<br><small style="font-weight:400;color:var(--text-muted);">M3, Z. 3 ff.</small></td>
+            <td><textarea class="fill-input" id="fp-eff" placeholder="Ihre Einschätzung zur Effizienz …"></textarea></td>
+            <td><textarea class="fill-input" id="fp-ger" placeholder="Ihre Einschätzung zur Gerechtigkeit …"></textarea></td>
+          </tr>
+          <tr>
+            <td>Praxisgebühren & Eigenbeteiligung<br><small style="font-weight:400;color:var(--text-muted);">M4, Z. 3 ff.</small></td>
+            <td><textarea class="fill-input" id="pg-eff" placeholder="Ihre Einschätzung zur Effizienz …"></textarea></td>
+            <td><textarea class="fill-input" id="pg-ger" placeholder="Ihre Einschätzung zur Gerechtigkeit …"></textarea></td>
+          </tr>
+          <tr>
+            <td>Anhebung der Beitragsbemessungsgrenze<br><small style="font-weight:400;color:var(--text-muted);">M4, Z. 23 ff.</small></td>
+            <td><textarea class="fill-input" id="bbg-eff" placeholder="Ihre Einschätzung zur Effizienz …"></textarea></td>
+            <td><textarea class="fill-input" id="bbg-ger" placeholder="Ihre Einschätzung zur Gerechtigkeit …"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-tabelle')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-tabelle">
+        <strong>Fallpauschalen:</strong><br>
+        <span class="badge-eff">Effizienz</span> Falsche Anreize: Verursacht lange Liegezeiten. Motiviert Krankenhäuser dazu, möglichst viel zu operieren und Pflege zu reduzieren.<br>
+        <span class="badge-ger">Gerechtigkeit</span> Bestimmte Bereiche (z. B. Kinderheilkunde) bringen geringen Umsatz. Da hier gerade die Schwächsten benachteiligt werden, widerspricht dies der sozialen Gerechtigkeit.<br><br>
+        <strong>Praxisgebühren & Eigenbeteiligung:</strong><br>
+        <span class="badge-eff">Effizienz</span> Verbessert die Selbststeuerung und führt ggf. zu mehr Eigenverantwortung bei der Inanspruchnahme von Leistungen.<br>
+        <span class="badge-ger">Gerechtigkeit</span> Wäre gegenüber Beitragszahlern, die derzeit fast die gesamte Finanzierungslast tragen, fair; eine geringe Selbstbeteiligung wäre ggf. auch niedrigen Einkommensgruppen zumutbar.<br><br>
+        <strong>Anhebung der Beitragsbemessungsgrenze:</strong><br>
+        <span class="badge-eff">Effizienz</span> Das Beitragsaufkommen könnte erhöht werden. Die Wahlfreiheit der Versicherung wird allerdings eingeschränkt.<br>
+        <span class="badge-ger">Gerechtigkeit</span> Eine größere Zahl an Erwerbspersonen wäre Teil der Solidargemeinschaft.
+      </div>
+    </div>
+  </div>
+
+  <!-- Diskussion: Position beziehen -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">5</div>
+      <div style="flex:1">
+        <span class="task-title">Position beziehen – Reflexion</span>
+        <span class="task-sub">Diskussion · Plenum</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Plenum orange -->
+          <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+            <circle cx="22" cy="30" r="5" fill="#E65100"/>
+            <path d="M13 38c0-4.418 4.03-8 9-8s9 3.582 9 8" stroke="#E65100" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <circle cx="7" cy="14" r="3.5" fill="#E65100" opacity="0.7"/>
+            <path d="M2 22c0-3.314 2.239-6 5-6s5 2.686 5 6" stroke="#E65100" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.7"/>
+            <circle cx="16" cy="10" r="3.5" fill="#E65100" opacity="0.75"/>
+            <path d="M11 18c0-3.314 2.239-6 5-6s5 2.686 5 6" stroke="#E65100" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <circle cx="28" cy="10" r="3.5" fill="#E65100" opacity="0.75"/>
+            <path d="M23 18c0-3.314 2.239-6 5-6s5 2.686 5 6" stroke="#E65100" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <circle cx="37" cy="14" r="3.5" fill="#E65100" opacity="0.7"/>
+            <path d="M32 22c0-3.314 2.239-6 5-6s5 2.686 5 6" stroke="#E65100" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Diskussion teal -->
+          <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+            <rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/>
+            <path d="M6 19l-4 6 8-4" fill="#0d9488"/>
+            <rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/>
+            <path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/>
+            <path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Kehren Sie zur Einstiegsfrage zurück: Hat sich Ihre Einschätzung durch die Auseinandersetzung mit den Materialien verändert? Begründen Sie Ihre aktuelle Position.</p>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:0.75rem;">Leitfragen: Unter welchen <em>Bedingungen</em> wäre welcher Ansatz überzeugender? Welche Gerechtigkeitsdimension gewichten Sie stärker – Chancen-, Bedarfs- oder Leistungsgerechtigkeit?</p>
+
+      <div class="poll-opts" id="poll2-opts" style="margin-bottom:0.75rem;">
+        <button class="poll-opt" onclick="pollVote('poll2',this)">A – Mehr Eigenverantwortung: Zuzahlungen und Praxisgebühr</button>
+        <button class="poll-opt" onclick="pollVote('poll2',this)">B – Mehr Solidarität: Beitragsbemessungsgrenze anheben</button>
+        <button class="poll-opt" onclick="pollVote('poll2',this)">C – Mehr Markt: Wettbewerb zwischen Versicherungen zulassen</button>
+        <button class="poll-opt" onclick="pollVote('poll2',this)">D – Strukturreform: Fallpauschalen und Qualitätswettbewerb</button>
+      </div>
+      <div id="poll2-result" class="quiz-result"></div>
+      <button id="poll2-retry" class="btn-retry" style="display:none" onclick="retryPoll('poll2')">↩ Neue Abstimmung</button>
+
+      <label style="font-size:13px;font-weight:800;color:var(--text-secondary);display:block;margin-top:0.75rem;margin-bottom:4px;">Begründung Ihrer Position:</label>
+      <textarea class="answer-area" id="position-antwort" placeholder="Begründen Sie Ihre Einschätzung unter Bezug auf die Kriterien Effizienz und Gerechtigkeit …"></textarea>
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="margin-top:0.75rem;">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Abschluss</div>
+          <p>Vergleichen Sie die Ergebnisse von Eingangs- und Ausgangspoll im Plenum. Hat eine Positionsveränderung stattgefunden? Falls ja: worauf ist sie zurückzuführen? Dies fördert Metakognition und schließt die Stunde inhaltlich.</p>
+          <p style="margin-top:6px;">Übergang zu Stunde 7 (2.3.7 Rentenversicherung, S. 127–130): Die gleiche Bewertungsmatrix (Angemessenheit / Nachhaltigkeit / Integrität nach MCGPI) kann dort wieder angewendet werden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fazit -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">∑</div>
+      <div class="section-title">Fazit – Reformansätze im Spannungsfeld</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box purple">
+        <div class="info-box-title">Kernaussagen der Stunde</div>
+        <ul>
+          <li>Jeder Reformansatz hat <strong>Stärken und Schwächen</strong> – je nachdem, ob Effizienz oder Gerechtigkeit höher gewichtet wird.</li>
+          <li><strong>Fallpauschalen</strong> können Effizienz steigern, erzeugen aber strukturelle Fehlanreize – besonders in der Pädiatrie.</li>
+          <li><strong>Eigenbeteiligung</strong> stärkt Eigenverantwortung, belastet aber untere Einkommensgruppen überproportional.</li>
+          <li><strong>Marktbasierte Ansätze</strong> versprechen Effizienz, gefährden aber das Solidaritätsprinzip und den gleichwertigen Zugang zur Gesundheitsversorgung.</li>
+          <li>Eine ausgewogene Reform kombiniert mehrere Ansätze und berücksichtigt alle drei Gerechtigkeitsdimensionen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(2)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(1)">↑ Zum Anfang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 4 – MÜNDLICHE ABFRAGE (Lehrkraft only) -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step teacher-only" id="step-4">
+
+  <div class="hero" style="background:linear-gradient(135deg,#92400e,#D97706) !important;">
+    <div class="hero-eyebrow">Nur Lehrkraft · Schritt 4</div>
+    <h1>Mündliche Abfrage – 2.3.6</h1>
+    <div class="hero-sub">4K-Modell · Wissen · Kritisches Denken · Kommunikation · Kreativität</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ ca. 10 Min.</span>
+      <span class="hero-tag">1 Schüler/in</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-body">
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-wissen">Wissen</span>
+          <div class="abfrage-question">Erläutern Sie das Prinzip der Fallpauschalen. Welches Problem sollten sie ursprünglich lösen – und welche Fehlanreize haben sie in der Praxis erzeugt?</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Ursprung: Krankenhäuser erhielten früher Tagessätze → Anreiz zu langen Liegezeiten; Fallpauschalen sollten dem entgegenwirken</li>
+            <li>Prinzip: Einheitliche Vergütung je Diagnosegruppe (DRG), unabhängig von tatsächlicher Liegedauer</li>
+            <li>Fehlanreize: Frühzeitige Entlassung (Kosten drücken), bevorzugte Aufnahme lukrativer Fälle, Unterversorgung in wenig profitablen Bereichen (z. B. Pädiatrie)</li>
+            <li>Gerechtigkeitsproblem: Kinderheilkunde wenig rentabel → Kinderbettenzahl in Kliniken gesunken um ca. 43 %</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kritisch">Kritisches Denken</span>
+          <div class="abfrage-question">Inwiefern steht die „Transformation zu einem marktbasierten Versicherungssystem" in einem Zielkonflikt zwischen Effizienz und sozialer Gerechtigkeit? Unter welchen Bedingungen wäre eine solche Reform überzeugender zu vertreten?</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Effizienzgewinn: Wettbewerb, Preistransparenz, Kostendruck → sinkende Ausgaben, besseres Preis-Leistungs-Verhältnis</li>
+            <li>Gerechtigkeitsproblem: Risikoselektion (schlechte Risiken werden gemieden), untere Einkommensgruppen könnten Leistungen nicht nachfragen, Gesundheit als Menschenwürde nicht marktfähig</li>
+            <li>Zielkonflikt: Effizienz und Bedarfsgerechtigkeit sind hier strukturell gegenläufig</li>
+            <li>Bedingungen für mehr Überzeugungskraft: Wenn Informationsasymmetrien tatsächlich abgebaut werden können, flankierende Sozialleistungen für einkommensschwache Gruppen vorhanden sind, und Risikoausgleich zwischen Versicherern gewährleistet ist</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-komm">Kommunikation</span>
+          <div class="abfrage-question">Erklären Sie einem skeptischen Mitschüler, warum die Einführung einer Praxisgebühr (z. B. 5 € pro Arztbesuch) sowohl als gerechtes als auch als ungerechtes Instrument bewertet werden kann.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li><em>Argument für Gerechtigkeit:</em> Beitragszahler schultern derzeit fast die gesamte Last; eine geringe Eigenbeteiligung verteilt die Last breiter und stärkt Eigenverantwortung (Leistungsgerechtigkeit)</li>
+            <li><em>Argument gegen Gerechtigkeit:</em> 5 € ist für Geringverdiener relativ mehr als für Gutverdiener → regressive Wirkung; Gefahr, dass Arztbesuche aus Kostengründen vermieden werden (Bedarfsgerechtigkeit leidet)</li>
+            <li>Kommunikationskriterium: klare Gliederung (erst pro, dann contra), Bezug auf Gerechtigkeitsdimensionen, verständliche Sprache</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kreativ">Kreativität</span>
+          <div class="abfrage-question">Entwickeln Sie einen eigenen hybriden Reformvorschlag, der Elemente aus mindestens zwei der diskutierten Ansätze kombiniert. Begründen Sie, wie Ihr Vorschlag den Zielkonflikt zwischen Effizienz und Gerechtigkeit abmildert.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont (offen – Schülerleistung bewerten nach)</div>
+          <ul>
+            <li>Kombination z. B.: einkommensabhängige Zuzahlungen (Effizienz + Gerechtigkeit) + Anhebung der Beitragsbemessungsgrenze (Solidarität) + qualitätsorientierte statt mengenmäßige Fallpauschalen</li>
+            <li>Oder: Bürgerversicherung (alle pflichtversichert, inkl. Beamte/Selbstständige) + moderates Bonussystem für präventives Verhalten</li>
+            <li>Kreativitätskriterium: Eigenständigkeit des Ansatzes, Reflexion von Zielkonflikten, Auseinandersetzung mit Umsetzungsproblemen</li>
+            <li>Keine „richtige" Antwort – Begründungsqualität entscheidend</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Drucken</button>
+    <button class="btn btn-secondary" onclick="showStep(3)">← Zurück zu Schritt 3</button>
+  </div>
+</div>
+
+</main>
+
+<!-- PIN MODAL -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal" id="pinModalBox">
+    <h3>🔒 Lehrkraft-Modus</h3>
+    <p>Bitte geben Sie die 6-stellige PIN ein.</p>
+    <div class="pin-display" id="pinDisplay">——————</div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinKey('1')">1</button>
+      <button class="numpad-btn" onclick="pinKey('2')">2</button>
+      <button class="numpad-btn" onclick="pinKey('3')">3</button>
+      <button class="numpad-btn" onclick="pinKey('4')">4</button>
+      <button class="numpad-btn" onclick="pinKey('5')">5</button>
+      <button class="numpad-btn" onclick="pinKey('6')">6</button>
+      <button class="numpad-btn" onclick="pinKey('7')">7</button>
+      <button class="numpad-btn" onclick="pinKey('8')">8</button>
+      <button class="numpad-btn" onclick="pinKey('9')">9</button>
+      <button class="numpad-btn numpad-del" onclick="pinDel()">⌫</button>
+      <button class="numpad-btn" onclick="pinKey('0')">0</button>
+      <button class="numpad-btn" onclick="closePinModal()">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN = '123456';
+let pinBuffer = '';
+let currentStep = 1;
+let teacherMode = false;
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  document.getElementById('step-btn-' + n).classList.add('active');
+  currentStep = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function openPinModal() {
+  if (teacherMode) {
+    teacherMode = false;
+    document.body.classList.remove('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔒 Lehrkraft';
+    document.getElementById('step-btn-4').style.display = 'none';
+    if (currentStep === 4) showStep(1);
+    return;
+  }
+  pinBuffer = '';
+  updatePinDisplay();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('open');
+}
+function closePinModal() {
+  document.getElementById('pinModal').classList.remove('open');
+  pinBuffer = '';
+}
+function pinKey(k) {
+  if (pinBuffer.length >= 6) return;
+  pinBuffer += k;
+  updatePinDisplay();
+  if (pinBuffer.length === 6) setTimeout(checkPin, 200);
+}
+function pinDel() {
+  pinBuffer = pinBuffer.slice(0, -1);
+  updatePinDisplay();
+}
+function updatePinDisplay() {
+  let d = '';
+  for (let i = 0; i < 6; i++) d += i < pinBuffer.length ? '●' : '—';
+  document.getElementById('pinDisplay').textContent = d;
+}
+function checkPin() {
+  if (pinBuffer === TEACHER_PIN) {
+    teacherMode = true;
+    document.body.classList.add('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔓 Lehrkraft aktiv';
+    document.getElementById('step-btn-4').style.display = 'flex';
+    closePinModal();
+  } else {
+    document.getElementById('pinError').textContent = 'Falsche PIN. Bitte erneut versuchen.';
+    const m = document.getElementById('pinModalBox');
+    m.classList.add('shake');
+    setTimeout(() => m.classList.remove('shake'), 400);
+    pinBuffer = '';
+    updatePinDisplay();
+  }
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('pinModal').classList.contains('open')) return;
+  if (e.key >= '0' && e.key <= '9') pinKey(e.key);
+  if (e.key === 'Backspace') pinDel();
+  if (e.key === 'Escape') closePinModal();
+});
+document.getElementById('pinModal').addEventListener('click', function(e) {
+  if (e.target === this) closePinModal();
+});
+
+function pollVote(id, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .poll-opt`);
+  opts.forEach(o => { o.disabled = true; o.classList.remove('selected'); });
+  btn.classList.add('selected');
+  const res = document.getElementById(`${id}-result`);
+  res.className = 'quiz-result show ok';
+  res.textContent = 'Danke für Ihre Stimme! Vergleichen Sie Ihr Ergebnis im Plenum.';
+  document.getElementById(`${id}-retry`).style.display = 'inline-block';
+}
+function retryPoll(id) {
+  const opts = document.querySelectorAll(`#${id}-opts .poll-opt`);
+  opts.forEach(o => { o.disabled = false; o.classList.remove('selected'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-result`).textContent = '';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+
+function quizAnswer(id, val, correct, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => o.disabled = true);
+  const res = document.getElementById(`${id}-result`);
+  if (correct) {
+    btn.classList.add('correct');
+    res.className = 'quiz-result show ok';
+    res.textContent = '✓ Richtig!';
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(o => { if (!o.classList.contains('wrong')) o.classList.add('correct'); });
+    res.className = 'quiz-result show err';
+    res.textContent = '✗ Nicht ganz – die richtige Antwort ist hervorgehoben.';
+    document.getElementById(`${id}-retry`).style.display = 'inline-block';
+  }
+}
+function retryQuiz(id) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+
+function toggleSolution(id) {
+  document.getElementById(id).classList.toggle('visible');
+}
+
+function toggleAbfrage(btn) {
+  const reveal = btn.closest('.abfrage-card').querySelector('.abfrage-reveal');
+  reveal.classList.toggle('visible');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
