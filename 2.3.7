@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR 12 · 2.3.7 Herausforderungen der Rentenversicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font: 'Nunito', sans-serif;
+  /* Stunde 7: Orange */
+  --primary:       #E65100;
+  --primary-light: #F4511E;
+  --primary-dark:  #BF360C;
+  --accent:        #FFAB91;
+  --grad-primary:  linear-gradient(135deg, #BF360C, #FF7043);
+
+  --blue-900:#0D47A1; --blue-800:#1565C0; --blue-700:#1976D2;
+  --blue-400:#29B6F6; --blue-50:#E3F2FD;
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --red:#E53935;     --red-light:#FFEBEE;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --amber:#D97706;   --amber-light:#FFFBEB;
+
+  --text:#1A1A1A; --text-secondary:#555555; --text-muted:#AAAAAA;
+  --border:#E0E0E0; --bg-card:#FFFFFF; --bg-page:#F0F4F8;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+.topbar{background:var(--primary);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 1.5rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(191,54,12,0.35);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;white-space:nowrap;}
+.topbar-logo span{color:var(--accent);}
+.topbar-chip{background:rgba(255,255,255,0.15);color:white;font-weight:700;font-size:12px;
+  border-radius:20px;padding:3px 10px;margin:0 auto;}
+.topbar-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+  color:white;border-radius:var(--radius-sm);padding:6px 14px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.topbar-btn:hover{background:rgba(255,255,255,0.25);}
+
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:0.6rem 1.5rem;display:flex;gap:6px;align-items:center;overflow-x:auto;}
+.step-btn{flex:1;min-width:0;border:none;background:transparent;cursor:pointer;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  color:var(--text-muted);padding:6px 4px;border-radius:var(--radius-sm);transition:all 0.2s;white-space:nowrap;}
+.step-btn.active{color:var(--primary);background:#fff3e0;}
+.step-btn::after{content:'';display:block;height:3px;border-radius:2px;background:var(--border);margin-top:4px;transition:background 0.2s;}
+.step-btn.active::after{background:var(--primary);}
+.step-btn.teacher-step{color:var(--amber);}
+.step-btn.teacher-step::after{background:var(--amber);}
+.step-btn.teacher-step.active{background:var(--amber-light);color:var(--amber);}
+
+main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+
+.hero{background:var(--grad-primary) !important;border-radius:var(--radius-lg);
+  padding:2.2rem 2rem;color:white !important;position:relative;overflow:hidden;margin-bottom:1.5rem;}
+.hero *{color:white !important;}
+.hero::before{content:'§';position:absolute;right:1.2rem;top:-15px;
+  font-size:140px;font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:0.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-sub{font-size:14px;opacity:0.85;font-weight:600;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.hero-tag{background:rgba(255,255,255,0.18);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;}
+
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;animation:fadeUp 0.4s ease both;}
+.section-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.section-num{width:28px;height:28px;border-radius:50%;background:var(--grad-primary);color:white;
+  font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section-title{font-weight:800;font-size:16px;}
+.section-body{padding:1.25rem;}
+
+.step{display:none;}
+.step.active{display:block;}
+
+.task{border:1.5px solid var(--accent);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.task-header{background:var(--primary);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-weight:800;font-size:14px;color:white;flex:1;}
+.task-sub{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;display:block;margin-top:1px;}
+.task-icons{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.task-icon-tile{background:white;border:1.5px solid rgba(255,255,255,0.5);border-radius:8px;
+  padding:7px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+.task-body{background:#F0F4F8;padding:1.1rem 1.2rem;}
+
+.info-box{border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.info-box.blue  {background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green {background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red   {background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal  {background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box-title{font-weight:800;font-size:13px;margin-bottom:4px;}
+.info-box p,.info-box li{font-size:13.5px;line-height:1.55;}
+.info-box ul{padding-left:16px;margin-top:4px;}
+
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:0.75rem;}
+.book-ref-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.book-ref-title{color:#6b21a8;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;}
+.book-ref-text{color:#581c87;font-size:13px;font-weight:600;}
+
+.media-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:center;gap:12px;margin-bottom:0.75rem;
+  text-decoration:none;transition:all 0.2s;}
+.media-box:hover{background:#dcfce7;border-color:#4ade80;}
+.media-box-icon{font-size:22px;flex-shrink:0;}
+.media-box-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#166534;}
+.media-box-title{font-size:13.5px;font-weight:700;color:#15803d;}
+.media-box-url{font-size:11px;color:#166534;opacity:0.7;margin-top:1px;}
+
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 14px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;text-align:left;transition:all 0.2s;font-family:var(--font);}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:#fff3e0;}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong  {border-color:var(--red);  background:var(--red-light); color:#7f1d1d;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-result{margin-top:8px;font-size:13px;font-weight:700;padding:8px 12px;border-radius:var(--radius-sm);display:none;}
+.quiz-result.show{display:block;}
+.quiz-result.ok {background:var(--green-light);color:#1b5e20;}
+.quiz-result.err{background:var(--red-light);color:#7f1d1d;}
+
+.solution-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:8px 16px;font-weight:700;font-size:13px;color:var(--text-secondary);
+  cursor:pointer;font-family:var(--font);transition:all 0.2s;margin-top:8px;}
+.solution-btn:hover{border-color:var(--primary);color:var(--primary);background:#fff3e0;}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;
+  padding:10px 14px;color:#1b5e20;font-size:13px;display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:4px;}
+.solution-reveal li{margin-bottom:3px;}
+
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;font-family:var(--font);font-size:14px;resize:vertical;min-height:80px;background:white;}
+.answer-area:focus{outline:none;border-color:var(--primary);}
+
+.poll-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:0.75rem;}
+.poll-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:9px 18px;background:white;font-size:14px;font-weight:600;cursor:pointer;
+  transition:all 0.2s;font-family:var(--font);}
+.poll-opt:hover:not(:disabled){border-color:var(--accent);background:#fff3e0;}
+.poll-opt.selected{border-color:var(--primary);background:#fff3e0;color:var(--primary);}
+
+/* MCGPI Kriterien-Karten */
+.kriterien-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0.75rem 0;}
+@media(max-width:600px){.kriterien-grid{grid-template-columns:1fr;}}
+.krit-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid;text-align:center;}
+.krit-card.ang {background:#fff7ed;border-color:#fdba74;}
+.krit-card.nach{background:#f0fdf4;border-color:#86efac;}
+.krit-card.int {background:#eff6ff;border-color:#93c5fd;}
+.krit-badge{display:inline-block;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:900;margin-bottom:6px;}
+.krit-card.ang  .krit-badge{background:#fed7aa;color:#c2410c;}
+.krit-card.nach .krit-badge{background:#bbf7d0;color:#166534;}
+.krit-card.int  .krit-badge{background:#bfdbfe;color:#1d4ed8;}
+.krit-pct{font-size:28px;font-weight:900;margin-bottom:4px;}
+.krit-card.ang  .krit-pct{color:#c2410c;}
+.krit-card.nach .krit-pct{color:#166534;}
+.krit-card.int  .krit-pct{color:#1d4ed8;}
+.krit-label{font-size:11px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
+.krit-card p{font-size:12px;line-height:1.45;color:var(--text-secondary);}
+
+/* Generationenvertrag Grafik */
+.gen-vis{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;
+  margin:0.75rem 0;background:#fff7ed;border-radius:var(--radius-md);padding:1.25rem;}
+.gen-side{text-align:center;}
+.gen-side-title{font-weight:900;font-size:13px;margin-bottom:8px;}
+.gen-side.zahler .gen-side-title{color:#c2410c;}
+.gen-side.rentner .gen-side-title{color:#1d4ed8;}
+.gen-bar-wrap{display:flex;flex-direction:column;gap:4px;}
+.gen-bar{height:28px;border-radius:6px;display:flex;align-items:center;padding:0 10px;
+  font-size:12px;font-weight:800;color:white;transition:width 0.5s;}
+.gen-bar.zahler{background:#c2410c;}
+.gen-bar.rentner{background:#1d4ed8;}
+.gen-year{font-size:11px;font-weight:700;color:var(--text-muted);margin-top:2px;}
+.gen-arrow{font-size:28px;text-align:center;color:var(--text-muted);}
+.gen-caption{font-size:12px;color:var(--text-secondary);text-align:center;margin-top:8px;font-style:italic;
+  grid-column:1/-1;}
+
+/* Reformoptionen Tabelle */
+.reform-table{width:100%;border-collapse:collapse;font-size:13px;margin:0.75rem 0;}
+.reform-table th{background:var(--primary);color:white;padding:9px 12px;font-weight:800;text-align:left;font-size:12px;}
+.reform-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:13px;line-height:1.5;}
+.reform-table tr:nth-child(even) td{background:#fff8f5;}
+.reform-table td:first-child{font-weight:700;color:var(--primary-dark);}
+
+/* fill-in */
+.fill-table{width:100%;border-collapse:collapse;font-size:13px;margin:0.75rem 0;}
+.fill-table th{background:var(--primary);color:white;padding:9px 12px;font-weight:800;font-size:12px;text-align:left;}
+.fill-table td{padding:6px 8px;border:1px solid var(--border);vertical-align:top;}
+.fill-table td:first-child{font-weight:700;color:var(--primary-dark);font-size:13px;background:#fff8f5;width:28%;}
+.fill-input{width:100%;border:1.5px solid var(--border);border-radius:6px;
+  padding:6px 8px;font-family:var(--font);font-size:13px;background:white;resize:none;min-height:64px;}
+.fill-input:focus{outline:none;border-color:var(--primary);}
+
+.teacher-only{display:none;}
+body.teacher-mode .teacher-only{display:block;}
+body.teacher-mode .teacher-step{display:flex !important;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.teacher-note-header{font-weight:800;font-size:12px;color:#92400e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.teacher-note p,.teacher-note li{font-size:13px;color:#78350f;line-height:1.55;}
+.teacher-note ul{padding-left:16px;}
+
+.abfrage-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.abfrage-card-header{padding:0.8rem 1rem;display:flex;align-items:center;gap:10px;}
+.abfrage-k-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;color:white;white-space:nowrap;}
+.k-wissen   {background:var(--blue-700);}
+.k-kritisch {background:var(--red);}
+.k-komm     {background:var(--green);}
+.k-kreativ  {background:var(--purple);}
+.abfrage-question{font-weight:800;font-size:14px;flex:1;}
+.abfrage-reveal{background:#F0F4F8;padding:0.9rem 1rem;border-top:1px solid var(--border);display:none;}
+.abfrage-reveal.visible{display:block;}
+.abfrage-reveal-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;}
+.abfrage-reveal ul{padding-left:16px;}
+.abfrage-reveal li{font-size:13px;line-height:1.6;margin-bottom:3px;}
+.expand-btn{background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0;}
+.expand-btn.open{transform:rotate(180deg);}
+
+.btn{border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-primary{background:var(--primary);color:white;}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--text);border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-retry{background:#fff3e0;color:#b45309;border:1.5px solid #fdba74;border-radius:var(--radius-sm);
+  padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);margin-top:8px;}
+
+.badge-ang{display:inline-block;background:#fed7aa;color:#c2410c;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:800;}
+.badge-nach{display:inline-block;background:#bbf7d0;color:#166534;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:800;}
+.badge-int{display:inline-block;background:#bfdbfe;color:#1d4ed8;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:800;}
+
+@media print{
+  .topbar,.progress-bar,.btn,.solution-btn,.expand-btn{display:none!important;}
+  .step{display:block!important;}
+  .abfrage-reveal{display:block!important;}
+  body{background:white;}
+}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:var(--radius-lg);padding:2rem;width:320px;box-shadow:var(--shadow-lg);text-align:center;}
+.modal h3{font-weight:900;font-size:18px;margin-bottom:6px;}
+.modal p{font-size:13px;color:var(--text-secondary);margin-bottom:1.25rem;}
+.pin-display{font-size:28px;font-weight:900;letter-spacing:8px;color:var(--primary);
+  background:#fff3e0;border-radius:var(--radius-sm);padding:10px;margin-bottom:1rem;min-height:52px;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.numpad-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:12px;font-size:18px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
+.numpad-btn:hover{border-color:var(--primary);color:var(--primary);background:#fff3e0;}
+.pin-error{color:var(--red);font-size:13px;font-weight:700;height:18px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.modal.shake{animation:shake 0.4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.nav-footer{display:flex;justify-content:space-between;margin-top:1.5rem;gap:1rem;}
+@media(max-width:600px){main{padding:16px 12px 48px;}.hero{padding:1.5rem 1.2rem;}.section-body{padding:1rem;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="WR_Q12_index.html" class="topbar-logo">WR<span>&</span>Recht</a>
+  <div class="topbar-chip">2.3.7</div>
+  <button class="topbar-btn" onclick="openPinModal()" id="teacherToggle">🔒 Lehrkraft</button>
+</nav>
+
+<div class="progress-bar">
+  <button class="step-btn active" id="step-btn-1" onclick="showStep(1)">1 · Einstieg</button>
+  <button class="step-btn" id="step-btn-2" onclick="showStep(2)">2 · Daten & Analyse</button>
+  <button class="step-btn" id="step-btn-3" onclick="showStep(3)">3 · Reform & Bewertung</button>
+  <button class="step-btn teacher-step" id="step-btn-4" style="display:none" onclick="showStep(4)">4 · Abfrage 🔒</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 1 – EINSTIEG -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step active" id="step-1">
+
+  <div class="hero">
+    <div class="hero-eyebrow">WR 12 · Kapitel 2.3.7</div>
+    <h1>Vor welchen Herausforderungen steht die gesetzliche Rentenversicherung?</h1>
+    <div class="hero-sub">Generationengerechtigkeit, Finanzierbarkeit und internationale Perspektive</div>
+    <div class="hero-tags">
+      <span class="hero-tag">📚 S. 127–130</span>
+      <span class="hero-tag">⏱ ca. 30 Min.</span>
+      <span class="hero-tag">3 Schritte</span>
+    </div>
+  </div>
+
+  <!-- Kompetenz -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">→</div>
+      <div class="section-title">Kompetenzerwartung</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box orange">
+        <p>Sie <strong>bewerten die gesetzliche Rentenversicherung hinsichtlich der Fähigkeit, aktuellen und zukünftigen Herausforderungen begegnen zu können</strong>. Dabei berücksichtigen Sie insbesondere den Aspekt der Finanzierbarkeit.</p>
+      </div>
+      <!-- Generationenvertrag-Visualisierung -->
+      <div class="gen-vis">
+        <div class="gen-side zahler">
+          <div class="gen-side-title">Beitragszahler</div>
+          <div class="gen-bar-wrap">
+            <div>
+              <div class="gen-bar zahler" style="width:100%">5,5</div>
+              <div class="gen-year">1965</div>
+            </div>
+            <div>
+              <div class="gen-bar zahler" style="width:56%">3,1</div>
+              <div class="gen-year">2000</div>
+            </div>
+            <div>
+              <div class="gen-bar zahler" style="width:38%">2,1</div>
+              <div class="gen-year">2024</div>
+            </div>
+            <div>
+              <div class="gen-bar zahler" style="width:25%" style="opacity:0.6">~1,9?</div>
+              <div class="gen-year">2070</div>
+            </div>
+          </div>
+        </div>
+        <div class="gen-arrow">⟶<br><small style="font-size:10px;font-weight:700;color:#92400e;">je 1 Rentner</small></div>
+        <div class="gen-side rentner">
+          <div class="gen-side-title">Rentner</div>
+          <div style="font-size:36px;font-weight:900;color:#1d4ed8;margin-top:8px;">1</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Anzahl der Rentner bleibt konstant – die Beitragszahler werden weniger</div>
+        </div>
+        <div class="gen-caption">Quelle: Darstellung nach Angaben des Buchs M4 (S. 128) und M2 (S. 127) – Zahlen gerundet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Einstiegs-Poll -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">?</div>
+      <div class="section-title">Einstiegsfrage</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.5rem;">Das größte Problem der gesetzlichen Rentenversicherung ist …</p>
+      <div class="poll-opts" id="poll1-opts">
+        <button class="poll-opt" onclick="pollVote('poll1',this)">A – Der Baby-Boomer-Effekt: zu viele Rentner auf einmal</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">B – Die sinkende Geburtenrate: zu wenige Beitragszahler</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">C – Die steigende Lebenserwartung: längere Rentenbezugsdauer</button>
+        <button class="poll-opt" onclick="pollVote('poll1',this)">D – Alle drei Faktoren wirken zusammen</button>
+      </div>
+      <div id="poll1-result" class="quiz-result"></div>
+      <button id="poll1-retry" class="btn-retry" style="display:none" onclick="retryPoll('poll1')">↩ Neue Abstimmung</button>
+      <div class="teacher-only">
+        <div class="teacher-note" style="margin-top:0.75rem;">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis</div>
+          <p>Antwort D ist inhaltlich richtig – alle drei Faktoren verstärken sich gegenseitig. Der Poll dient als Denkanstoß; Auflösung erfolgt in Schritt 2 bei der Materialanalyse.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCGPI Kriterien -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Bewertungsrahmen: Mercer CFA Institute Global Pension Index (MCGPI)</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13.5px;margin-bottom:0.75rem;">Der MCGPI bewertet Rentensysteme weltweit nach drei Teilindizes. Deutschland schneidet im internationalen Vergleich nur <strong>mittelmäßig</strong> ab (Rang 17 von max. 100, Gesamtindex 67,9).</p>
+      <div class="kriterien-grid">
+        <div class="krit-card ang">
+          <div class="krit-badge">Angemessenheit</div>
+          <div class="krit-pct">40 %</div>
+          <div class="krit-label">Gewichtung</div>
+          <p>„Wie viel bekommt man zurück?" – Höhe der Leistungen, Systemdesign, Rentenansprüche bei Stellenwechsel</p>
+        </div>
+        <div class="krit-card nach">
+          <div class="krit-badge">Nachhaltigkeit</div>
+          <div class="krit-pct">35 %</div>
+          <div class="krit-label">Gewichtung</div>
+          <p>„Wie groß ist die Zukunftsfähigkeit?" – Verhältnis Beitragszahler/Rentner, Kapitaldeckung, demografische Entwicklung</p>
+        </div>
+        <div class="krit-card int">
+          <div class="krit-badge">Integrität</div>
+          <div class="krit-pct">25 %</div>
+          <div class="krit-label">Gewichtung</div>
+          <p>„Ist das System vertrauenswürdig?" – Governance, Transparenz, Kosten der Verwaltung</p>
+        </div>
+      </div>
+      <div class="info-box orange" style="margin-top:0.5rem;">
+        <div class="info-box-title">Deutschlands Schwäche: Nachhaltigkeit</div>
+        <p>Deutschland schneidet beim Kriterium Nachhaltigkeit <strong>nur mittelmäßig</strong> ab – während die Integrität (Vertrauen in öffentliche Träger) vergleichsweise hoch ist.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medien -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">🎬</div>
+      <div class="section-title">Medien & Grafiken</div>
+    </div>
+    <div class="section-body">
+      <a class="media-box" href="https://www.ccbuchner.de/clip_code/82023-228" target="_blank">
+        <div class="media-box-icon">📊</div>
+        <div>
+          <div class="media-box-label">C.C. Buchner · Mediencode</div>
+          <div class="media-box-title">Aktuelle Grafiken zur Rentenversicherung – M1 bis M7 (82023-228)</div>
+          <div class="media-box-url">ccbuchner.de/clip_code/82023-228</div>
+        </div>
+      </a>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Enthält die aktuellsten Versionen der Grafiken M1 (Geburtenrate EU), M2 (Rentner/Beitragszahler), M3 (Rentenbezugsdauer) und M7 (Beiträge & Ausgaben) – empfohlen zur Aktualisierung der Buchgrafiken.</p>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <div></div>
+    <button class="btn btn-primary" onclick="showStep(2)">Weiter → Daten & Analyse</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 2 – DATEN & ANALYSE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-2">
+
+  <!-- Aufgabe 1 -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">1</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 1 – Herausforderungen zusammenfassen (S. 130)</span>
+        <span class="task-sub">Buchaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 130, Aufgabe 1 – M4 „Reformbedarf der Rentenversicherung" lesen und gegenwärtige sowie zukünftige Herausforderungen zusammenfassen</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Fassen Sie gegenwärtige und zukünftige Herausforderungen der gesetzlichen Rentenversicherung zusammen (M4). Arbeiten Sie dabei insbesondere Probleme der <strong>sozialen Gerechtigkeit</strong> und der <strong>Finanzierbarkeit</strong> heraus.</p>
+      <textarea class="answer-area" placeholder="Strukturieren Sie Ihre Antwort: (1) Gegenwärtige Hauptherausforderung, (2) Zukünftige Entwicklung, (3) Gerechtigkeitsproblem …"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-aufg1')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-aufg1">
+        <strong>Gegenwärtige Herausforderung:</strong> Die Finanzierung der Renten der Baby-Boomer (Geburtsjahrgänge frühe 1960er) ist die unmittelbar dringlichste Aufgabe. Diese Renten sind gegenwärtig nur finanzierbar, wenn entweder die Beiträge der arbeitenden Generation stark steigen oder der Bundeszuschuss aus Steuergeldern erhöht wird.<br><br>
+        <strong>Finanzierbarkeit:</strong> 1965 kamen noch 5,5 Beitragszahler auf einen Rentner – heute sind es ca. 2,1. Modellrechnungen für 2070 gehen von nur noch ca. 1,9 aus. Beitragssätze könnten bis 2080 auf 24 % steigen.<br><br>
+        <strong>Gerechtigkeitsproblem (Generationengerechtigkeit):</strong> Die jetzt erwerbstätige Generation zahlt hohe und steigende Beiträge, ohne zu wissen, ob sie selbst jemals äquivalente Leistungen erhalten wird. Dies kann den sozialen Frieden durch Verteilungskonflikte gefährden – jüngere Jahrgänge bekommen für ihre Beiträge merklich weniger heraus als ältere.
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 2: Statistiken verknüpfen -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">2</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 2 – Statistiken M1–M3 mit M4 verknüpfen (S. 127–128)</span>
+        <span class="task-sub">Buchaufgabe · Partnerarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+            <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+            <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+            <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 127–130, Aufgabe 2 – Statistiken M1 (Geburtenrate EU), M2 (Rentner/Beitragszahler), M3 (Rentenbezugsdauer) mit den Aussagen in M4 verknüpfen</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Erläutern Sie, wie die in M1–M3 gezeigten statistischen Entwicklungen die in M4 beschriebenen Probleme belegen. Ordnen Sie jede Grafik einer konkreten Aussage in M4 zu.</p>
+
+      <table class="fill-table">
+        <thead>
+          <tr>
+            <th>Grafik</th>
+            <th>Belegte Aussage in M4 (Textstelle angeben)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>M1 – Geburtenrate EU</td>
+            <td><textarea class="fill-input" placeholder="Welche Aussage in M4 wird durch M1 gestützt? …"></textarea></td>
+          </tr>
+          <tr>
+            <td>M2 – Rentner/Beitragszahler</td>
+            <td><textarea class="fill-input" placeholder="Welche Aussage in M4 wird durch M2 gestützt? …"></textarea></td>
+          </tr>
+          <tr>
+            <td>M3 – Rentenbezugsdauer</td>
+            <td><textarea class="fill-input" placeholder="Welche Aussage in M4 wird durch M3 gestützt? …"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-statistik')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-statistik">
+        <strong>M1 – Geburtenrate EU:</strong> Belegt die Aussage M4, Z. 11: „wie man die Renten der Babyboomer finanziert" – die niedrige Geburtenrate Deutschlands (1,58, unter EU-Schnitt von 1,53) zeigt, dass langfristig kaum mehr Beitragszahler nachwachsen.<br><br>
+        <strong>M2 – Rentner/Beitragszahler-Verhältnis:</strong> Belegt M4, Z. 20 ff.: „1965 kamen noch fünfeinhalb Beitragszahler auf einen Rentenempfänger, heute sind es gerade mal 2,1 Zahler" – M2 bestätigt diesen Rückgang statistisch.<br><br>
+        <strong>M3 – Rentenbezugsdauer:</strong> Belegt M4, Z. 23 ff.: „können die Menschen zudem ihren Ruhestand länger genießen" – die durchschnittliche Bezugsdauer ist von ca. 10 Jahren (1965) auf über 22 Jahre (Frauen, 2022) gestiegen.
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">3</div>
+      <div style="flex:1">
+        <span class="task-title">Quiz – Rentenversicherung und demografischer Wandel</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">1. Warum erweckt Grafik M7 (Beiträge & Ausgaben der Rentenversicherung 1995–2023) den Eindruck langfristiger Stabilität – obwohl das System gefährdet ist?</p>
+        <div class="quiz-opts" id="quiz1-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','A',false,this)">A – Weil die Ausgaben seit 2010 sinken</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','B',true,this)">B – Weil die Finanzierungslücke bisher konstant blieb, der Eintritt der Baby-Boomer aber eine schlagartige Verschlechterung verursacht, die in der Grafik noch nicht sichtbar ist</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','C',false,this)">C – Weil der Bund die Differenz vollständig aus Steuergeldern ausgleicht</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','D',false,this)">D – Weil die Rentenbeiträge schneller steigen als die Ausgaben</button>
+        </div>
+        <div class="quiz-result" id="quiz1-result"></div>
+        <button class="btn-retry" id="quiz1-retry" style="display:none" onclick="retryQuiz('quiz1')">↩ Nochmal versuchen</button>
+      </div>
+
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">2. Deutschland liegt im MCGPI auf Rang 17. In welchem Kriterium schneidet es besonders schwach ab?</p>
+        <div class="quiz-opts" id="quiz2-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','A',false,this)">A – Integrität</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','B',false,this)">B – Angemessenheit</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','C',true,this)">C – Nachhaltigkeit</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','D',false,this)">D – Deutschland schneidet in allen Kriterien gleich schwach ab</button>
+        </div>
+        <div class="quiz-result" id="quiz2-result"></div>
+        <button class="btn-retry" id="quiz2-retry" style="display:none" onclick="retryQuiz('quiz2')">↩ Nochmal versuchen</button>
+      </div>
+
+      <div>
+        <p style="font-size:14px;font-weight:700;">3. Was bedeutet „Generationengerechtigkeit" im Kontext der Rentenversicherung konkret?</p>
+        <div class="quiz-opts" id="quiz3-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','A',false,this)">A – Alle Rentner sollen gleich hohe Renten erhalten, unabhängig von ihren Einzahlungen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','B',true,this)">B – Die Beitragslast für jüngere Generationen soll in einem zumutbaren Verhältnis zu den zu erwartenden eigenen Rentenleistungen stehen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','C',false,this)">C – Jede Generation soll exakt so viel Rente erhalten, wie sie eingezahlt hat</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','D',false,this)">D – Rentner und Beitragszahler sollen gemeinsam über die Rentenhöhe abstimmen</button>
+        </div>
+        <div class="quiz-result" id="quiz3-result"></div>
+        <button class="btn-retry" id="quiz3-retry" style="display:none" onclick="retryQuiz('quiz3')">↩ Nochmal versuchen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(1)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(3)">Weiter → Reform & Bewertung</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 3 – REFORM & BEWERTUNG -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-3">
+
+  <!-- Aufgabe 3: MCGPI-Kriterien -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">4</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 3 – MCGPI-Kriterien diskutieren (S. 130)</span>
+        <span class="task-sub">Diskussion · Gruppenarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="5" r="4" fill="#7B1FA2"/>
+            <path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="20" cy="35" r="4" fill="#7B1FA2"/>
+            <path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="5" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="35" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+            <rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/>
+            <path d="M6 19l-4 6 8-4" fill="#0d9488"/>
+            <rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/>
+            <path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/>
+            <path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 130, Aufgabe 3 – M5 (internationales Ranking) und M6 (Kriterien MCGPI): Welche Aspekte sollten bei einer Reform des Rentensystems im Vordergrund stehen?</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Diskutieren Sie anhand der Kriterien des MCGPI (M5, M6), welche Aspekte bei einer Reform des deutschen Rentensystems im Vordergrund stehen sollten. Begründen Sie Ihre Priorität.</p>
+
+      <table class="fill-table">
+        <thead>
+          <tr>
+            <th>Kriterium</th>
+            <th>Warum besonders wichtig? Reformansatz?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge-ang">Angemessenheit</span></td>
+            <td><textarea class="fill-input" placeholder="Begründung, warum dieses Kriterium Vorrang haben sollte / nicht sollte …"></textarea></td>
+          </tr>
+          <tr>
+            <td><span class="badge-nach">Nachhaltigkeit</span></td>
+            <td><textarea class="fill-input" placeholder="Begründung, warum dieses Kriterium Vorrang haben sollte / nicht sollte …"></textarea></td>
+          </tr>
+          <tr>
+            <td><span class="badge-int">Integrität</span></td>
+            <td><textarea class="fill-input" placeholder="Begründung, warum dieses Kriterium Vorrang haben sollte / nicht sollte …"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-mcgpi')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-mcgpi">
+        <strong><span class="badge-ang">Angemessenheit</span></strong> sollte bei Reformüberlegungen beachtet werden, weil nur wenn Beitragszahler das Gefühl haben, später selbst eine angemessene Rente zu erhalten, sie bereit sind, am System teilzunehmen. Fehlt dieses Vertrauen, drohen Verteilungskonflikte und eine Gefährdung des sozialen Friedens (Generationengerechtigkeit).<br><br>
+        <strong><span class="badge-nach">Nachhaltigkeit</span></strong> sollte im Vordergrund stehen, da Deutschland hier nur mittelmäßig abschneidet. Ein Rentensystem ist seinem Wesen nach langfristig angelegt – Reformen müssen daher auf Jahrzehnte hin tragfähig sein. Die demografische Entwicklung macht Anpassungen (z. B. Rentenalter, Beitragsbemessungsgrundlage) unvermeidbar.<br><br>
+        <strong><span class="badge-int">Integrität</span></strong> ist besonders bei Reformen relevant, die auf Privatisierung oder Kapitaldeckung abzielen. Das Vertrauen in öffentlich-rechtliche Träger ist in Deutschland vergleichsweise hoch – bei privaten Anbietern (z. B. Riester-Rente) wurde dieses Vertrauen schon enttäuscht. Reformen sollten dieses Kapital nicht leichtfertig verspielen.
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 4: M7 Grafik interpretieren -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">5</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgabe 4 – Grafik M7 interpretieren (S. 130)</span>
+        <span class="task-sub">Buchaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 130, Aufgabe 4 – M7 „Beiträge und Ausgaben der Rentenversicherung in Deutschland" (Stand: 2023)</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Erklären Sie, warum die Probleme der Rentenversicherung bisher noch nicht stark ins öffentliche Interesse gerückt sind, obwohl M7 die wachsende Finanzierungslücke zeigt.</p>
+      <textarea class="answer-area" placeholder="Was zeigt die rote Linie in M7? Welchen Eindruck erzeugt sie? Warum kann dieser Eindruck täuschen? …"></textarea>
+      <button class="solution-btn" onclick="toggleSolution('sol-m7')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-m7">
+        Ausgaben und Beiträge sind über die Jahre hinweg zwar beide gestiegen, die <strong>Finanzierungslücke</strong> (d. h. der Anteil der Ausgaben, der durch Beiträge gedeckt ist, rote Linie) ist jedoch im Wesentlichen <strong>konstant</strong> geblieben – das erweckt den Eindruck langfristiger Stabilität.<br><br>
+        Dieser Eindruck ist jedoch <strong>trügerisch</strong>: Sobald die Baby-Boomer in Rente gehen (ab ca. 2025), kann sich die Lage schlagartig verändern. Der konstante Deckungsanteil bisher hatte auch damit zu tun, dass die Beschäftigungslage in Deutschland in den letzten Jahren günstig war – dieser Sondereffekt kann sich rasch umkehren.<br><br>
+        Politisch gilt: Rentenpolitik ist heikel, weil Rentner eine große Wählergruppe darstellen und schmerzhafte Einschnitte unpopulär sind.
+      </div>
+    </div>
+  </div>
+
+  <!-- Reformoptionen-Übersicht -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">∑</div>
+      <div class="section-title">Reformoptionen im Überblick</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13.5px;margin-bottom:0.75rem;">Das Fachwissen (S. 131–134) nennt Reformoptionen, die sowohl an der Einnahmen- als auch an der Ausgabenseite ansetzen:</p>
+      <table class="reform-table">
+        <thead>
+          <tr>
+            <th style="width:30%">Reformoption</th>
+            <th style="width:35%">Wirkung / Chancen</th>
+            <th style="width:35%">Risiken / Kritik</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Erweiterung des versicherungspflichtigen Personenkreises (Beamte, Selbstständige)</td>
+            <td>Stärkt die Einnahmenbasis; mehr Menschen in der Solidargemeinschaft</td>
+            <td>Politisch schwer durchsetzbar; greift in bestehende Versorgungssysteme ein</td>
+          </tr>
+          <tr>
+            <td>Erhöhung des Renteneintrittsalters</td>
+            <td>Reduziert Bezugsdauer; erhöht Beitragsjahre</td>
+            <td>Unzumutbar für körperlich belastende Berufe; Gerechtigkeitsfrage</td>
+          </tr>
+          <tr>
+            <td>Übergang zum Kapitaldeckungsverfahren (Aktienrente)</td>
+            <td>Kapitalstock aufbaubar; Zinseszins-Effekt; international erprobt</td>
+            <td>Krisenanfällig; Umstellung aufwendig; Anfangskapital muss irgendwoher kommen</td>
+          </tr>
+          <tr>
+            <td>Kürzung der Leistungen / Absenkung des Rentenniveaus</td>
+            <td>Ausgabenseitige Entlastung</td>
+            <td>Armutsgefährdung im Alter; Vertrauensverlust; politisch unpopulär</td>
+          </tr>
+          <tr>
+            <td>Arbeitsmarktpolitik: mehr Erwerbstätige (Frauen, Ältere, Zuwanderung)</td>
+            <td>Strukturell: Beitragsbasis langfristig stabilisieren</td>
+            <td>Langfristig; erfordert Infrastruktur (Kitas, Weiterbildung, Integration)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="info-box orange" style="margin-top:0.5rem;">
+        <div class="info-box-title">Fazit</div>
+        <p>Keine Einzelmaßnahme reicht aus. Eine Reform muss an mehreren Stellschrauben gleichzeitig ansetzen – und dabei die drei Kriterien Angemessenheit, Nachhaltigkeit und Integrität im Blick behalten.</p>
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="margin-top:0.75rem;">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Übergang Stunde 8</div>
+          <p>Stunde 8 ist als Sicherungs- und Wiederholungsstunde angelegt (Kompetenzcheck S. 135, Fachwissen S. 131–134). Die heute erarbeiteten Reformoptionen und MCGPI-Kriterien bilden die Grundlage für den Kompetenzcheck.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(2)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(1)">↑ Zum Anfang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 4 – MÜNDLICHE ABFRAGE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step teacher-only" id="step-4">
+
+  <div class="hero" style="background:linear-gradient(135deg,#92400e,#D97706) !important;">
+    <div class="hero-eyebrow">Nur Lehrkraft · Schritt 4</div>
+    <h1>Mündliche Abfrage – 2.3.7</h1>
+    <div class="hero-sub">4K-Modell · Wissen · Kritisches Denken · Kommunikation · Kreativität</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ ca. 10 Min.</span>
+      <span class="hero-tag">1 Schüler/in</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-body">
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-wissen">Wissen</span>
+          <div class="abfrage-question">Erläutern Sie, warum die Grafik M7 (Beiträge & Ausgaben der Rentenversicherung 1995–2023) einen stabileren Eindruck erweckt, als die tatsächliche Finanzierungslage rechtfertigt.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Beiträge und Ausgaben sind beide gestiegen, der Deckungsanteil (rote Linie) blieb weitgehend konstant → Eindruck von Stabilität</li>
+            <li>Dieser Eindruck ist trügerisch: Der Eintritt der Baby-Boomer ins Rentenalter kann die Lage schlagartig verändern</li>
+            <li>Die gute Beschäftigungslage der letzten Jahre hat den Effekt überdeckt – ein temporärer Sonderfaktor</li>
+            <li>Politisch: Rentenpolitik ist unpopulär, Reformdruck wird von Parteien oft vermieden</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kritisch">Kritisches Denken</span>
+          <div class="abfrage-question">Deutschland schneidet im MCGPI beim Kriterium Nachhaltigkeit nur mittelmäßig ab. Welche Reformen wären geeignet, dieses Kriterium zu verbessern – und welche Zielkonflikte entstehen dabei?</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Nachhaltigkeit verbessern: höheres Renteneintrittsalter, Kapitaldeckungsverfahren (Aktienrente), mehr Beitragszahler durch Arbeitsmarktpolitik</li>
+            <li>Zielkonflikt mit Angemessenheit: höheres Rentenalter belastet körperlich arbeitende Berufe; Kapitaldeckung braucht Anlaufzeit und ist krisenanfällig</li>
+            <li>Zielkonflikt mit Integrität: Privatisierungselemente können das Vertrauen in das System gefährden (vgl. Riester-Rente)</li>
+            <li>Fazit: kein Instrument ohne Nebenwirkungen – Kombinationslösungen nötig</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-komm">Kommunikation</span>
+          <div class="abfrage-question">Erklären Sie dem Schüler einer 10. Klasse, was „Generationengerechtigkeit" in der Rentenversicherung bedeutet und warum dieses Prinzip heute besonders unter Druck steht.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Generationengerechtigkeit: Jede Generation soll fair behandelt werden – wer viel einzahlt, soll auch eine angemessene Leistung erhalten</li>
+            <li>Problem heute: Junge zahlen steigende Beiträge, haben aber keine Sicherheit, ob sie selbst eine äquivalente Rente erhalten</li>
+            <li>1965: 5,5 Beitragszahler je Rentner – heute: 2,1 – Tendenz weiter fallend</li>
+            <li>Kommunikationskriterium: altersgerechte Sprache, konkrete Zahlen, anschauliche Beispiele</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kreativ">Kreativität</span>
+          <div class="abfrage-question">Entwickeln Sie ein eigenes Reformpaket für die gesetzliche Rentenversicherung, das mindestens zwei der drei MCGPI-Kriterien verbessert. Begründen Sie, welche Zielkonflikte Sie dabei bewusst in Kauf nehmen.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont (offen – Begründungsqualität bewertet)</div>
+          <ul>
+            <li>Mögliche Kombination: Bürgerversicherung (alle pflichtversichert → Nachhaltigkeit) + einkommensabhängiges Mindestniveau (Angemessenheit) + unabhängige Aufsichtsbehörde (Integrität)</li>
+            <li>Oder: schrittweise Aktienrente mit staatlicher Ausfallgarantie + Anhebung Rentenalter + Einwanderungsförderung</li>
+            <li>Zielkonflikte benennen: z. B. höheres Rentenalter vs. Angemessenheit für körperlich Arbeitende; Privatisierung vs. Integrität</li>
+            <li>Kreativitätskriterium: Originalität, kohärente Begründung, Auseinandersetzung mit Umsetzungsproblemen</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Drucken</button>
+    <button class="btn btn-secondary" onclick="showStep(3)">← Zurück zu Schritt 3</button>
+  </div>
+</div>
+
+</main>
+
+<!-- PIN MODAL -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal" id="pinModalBox">
+    <h3>🔒 Lehrkraft-Modus</h3>
+    <p>Bitte geben Sie die 6-stellige PIN ein.</p>
+    <div class="pin-display" id="pinDisplay">——————</div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinKey('1')">1</button>
+      <button class="numpad-btn" onclick="pinKey('2')">2</button>
+      <button class="numpad-btn" onclick="pinKey('3')">3</button>
+      <button class="numpad-btn" onclick="pinKey('4')">4</button>
+      <button class="numpad-btn" onclick="pinKey('5')">5</button>
+      <button class="numpad-btn" onclick="pinKey('6')">6</button>
+      <button class="numpad-btn" onclick="pinKey('7')">7</button>
+      <button class="numpad-btn" onclick="pinKey('8')">8</button>
+      <button class="numpad-btn" onclick="pinKey('9')">9</button>
+      <button class="numpad-btn numpad-del" onclick="pinDel()">⌫</button>
+      <button class="numpad-btn" onclick="pinKey('0')">0</button>
+      <button class="numpad-btn" onclick="closePinModal()">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN = '123456';
+let pinBuffer = '';
+let currentStep = 1;
+let teacherMode = false;
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  document.getElementById('step-btn-' + n).classList.add('active');
+  currentStep = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function openPinModal() {
+  if (teacherMode) {
+    teacherMode = false;
+    document.body.classList.remove('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔒 Lehrkraft';
+    document.getElementById('step-btn-4').style.display = 'none';
+    if (currentStep === 4) showStep(1);
+    return;
+  }
+  pinBuffer = '';
+  updatePinDisplay();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('open');
+}
+function closePinModal() { document.getElementById('pinModal').classList.remove('open'); pinBuffer = ''; }
+function pinKey(k) { if (pinBuffer.length >= 6) return; pinBuffer += k; updatePinDisplay(); if (pinBuffer.length === 6) setTimeout(checkPin, 200); }
+function pinDel() { pinBuffer = pinBuffer.slice(0, -1); updatePinDisplay(); }
+function updatePinDisplay() {
+  let d = ''; for (let i = 0; i < 6; i++) d += i < pinBuffer.length ? '●' : '—';
+  document.getElementById('pinDisplay').textContent = d;
+}
+function checkPin() {
+  if (pinBuffer === TEACHER_PIN) {
+    teacherMode = true;
+    document.body.classList.add('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔓 Lehrkraft aktiv';
+    document.getElementById('step-btn-4').style.display = 'flex';
+    closePinModal();
+  } else {
+    document.getElementById('pinError').textContent = 'Falsche PIN. Bitte erneut versuchen.';
+    const m = document.getElementById('pinModalBox');
+    m.classList.add('shake');
+    setTimeout(() => m.classList.remove('shake'), 400);
+    pinBuffer = '';
+    updatePinDisplay();
+  }
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('pinModal').classList.contains('open')) return;
+  if (e.key >= '0' && e.key <= '9') pinKey(e.key);
+  if (e.key === 'Backspace') pinDel();
+  if (e.key === 'Escape') closePinModal();
+});
+document.getElementById('pinModal').addEventListener('click', function(e) { if (e.target === this) closePinModal(); });
+
+function pollVote(id, btn) {
+  document.querySelectorAll(`#${id}-opts .poll-opt`).forEach(o => { o.disabled = true; o.classList.remove('selected'); });
+  btn.classList.add('selected');
+  const res = document.getElementById(`${id}-result`);
+  res.className = 'quiz-result show ok';
+  res.textContent = 'Danke! Vergleichen Sie im Plenum.';
+  document.getElementById(`${id}-retry`).style.display = 'inline-block';
+}
+function retryPoll(id) {
+  document.querySelectorAll(`#${id}-opts .poll-opt`).forEach(o => { o.disabled = false; o.classList.remove('selected'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-result`).textContent = '';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+function quizAnswer(id, val, correct, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => o.disabled = true);
+  const res = document.getElementById(`${id}-result`);
+  if (correct) {
+    btn.classList.add('correct');
+    res.className = 'quiz-result show ok';
+    res.textContent = '✓ Richtig!';
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(o => { if (!o.classList.contains('wrong')) o.classList.add('correct'); });
+    res.className = 'quiz-result show err';
+    res.textContent = '✗ Nicht ganz – die richtige Antwort ist hervorgehoben.';
+    document.getElementById(`${id}-retry`).style.display = 'inline-block';
+  }
+}
+function retryQuiz(id) {
+  document.querySelectorAll(`#${id}-opts .quiz-opt`).forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+function toggleSolution(id) { document.getElementById(id).classList.toggle('visible'); }
+function toggleAbfrage(btn) {
+  btn.closest('.abfrage-card').querySelector('.abfrage-reveal').classList.toggle('visible');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
