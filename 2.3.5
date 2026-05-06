@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WR 12 · 2.3.5 Herausforderungen der Sozialversicherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font: 'Nunito', sans-serif;
+  /* Stunde 5: Teal/Grün */
+  --primary:       #00695C;
+  --primary-light: #00897B;
+  --primary-dark:  #004D40;
+  --accent:        #26C6DA;
+  --grad-primary:  linear-gradient(135deg, #00695C, #26C6DA);
+
+  --blue-900:#0D47A1; --blue-800:#1565C0; --blue-700:#1976D2;
+  --blue-400:#29B6F6; --blue-50:#E3F2FD;
+  --green:#43A047;   --green-light:#E8F5E9;
+  --orange:#FF9800;  --orange-light:#FFF3E0;
+  --purple:#AB47BC;  --purple-light:#F3E5F5;
+  --red:#E53935;     --red-light:#FFEBEE;
+  --teal:#0d9488;    --teal-light:#ccfbf1;
+  --amber:#D97706;   --amber-light:#FFFBEB;
+
+  --text:#1A1A1A; --text-secondary:#555555; --text-muted:#AAAAAA;
+  --border:#E0E0E0; --bg-card:#FFFFFF; --bg-page:#F0F4F8;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg-page);color:var(--text);min-height:100vh;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--primary);height:52px;position:sticky;top:0;z-index:100;
+  padding:0 1.5rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 2px 12px rgba(0,105,92,0.3);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;white-space:nowrap;}
+.topbar-logo span{color:var(--accent);}
+.topbar-chip{background:rgba(255,255,255,0.15);color:white;font-weight:700;font-size:12px;
+  border-radius:20px;padding:3px 10px;margin:0 auto;}
+.topbar-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+  color:white;border-radius:var(--radius-sm);padding:6px 14px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.topbar-btn:hover{background:rgba(255,255,255,0.25);}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{background:white;border-bottom:1px solid var(--border);
+  padding:0.6rem 1.5rem;display:flex;gap:6px;align-items:center;overflow-x:auto;}
+.step-btn{flex:1;min-width:0;border:none;background:transparent;cursor:pointer;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  color:var(--text-muted);padding:6px 4px;border-radius:var(--radius-sm);
+  transition:all 0.2s;white-space:nowrap;position:relative;}
+.step-btn.active{color:var(--primary);background:#e0f2f1;}
+.step-btn.done{color:var(--primary);opacity:0.7;}
+.step-btn::after{content:'';display:block;height:3px;border-radius:2px;
+  background:var(--border);margin-top:4px;transition:background 0.2s;}
+.step-btn.active::after{background:var(--primary);}
+.step-btn.done::after{background:var(--primary);opacity:0.5;}
+.step-btn.teacher-step{color:var(--amber);}
+.step-btn.teacher-step::after{background:var(--amber);}
+.step-btn.teacher-step.active{background:var(--amber-light);color:var(--amber);}
+
+/* ── MAIN ── */
+main{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+
+/* ── HERO ── */
+.hero{background:var(--grad-primary) !important;border-radius:var(--radius-lg);
+  padding:2.2rem 2rem;color:white !important;position:relative;overflow:hidden;margin-bottom:1.5rem;}
+.hero *{color:white !important;}
+.hero::before{content:'§';position:absolute;right:1.2rem;top:-15px;
+  font-size:140px;font-weight:900;color:rgba(255,255,255,0.06);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  opacity:0.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-sub{font-size:14px;opacity:0.85;font-weight:600;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.hero-tag{background:rgba(255,255,255,0.18);border-radius:20px;
+  padding:4px 12px;font-size:12px;font-weight:700;}
+
+/* ── SECTION ── */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
+  box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;
+  animation:fadeUp 0.4s ease both;}
+.section-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;}
+.section-num{width:28px;height:28px;border-radius:50%;
+  background:var(--grad-primary);color:white;font-weight:900;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section-title{font-weight:800;font-size:16px;}
+.section-body{padding:1.25rem;}
+
+/* ── STEP ── */
+.step{display:none;}
+.step.active{display:block;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--accent);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.task-header{background:var(--primary);padding:0.75rem 1.1rem;
+  display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);
+  color:white;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-weight:800;font-size:14px;color:white;flex:1;}
+.task-sub{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;display:block;margin-top:1px;}
+.task-icons{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.task-icon-tile{background:white;border:1.5px solid rgba(255,255,255,0.5);border-radius:8px;
+  padding:7px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+.task-body{background:#F0F4F8;padding:1.1rem 1.2rem;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.info-box.blue  {background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green {background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red   {background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.teal  {background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box-title{font-weight:800;font-size:13px;margin-bottom:4px;}
+.info-box p, .info-box li{font-size:13.5px;line-height:1.55;}
+.info-box ul{padding-left:16px;}
+
+/* ── BUCHVERWEIS ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:0.75rem;}
+.book-ref-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.book-ref-title{color:#6b21a8;font-weight:800;font-size:12px;text-transform:uppercase;
+  letter-spacing:0.5px;margin-bottom:2px;}
+.book-ref-text{color:#581c87;font-size:13px;font-weight:600;}
+
+/* ── MEDIA BOX ── */
+.media-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:var(--radius-md);
+  padding:0.9rem 1rem;display:flex;align-items:center;gap:12px;margin-bottom:0.75rem;
+  text-decoration:none;transition:all 0.2s;cursor:pointer;}
+.media-box:hover{background:#dcfce7;border-color:#4ade80;}
+.media-box-icon{font-size:22px;flex-shrink:0;}
+.media-box-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#166534;}
+.media-box-title{font-size:13.5px;font-weight:700;color:#15803d;}
+.media-box-url{font-size:11px;color:#166534;opacity:0.7;margin-top:1px;}
+
+/* ── QUIZ ── */
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-top:0.75rem;}
+.quiz-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 14px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;text-align:left;transition:all 0.2s;font-family:var(--font);}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:#e0f2f1;}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong  {border-color:var(--red);  background:var(--red-light); color:#7f1d1d;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-result{margin-top:8px;font-size:13px;font-weight:700;padding:8px 12px;
+  border-radius:var(--radius-sm);display:none;}
+.quiz-result.show{display:block;}
+.quiz-result.ok {background:var(--green-light);color:#1b5e20;}
+.quiz-result.err{background:var(--red-light);color:#7f1d1d;}
+
+/* ── SOLUTION ── */
+.solution-btn{border:1.5px solid var(--border);background:white;
+  border-radius:var(--radius-sm);padding:8px 16px;font-weight:700;font-size:13px;
+  color:var(--text-secondary);cursor:pointer;font-family:var(--font);transition:all 0.2s;margin-top:8px;}
+.solution-btn:hover{border-color:var(--primary);color:var(--primary);background:#e0f2f1;}
+.solution-reveal{background:var(--green-light);border-left:3px solid var(--green);
+  border-radius:0 8px 8px 0;padding:10px 14px;color:#1b5e20;
+  font-size:13px;display:none;margin-top:8px;line-height:1.6;}
+.solution-reveal.visible{display:block;}
+.solution-reveal ul{padding-left:16px;margin-top:4px;}
+
+/* ── ANSWER AREA ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;font-family:var(--font);font-size:14px;resize:vertical;
+  min-height:80px;background:white;transition:border 0.2s;}
+.answer-area:focus{outline:none;border-color:var(--primary);}
+
+/* ── POLL ── */
+.poll-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:0.75rem;}
+.poll-opt{border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:9px 18px;background:white;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;font-family:var(--font);}
+.poll-opt:hover:not(:disabled){border-color:var(--accent);background:#e0f2f1;}
+.poll-opt.selected{border-color:var(--primary);background:#e0f2f1;color:var(--primary);}
+.poll-opt.correct-answer{border-color:var(--green);background:var(--green-light);color:#1b5e20;font-weight:800;}
+.poll-opt.wrong-answer{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+
+/* ── DRAG DROP (Zuordnung) ── */
+.zuordnung-container{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem;}
+@media(max-width:600px){.zuordnung-container{grid-template-columns:1fr;}}
+.drag-pool{background:#F0F4F8;border:2px dashed var(--border);border-radius:var(--radius-md);
+  padding:0.75rem;min-height:80px;}
+.drag-pool-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  color:var(--text-muted);margin-bottom:8px;}
+.drag-item{background:white;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:7px 11px;font-size:13px;font-weight:600;cursor:grab;margin-bottom:6px;
+  transition:all 0.15s;user-select:none;}
+.drag-item:hover{border-color:var(--accent);box-shadow:var(--shadow);}
+.drag-item.dragging{opacity:0.4;}
+.drop-zone{background:#f8f8f8;border:2px dashed var(--border);border-radius:var(--radius-md);
+  padding:0.75rem;min-height:60px;transition:all 0.15s;}
+.drop-zone.drag-over{border-color:var(--accent);background:#e0f2f1;}
+.drop-zone-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  margin-bottom:8px;}
+.drop-zone.einnahme .drop-zone-label{color:var(--red);}
+.drop-zone.ausgabe .drop-zone-label{color:var(--orange);}
+.drop-zone.struktur .drop-zone-label{color:var(--purple);}
+
+/* ── MATCHING TABLE ── */
+.match-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:0.75rem;}
+.match-table th{background:var(--primary);color:white;padding:8px 12px;font-weight:800;text-align:left;}
+.match-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+.match-table tr:nth-child(even) td{background:#f8f9fa;}
+.match-cell{display:flex;gap:6px;flex-wrap:wrap;}
+.match-badge{display:inline-block;border-radius:20px;padding:2px 9px;font-size:11px;font-weight:800;}
+.badge-ein{background:#fee2e2;color:#b91c1c;}
+.badge-aus{background:#fff7ed;color:#c2410c;}
+.badge-str{background:#f3e8ff;color:#7e22ce;}
+
+/* ── TEACHER ── */
+.teacher-only{display:none;}
+body.teacher-mode .teacher-only{display:block;}
+body.teacher-mode .teacher-step{display:flex !important;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);
+  padding:1rem 1.1rem;margin-bottom:0.75rem;}
+.teacher-note-header{font-weight:800;font-size:12px;color:#92400e;
+  text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.teacher-note p,.teacher-note li{font-size:13px;color:#78350f;line-height:1.55;}
+.teacher-note ul{padding-left:16px;}
+
+/* ── ABFRAGE (Step 4) ── */
+.abfrage-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:1rem;}
+.abfrage-card-header{padding:0.8rem 1rem;display:flex;align-items:center;gap:10px;}
+.abfrage-k-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;color:white;}
+.k-wissen   {background:var(--blue-700);}
+.k-kritisch {background:var(--red);}
+.k-komm     {background:var(--green);}
+.k-kreativ  {background:var(--purple);}
+.abfrage-question{font-weight:800;font-size:14px;flex:1;}
+.abfrage-reveal{background:#F0F4F8;padding:0.9rem 1rem;border-top:1px solid var(--border);display:none;}
+.abfrage-reveal.visible{display:block;}
+.abfrage-reveal-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  color:var(--text-muted);margin-bottom:6px;}
+.abfrage-reveal ul{padding-left:16px;}
+.abfrage-reveal li{font-size:13px;line-height:1.6;margin-bottom:3px;}
+.expand-btn{background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);
+  transition:transform 0.2s;flex-shrink:0;}
+.expand-btn.open{transform:rotate(180deg);}
+
+/* ── BUTTONS ── */
+.btn{border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-primary{background:var(--primary);color:white;}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--text);border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-retry{background:#fff3e0;color:#b45309;border:1.5px solid #fbbf24;border-radius:var(--radius-sm);
+  padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);margin-top:8px;}
+
+/* ── PRINT ── */
+@media print{
+  .topbar,.progress-bar,.btn,.solution-btn,.expand-btn{display:none!important;}
+  .step{display:block!important;}
+  .abfrage-reveal{display:block!important;}
+  body{background:white;}
+}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:999;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:var(--radius-lg);padding:2rem;width:320px;
+  box-shadow:var(--shadow-lg);text-align:center;}
+.modal h3{font-weight:900;font-size:18px;margin-bottom:6px;}
+.modal p{font-size:13px;color:var(--text-secondary);margin-bottom:1.25rem;}
+.pin-display{font-size:28px;font-weight:900;letter-spacing:8px;color:var(--primary);
+  background:#e0f2f1;border-radius:var(--radius-sm);padding:10px;margin-bottom:1rem;
+  min-height:52px;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.numpad-btn{border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);
+  padding:12px;font-size:18px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
+.numpad-btn:hover{border-color:var(--primary);color:var(--primary);background:#e0f2f1;}
+.numpad-del{font-size:14px;}
+.pin-error{color:var(--red);font-size:13px;font-weight:700;height:18px;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
+.modal.shake{animation:shake 0.4s ease;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  main{padding:16px 12px 48px;}
+  .hero{padding:1.5rem 1.2rem;}
+  .section-body{padding:1rem;}
+}
+
+/* ── CHALLENGE BOXES ── */
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem;}
+@media(max-width:600px){.challenge-grid{grid-template-columns:1fr;}}
+.challenge-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid transparent;}
+.challenge-card.demo{background:#fef2f2;border-color:#fca5a5;}
+.challenge-card.digit{background:#eff6ff;border-color:#93c5fd;}
+.challenge-card.kosten{background:#fff7ed;border-color:#fdba74;}
+.challenge-card.moral{background:#f5f3ff;border-color:#c4b5fd;}
+.challenge-card-title{font-weight:800;font-size:13px;margin-bottom:6px;}
+.challenge-card.demo .challenge-card-title{color:#b91c1c;}
+.challenge-card.digit .challenge-card-title{color:#1d4ed8;}
+.challenge-card.kosten .challenge-card-title{color:#c2410c;}
+.challenge-card.moral .challenge-card-title{color:#6d28d9;}
+.challenge-card p{font-size:13px;line-height:1.55;}
+
+.nav-footer{display:flex;justify-content:space-between;margin-top:1.5rem;gap:1rem;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="WR_Q12_index.html" class="topbar-logo">WR<span>&</span>Recht</a>
+  <div class="topbar-chip">2.3.5</div>
+  <button class="topbar-btn" onclick="openPinModal()" id="teacherToggle">🔒 Lehrkraft</button>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar">
+  <button class="step-btn active" id="step-btn-1" onclick="showStep(1)">1 · Einstieg</button>
+  <button class="step-btn" id="step-btn-2" onclick="showStep(2)">2 · Herausforderungen</button>
+  <button class="step-btn" id="step-btn-3" onclick="showStep(3)">3 · Moral Hazard</button>
+  <button class="step-btn teacher-step" id="step-btn-4" style="display:none" onclick="showStep(4)">4 · Abfrage 🔒</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 1 – EINSTIEG -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step active" id="step-1">
+
+  <div class="hero">
+    <div class="hero-eyebrow">WR 12 · Kapitel 2.3.5</div>
+    <h1>Herausforderungen der gesetzlichen Sozialversicherung</h1>
+    <div class="hero-sub">Welche Probleme bedrohen die Finanzierbarkeit des Sozialstaats?</div>
+    <div class="hero-tags">
+      <span class="hero-tag">📚 S. 121–123</span>
+      <span class="hero-tag">⏱ ca. 30 Min.</span>
+      <span class="hero-tag">3 Schritte</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">→</div>
+      <div class="section-title">Worum geht es heute?</div>
+    </div>
+    <div class="section-body">
+      <div class="challenge-grid">
+        <div class="challenge-card demo">
+          <div class="challenge-card-title">👴 Demografischer Wandel</div>
+          <p>Immer weniger Beitragszahler finanzieren immer mehr Leistungsempfänger.</p>
+        </div>
+        <div class="challenge-card digit">
+          <div class="challenge-card-title">🤖 Digitalisierung & Automatisierung</div>
+          <p>Neue Beschäftigungsformen verändern die Beitragsbasis der Sozialversicherung.</p>
+        </div>
+        <div class="challenge-card kosten">
+          <div class="challenge-card-title">💊 Steigende Ausgaben</div>
+          <p>Medizinischer Fortschritt und Pflegebedarf treiben die Kosten in die Höhe.</p>
+        </div>
+        <div class="challenge-card moral">
+          <div class="challenge-card-title">⚖️ Moral Hazard</div>
+          <p>Fehlanreize im Versicherungssystem führen zu Überkonsum von Leistungen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Poll -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">?</div>
+      <div class="section-title">Einstiegsfrage</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.5rem;">Welche Herausforderung halten Sie für die gravierendste Bedrohung der gesetzlichen Sozialversicherung?</p>
+      <div class="poll-opts" id="poll1-opts">
+        <button class="poll-opt" onclick="pollVote('poll1','A',this)">A – Demografischer Wandel (Baby-Boomer-Effekt)</button>
+        <button class="poll-opt" onclick="pollVote('poll1','B',this)">B – Digitalisierung und Automatisierung</button>
+        <button class="poll-opt" onclick="pollVote('poll1','C',this)">C – Steigende Behandlungs- und Pflegekosten</button>
+        <button class="poll-opt" onclick="pollVote('poll1','D',this)">D – Moral Hazard und Fehlanreize</button>
+      </div>
+      <div id="poll1-result" class="quiz-result"></div>
+      <button id="poll1-retry" class="btn-retry" style="display:none" onclick="retryPoll('poll1')">↩ Neue Abstimmung</button>
+    </div>
+  </div>
+
+  <!-- Medienverweis Bevölkerungspyramide -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">🎬</div>
+      <div class="section-title">Medien & Visualisierungen</div>
+    </div>
+    <div class="section-body">
+
+      <a class="media-box" href="https://service.destatis.de/bevoelkerungspyramide/index.html#!y=2024" target="_blank">
+        <div class="media-box-icon">📊</div>
+        <div>
+          <div class="media-box-label">Destatis · Interaktiv</div>
+          <div class="media-box-title">Bevölkerungspyramide Deutschland (Statistisches Bundesamt)</div>
+          <div class="media-box-url">service.destatis.de/bevoelkerungspyramide</div>
+        </div>
+      </a>
+
+      <a class="media-box" href="https://www.ccbuchner.de/clip_code/73000-423" target="_blank">
+        <div class="media-box-icon">🎥</div>
+        <div>
+          <div class="media-box-label">C.C. Buchner · Mediencode</div>
+          <div class="media-box-title">Herausforderungen der Sozialversicherung (73000-423)</div>
+          <div class="media-box-url">ccbuchner.de/clip_code/73000-423</div>
+        </div>
+      </a>
+
+      <a class="media-box" href="https://www.ccbuchner.de/clip_code/73000-639" target="_blank">
+        <div class="media-box-icon">🎥</div>
+        <div>
+          <div class="media-box-label">C.C. Buchner · Mediencode</div>
+          <div class="media-box-title">Demografischer Wandel und Rentenversicherung (73000-639)</div>
+          <div class="media-box-url">ccbuchner.de/clip_code/73000-639</div>
+        </div>
+      </a>
+
+      <a class="media-box" href="https://www.ccbuchner.de/clip_code/73000-640" target="_blank">
+        <div class="media-box-icon">🎥</div>
+        <div>
+          <div class="media-box-label">C.C. Buchner · Mediencode</div>
+          <div class="media-box-title">Zukunft der Sozialversicherung (73000-640)</div>
+          <div class="media-box-url">ccbuchner.de/clip_code/73000-640</div>
+        </div>
+      </a>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Einstieg</div>
+          <p>Die Bevölkerungspyramide eignet sich ideal als Diskussionsimpuls: Vergleichen Sie 1970, 2024 und die Projektion für 2060. Der „Bauchbereich" der Baby-Boomer wird sichtbar. Fragen: Welche Form ist „ideal" für ein Umlageverfahren? Warum gerät das Fundament unter Druck?</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <div></div>
+    <button class="btn btn-primary" onclick="showStep(2)">Weiter → Herausforderungen</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 2 – HERAUSFORDERUNGEN -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-2">
+
+  <!-- Aufgabe 1 -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">1</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgaben – S. 121–122</span>
+        <span class="task-sub">Buchaufgabe · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Einzelarbeit blau -->
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Buchaufgabe blau -->
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 121–122, Aufgaben 1 und 2 – Demografischer Wandel und seine Folgen für die Sozialversicherung</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Bearbeiten Sie die Aufgaben 1 und 2 auf S. 121–122 schriftlich. Nutzen Sie dabei die Materialien M1–M4 im Buch.</p>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:0.5rem;font-weight:600;">Aufgabe 1: Tragen Sie Probleme in die vorgegebene Tabelle ein (Renten- vs. Kranken-/Pflegeversicherung).</p>
+      <p style="font-size:13px;color:var(--text-secondary);font-weight:600;">Aufgabe 2: Welche Maßnahmen könnten langfristig die Zahl der Erwerbstätigen steigern?</p>
+      <button class="solution-btn" onclick="toggleSolution('sol-aufg1')">💡 Musterlösung anzeigen</button>
+      <div class="solution-reveal" id="sol-aufg1">
+        <strong>Aufgabe 1 – Demografischer Wandel: Mehr Leistungsempfänger, weniger Beitragszahler</strong><br><br>
+        <em>Allgemeine Folgen:</em> Höhere Beitragsbelastung, sinkendes Leistungsniveau<br><br>
+        <em>Rentenversicherung spezifisch:</em> Höheres Renteneintrittsalter nötig, Generationenvertrag gerät unter Druck<br><br>
+        <em>Kranken- und Pflegeversicherung spezifisch:</em> Höhere Inanspruchnahme, erforderliche Zuzahlungen<br><br>
+        <strong>Aufgabe 2 – Maßnahmen zur Steigerung der Erwerbstätigenzahl:</strong>
+        <ul>
+          <li>Bessere Vereinbarkeit von Familie und Beruf (mehr berufstätige Frauen)</li>
+          <li>Beschäftigungsmöglichkeiten für Menschen über 55 verbessern</li>
+          <li>Integration von Einwanderern in den Arbeitsmarkt stärken</li>
+          <li>Altersgrenze für Renteneintritt anheben</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 2: Quiz Demografischer Wandel -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">2</div>
+      <div style="flex:1">
+        <span class="task-title">Quiz – Demografischer Wandel & Arbeitswelt</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Quiz rot -->
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <!-- Quiz 1 -->
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">1. Warum gerät das Umlageverfahren der Rentenversicherung durch den demografischen Wandel unter Druck?</p>
+        <div class="quiz-opts" id="quiz1-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','A',false,this)">A – Weil die Rentenformel verändert wurde</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','B',true,this)">B – Weil immer weniger Beitragszahler immer mehr Rentner finanzieren müssen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','C',false,this)">C – Weil der Staat zu wenig in den Rentenfonds einzahlt</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz1','D',false,this)">D – Weil Rentenbeiträge am Kapitalmarkt angelegt werden</button>
+        </div>
+        <div class="quiz-result" id="quiz1-result"></div>
+        <button class="btn-retry" id="quiz1-retry" style="display:none" onclick="retryQuiz('quiz1')">↩ Nochmal versuchen</button>
+      </div>
+      <!-- Quiz 2 -->
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">2. Welche der folgenden Beschäftigungsformen führt in der Rentenversicherung zu <em>besonders niedrigen</em> Rentenansprüchen?</p>
+        <div class="quiz-opts" id="quiz2-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','A',false,this)">A – Vollzeitstelle mit tariflichem Gehalt</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','B',false,this)">B – Beamtenverhältnis</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','C',true,this)">C – Dauerhafter Minijob ohne Sozialversicherungspflicht</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz2','D',false,this)">D – Befristete Vollzeitstelle</button>
+        </div>
+        <div class="quiz-result" id="quiz2-result"></div>
+        <button class="btn-retry" id="quiz2-retry" style="display:none" onclick="retryQuiz('quiz2')">↩ Nochmal versuchen</button>
+      </div>
+      <!-- Quiz 3 -->
+      <div>
+        <p style="font-size:14px;font-weight:700;">3. Welche mögliche <em>Chance</em> bietet Automatisierung für die Sozialversicherung?</p>
+        <div class="quiz-opts" id="quiz3-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','A',false,this)">A – Mehr Vollzeitarbeitsplätze entstehen automatisch</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','B',false,this)">B – Sozialversicherungspflicht entfällt bei Plattformarbeit</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','C',true,this)">C – Höhere Produktivität könnte Steuereinnahmen und staatliche Zuschüsse erhöhen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz3','D',false,this)">D – Rentenbeiträge werden durch Maschinensteuer ersetzt</button>
+        </div>
+        <div class="quiz-result" id="quiz3-result"></div>
+        <button class="btn-retry" id="quiz3-retry" style="display:none" onclick="retryQuiz('quiz3')">↩ Nochmal versuchen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 3: Zuordnung Herausforderungen -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">3</div>
+      <div style="flex:1">
+        <span class="task-title">Zuordnung – Einnahmen- vs. Ausgabenseite</span>
+        <span class="task-sub">Kreativaufgabe · Partnerarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Partnerarbeit teal -->
+          <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+            <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+            <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+            <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Ordnen Sie die Herausforderungen den Wirkungsbereichen zu. Eine Herausforderung kann mehrere Bereiche betreffen.</p>
+
+      <div style="margin-bottom:1rem;">
+        <table class="match-table">
+          <thead>
+            <tr>
+              <th>Herausforderung</th>
+              <th><span class="badge-ein" style="background:#fee2e2;color:#b91c1c;border-radius:20px;padding:3px 9px;">Einnahmenseite</span></th>
+              <th><span class="badge-aus" style="background:#fff7ed;color:#c2410c;border-radius:20px;padding:3px 9px;">Ausgabenseite</span></th>
+              <th><span class="badge-str" style="background:#f3e8ff;color:#7e22ce;border-radius:20px;padding:3px 9px;">Strukturproblem</span></th>
+            </tr>
+          </thead>
+          <tbody id="zuordnung-body">
+            <tr>
+              <td style="font-weight:700;font-size:13px;">Demografischer Wandel</td>
+              <td><input type="checkbox" id="z1e" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z1a" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z1s" style="width:16px;height:16px;"></td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;font-size:13px;">Moral Hazard / Informationsasymmetrien</td>
+              <td><input type="checkbox" id="z2e" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z2a" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z2s" style="width:16px;height:16px;"></td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;font-size:13px;">Plattformarbeit / Selbstständigkeit</td>
+              <td><input type="checkbox" id="z3e" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z3a" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z3s" style="width:16px;height:16px;"></td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;font-size:13px;">Medizinischer Fortschritt</td>
+              <td><input type="checkbox" id="z4e" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z4a" style="width:16px;height:16px;"></td>
+              <td><input type="checkbox" id="z4s" style="width:16px;height:16px;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="checkZuordnung()">Auswertung</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetZuordnung()" style="margin-left:8px;">Zurücksetzen</button>
+      <div class="quiz-result" id="zuordnung-result"></div>
+      <button class="solution-btn" onclick="toggleSolution('sol-zuordnung')">💡 Musterlösung</button>
+      <div class="solution-reveal" id="sol-zuordnung">
+        <strong>Musterlösung:</strong>
+        <ul>
+          <li><strong>Demografischer Wandel:</strong> Einnahmenseite ✓ · Ausgabenseite ✓ · Strukturproblem ✓</li>
+          <li><strong>Moral Hazard:</strong> Ausgabenseite ✓ · Strukturproblem ✓</li>
+          <li><strong>Plattformarbeit/Selbstständigkeit:</strong> Einnahmenseite ✓ · Strukturproblem ✓</li>
+          <li><strong>Medizinischer Fortschritt:</strong> Ausgabenseite ✓ · Strukturproblem ✓</li>
+        </ul>
+        <p style="margin-top:8px;font-size:12px;">Fazit: Fast alle Herausforderungen sind strukturelle Probleme – sie betreffen die grundlegende Konstruktion der Sozialversicherung.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(1)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(3)">Weiter → Moral Hazard</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 3 – MORAL HAZARD -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step" id="step-3">
+
+  <!-- Info: Moral Hazard -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Moral Hazard – Fehlanreize im Versicherungssystem</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box teal" style="margin-bottom:0.75rem;">
+        <div class="info-box-title">Was ist Moral Hazard?</div>
+        <p>Das Versicherungsprinzip kann unerwünscht riskantes oder fahrlässiges Verhalten begünstigen, weil Risiken auf die Versichertengemeinschaft abgewälzt werden – der Einzelne trägt nicht mehr die vollen Kosten seines Verhaltens.</p>
+      </div>
+      <div class="info-box purple">
+        <div class="info-box-title">Principal-Agent-Theorie</div>
+        <p><strong>Prinzipal</strong> (Versicherung) und <strong>Agent</strong> (Versicherter) verfolgen unterschiedliche Interessen. Die <strong>Informationsasymmetrie</strong> gibt dem Agenten einen Vorteil: Er weiß mehr über seinen tatsächlichen Bedarf und sein Verhalten als die Versicherung (<em>hidden information / hidden action</em>).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 4 -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">4</div>
+      <div style="flex:1">
+        <span class="task-title">Buchaufgaben S. 123 – Moral Hazard</span>
+        <span class="task-sub">Buchaufgabe · Partnerarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Partnerarbeit teal -->
+          <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+            <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+            <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+            <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+            <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div class="book-ref">
+        <div class="book-ref-icon">📖</div>
+        <div>
+          <div class="book-ref-title">startup.WR Bayern gA12</div>
+          <div class="book-ref-text">S. 123, Aufgaben 3, 4 und 5 – Moral Hazard und Gegenmaßnahmen</div>
+        </div>
+      </div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Bearbeiten Sie die Aufgaben 3–5 auf S. 123 mithilfe der Karikatur (M5) und der Materialien.</p>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-moral')">💡 Musterlösung Aufgabe 3</button>
+      <div class="solution-reveal" id="sol-moral">
+        <strong>Aufgabe 3 – Moral Hazard (paraphrasiert):</strong><br>
+        Moral Hazard bezeichnet riskantes oder fahrlässiges Verhalten, das aus einem Informationsgefälle zwischen den beteiligten Akteuren entsteht. Bei Versicherungen führt der Versicherungsschutz dazu, dass Versicherte eine höhere Risikobereitschaft entwickeln, weil sie sich abgesichert fühlen. Gleichzeitig besteht ein Anreiz, Versicherungsleistungen zu nutzen, auch wenn diese nicht unbedingt erforderlich wären. Da die Versicherung das Verhalten des Versicherungsnehmers kaum kontrollieren kann, entsteht ein strukturelles Informationsgefälle.
+      </div>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-moral4')">💡 Musterlösung Aufgabe 4</button>
+      <div class="solution-reveal" id="sol-moral4">
+        <strong>Aufgabe 4 – Zuordnung (paraphrasiert):</strong>
+        <ul>
+          <li><strong>Demografischer Wandel:</strong> wirkt auf Einnahmen- und Ausgabenseite sowie als Strukturproblem</li>
+          <li><strong>Moral Hazard / Informationsasymmetrien:</strong> wirkt vor allem auf Ausgabenseite und als Strukturproblem</li>
+          <li><strong>Indirekte Lohnkosten:</strong> wirken auf Ausgabenseite und als Strukturproblem (Standortnachteil)</li>
+          <li><strong>Starke Belastung unterer Einkommensgruppen:</strong> Einnahmenseite + Strukturproblem</li>
+          <li><strong>Zu wenige berufstätige Frauen / über 55-Jährige:</strong> Einnahmenseite + Strukturproblem</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aufgabe 5: Diskussion Gegenmaßnahmen -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">5</div>
+      <div style="flex:1">
+        <span class="task-title">Diskussion – Gegenmaßnahmen bewerten</span>
+        <span class="task-sub">Diskussion · Gruppenarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <!-- Gruppenarbeit lila -->
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="8" stroke="#7B1FA2" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="5" r="4" fill="#7B1FA2"/>
+            <path d="M14 13c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="20" cy="35" r="4" fill="#7B1FA2"/>
+            <path d="M14 27c0 3.314 2.686 6 6 6s6-2.686 6-6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="5" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M13 14c-3.314 0-6 2.686-6 6s2.686 6 6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="35" cy="20" r="4" fill="#7B1FA2"/>
+            <path d="M27 14c3.314 0 6 2.686 6 6s-2.686 6-6 6" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <!-- Diskussion teal -->
+          <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+            <rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/>
+            <path d="M6 19l-4 6 8-4" fill="#0d9488"/>
+            <rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/>
+            <path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/>
+            <path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Diskutieren Sie in Kleingruppen: Welche der folgenden Gegenmaßnahmen gegen Moral Hazard halten Sie für sinnvoll? Begründen Sie Ihre Einschätzung mit Blick auf <strong>Effizienz</strong> und <strong>soziale Gerechtigkeit</strong>.</p>
+
+      <div class="challenge-grid" style="margin-bottom:1rem;">
+        <div class="challenge-card demo">
+          <div class="challenge-card-title">Zuzahlungen / Selbstbeteiligung</div>
+          <p>Patient trägt Teil der Kosten selbst → schärfere Eigenverantwortung, aber Belastung unterer Einkommensgruppen.</p>
+        </div>
+        <div class="challenge-card digit">
+          <div class="challenge-card-title">Präventivanreize (Bonusprogramme)</div>
+          <p>Gesunde Lebensweise wird belohnt → freiwillige Eigenverantwortung, kein Zwang, aber schwer zu überprüfen.</p>
+        </div>
+        <div class="challenge-card kosten">
+          <div class="challenge-card-title">Fallpauschalen (Krankenhäuser)</div>
+          <p>Einheitliche Vergütung pro Diagnose → reduziert Überbehandlung, kann aber falsche Anreize bei Krankenhäusern setzen.</p>
+        </div>
+        <div class="challenge-card moral">
+          <div class="challenge-card-title">Stärkere Kontrollen / Transparenz</div>
+          <p>Bessere Informationslagen für Versicherungen → reduziert Informationsasymmetrie, aber datenschutzrechtlich heikel.</p>
+        </div>
+      </div>
+
+      <label style="font-size:13px;font-weight:800;color:var(--text-secondary);display:block;margin-bottom:4px;">Ihre Einschätzung:</label>
+      <textarea class="answer-area" id="diskussion-antwort" placeholder="Welche Maßnahme bevorzugen Sie und warum? Bedenken Sie dabei beide Kriterien: Effizienz und Gerechtigkeit ..."></textarea>
+
+      <button class="solution-btn" onclick="toggleSolution('sol-disk')">💡 Orientierungshilfe</button>
+      <div class="solution-reveal" id="sol-disk">
+        <strong>Abwägungshilfe:</strong>
+        <ul>
+          <li><strong>Zuzahlungen</strong> verbessern Effizienz, gefährden aber Chancengleichheit – niedrige Einkommen könnten notwendige Behandlungen meiden.</li>
+          <li><strong>Präventivanreize</strong> sind gerechter, da freiwillig, aber ihre Wirkung auf die Ausgaben ist begrenzt.</li>
+          <li><strong>Fallpauschalen</strong> haben sich als zweischneidig erwiesen: Sie können Krankenhäuser zu mehr Operationen bei lukrativen Diagnosen verleiten.</li>
+          <li><strong>Kontrollen</strong> können Informationsasymmetrien reduzieren, kollidieren aber mit dem Datenschutz und dem Arzt-Patienten-Vertrauen.</li>
+        </ul>
+        <p style="margin-top:6px;">Keine Maßnahme ist ideal – eine Kombination und regelmäßige Evaluation sind sinnvoller als ein einzelner Ansatz.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zusammenfassung -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">∑</div>
+      <div class="section-title">Fazit – Einnahmen und Ausgaben unter Druck</div>
+    </div>
+    <div class="section-body">
+      <div class="info-box green">
+        <div class="info-box-title">Kernaussagen der Stunde</div>
+        <ul>
+          <li>Die Sozialversicherung steht vor einer <strong>Kombination aus demografischen, wirtschaftlichen und verhaltensbedingten</strong> Herausforderungen.</li>
+          <li>Auf der <strong>Einnahmenseite</strong> schrumpft die Beitragsbasis (Baby-Boomer, Plattformarbeit).</li>
+          <li>Auf der <strong>Ausgabenseite</strong> steigen die Kosten (Medizin, Pflege, Langlebigkeit, Moral Hazard).</li>
+          <li>Lösungen müssen an <strong>beiden Seiten gleichzeitig</strong> ansetzen – Einzelmaßnahmen reichen nicht aus.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Abschluss -->
+  <div class="task">
+    <div class="task-header">
+      <div class="task-num">6</div>
+      <div style="flex:1">
+        <span class="task-title">Abschluss-Quiz – Stunde 5</span>
+        <span class="task-sub">Quiz · Einzelarbeit</span>
+      </div>
+      <div class="task-icons">
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+            <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="task-icon-tile">
+          <svg width="22" height="22" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="15" stroke="#E53935" stroke-width="2.5" fill="none"/>
+            <path d="M14 14c0-2.761 2.239-5 5-5s5 2.239 5 5c0 2-1.5 3-3 4s-2 2.5-2 3.5" stroke="#E53935" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="19" cy="28" r="1.8" fill="#E53935"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="task-body">
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:14px;font-weight:700;">1. Was versteht man unter dem „Baby-Boomer-Effekt" in der Rentenversicherung?</p>
+        <div class="quiz-opts" id="quiz4-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz4','A',false,this)">A – Steigende Geburtenraten erhöhen die Zahl der Beitragszahler</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz4','B',true,this)">B – Die geburtenstarken Jahrgänge der 1960er treten jetzt in Rente und belasten die Rentenkassen</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz4','C',false,this)">C – Junge Familien bekommen mehr Kindergeld und belasten die Staatskasse</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz4','D',false,this)">D – Die Zahl der Neugeborenen steigt seit 2010 wieder stark an</button>
+        </div>
+        <div class="quiz-result" id="quiz4-result"></div>
+        <button class="btn-retry" id="quiz4-retry" style="display:none" onclick="retryQuiz('quiz4')">↩ Nochmal versuchen</button>
+      </div>
+
+      <div>
+        <p style="font-size:14px;font-weight:700;">2. Welches Prinzip der Sozialversicherung wird durch Moral Hazard besonders geschwächt?</p>
+        <div class="quiz-opts" id="quiz5-opts">
+          <button class="quiz-opt" onclick="quizAnswer('quiz5','A',false,this)">A – Subsidiaritätsprinzip</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz5','B',false,this)">B – Pflichtversicherungsprinzip</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz5','C',true,this)">C – Solidaritätsprinzip (Gemeinschaft trägt Kosten für Fehlanreize Einzelner)</button>
+          <button class="quiz-opt" onclick="quizAnswer('quiz5','D',false,this)">D – Rentenanpassungsprinzip</button>
+        </div>
+        <div class="quiz-result" id="quiz5-result"></div>
+        <button class="btn-retry" id="quiz5-retry" style="display:none" onclick="retryQuiz('quiz5')">↩ Nochmal versuchen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-only">
+    <div class="teacher-note" style="margin-top:1rem;">
+      <div class="teacher-note-header">💡 Lehrkraft-Hinweis · Übergang Stunde 6</div>
+      <p>Stunde 6 vertieft Reformansätze (S. 124–130): Fallpauschalen (M3), Eigenbeteiligung (M4), Beitragsbemessungsgrenze (M4). Die heutige Diskussion zur Gerechtigkeitsfrage schafft eine gute Grundlage für die Tabelle Effizienz vs. Gerechtigkeit in Aufgabe 4 der nächsten Stunde.</p>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button class="btn btn-secondary" onclick="showStep(2)">← Zurück</button>
+    <button class="btn btn-primary" onclick="showStep(1)">↑ Zum Anfang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- STEP 4 – MÜNDLICHE ABFRAGE (Lehrkraft only) -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="step teacher-only" id="step-4">
+
+  <div class="hero" style="background:linear-gradient(135deg,#92400e,#D97706) !important;">
+    <div class="hero-eyebrow">Nur Lehrkraft · Schritt 4</div>
+    <h1>Mündliche Abfrage – 2.3.5</h1>
+    <div class="hero-sub">4K-Modell · Wissen · Kritisches Denken · Kommunikation · Kreativität</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ ca. 10 Min.</span>
+      <span class="hero-tag">1 Schüler/in</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-body">
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-wissen">Wissen</span>
+          <div class="abfrage-question">Erläutern Sie, warum das Umlageverfahren der Rentenversicherung durch den demografischen Wandel unter Druck gerät. Nennen Sie dabei die relevanten Ursachen.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Niedrige Geburtenraten seit den 1970er Jahren → Beitragszahler werden weniger</li>
+            <li>Steigende Lebenserwartung → Rentenbezugsdauer steigt, mehr Rentner gleichzeitig</li>
+            <li>Baby-Boomer erreichen ab ca. 2025 das Rentenalter → kurzfristige Spitzenbelastung</li>
+            <li>Sinkende Zahl Erwerbstätiger je Rentner (von 5,5 in 1965 auf ca. 2 heute)</li>
+            <li>Folge: Beitragssätze müssen steigen oder Leistungen sinken (Rentenniveau)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kritisch">Kritisches Denken</span>
+          <div class="abfrage-question">Inwiefern stellt Moral Hazard ein strukturelles Problem für die gesetzliche Sozialversicherung dar? Welche Gegenmaßnahmen sind unter dem Gesichtspunkt sozialer Gerechtigkeit kritisch zu bewerten?</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Moral Hazard entsteht durch Informationsasymmetrie (Principal-Agent-Problem): Versicherter weiß mehr als Versicherung</li>
+            <li>Einzelner hat Anreiz, Leistungen übermäßig in Anspruch zu nehmen → Gemeinschaft trägt Kosten</li>
+            <li>Strukturproblem: Nicht korrigierbar durch Einzelmaßnahmen, da systeminhärent</li>
+            <li><em>Kritisch bei Gerechtigkeitsfrage:</em> Zuzahlungen belasten untere Einkommensgruppen überproportional – Gefahr, dass notwendige Behandlungen gemieden werden</li>
+            <li>Präventivanreize hingegen gerechter (freiwillig), aber schwer messbar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-komm">Kommunikation</span>
+          <div class="abfrage-question">Erklären Sie einem fiktiven Mitschüler, der die Stunde verpasst hat, warum Digitalisierung und Plattformarbeit die Finanzierungsbasis der Sozialversicherung beeinflussen können.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont</div>
+          <ul>
+            <li>Sozialversicherung finanziert sich aus Beiträgen sozialversicherungspflichtiger Beschäftigungsverhältnisse</li>
+            <li>Automatisierung kann reguläre Stellen ersetzen → Beitragsbasis schrumpft</li>
+            <li>Plattformarbeiter (z. B. Fahrer, Freelancer) gelten oft als Selbstständige → keine Pflichtversicherung → keine Beiträge</li>
+            <li>Minijobs und Teilzeit führen zu geringeren Beiträgen und späteren Rentenansprüchen</li>
+            <li>Chance: Höhere Produktivität durch Automatisierung könnte staatliche Steuerzuschüsse erhöhen</li>
+            <li>Kommunikationskriterium: verständliche Sprache, Beispiele, strukturierter Aufbau</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="abfrage-card">
+        <div class="abfrage-card-header">
+          <span class="abfrage-k-badge k-kreativ">Kreativität</span>
+          <div class="abfrage-question">Entwickeln Sie einen eigenen Reformvorschlag, der gleichzeitig die Einnahmenseite stärkt und Fehlanreize auf der Ausgabenseite reduziert. Begründen Sie, warum Ihr Vorschlag dem Solidaritätsprinzip Rechnung trägt.</div>
+          <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
+        </div>
+        <div class="abfrage-reveal">
+          <div class="abfrage-reveal-title">Erwartungshorizont (offen – Schülerleistung bewerten nach)</div>
+          <ul>
+            <li>Einnahmenseite: z. B. Einbeziehung von Beamten und Selbstständigen (Bürgerversicherung), Anhebung der Beitragsbemessungsgrenze, Maschinensteuer</li>
+            <li>Ausgabenseite: z. B. einkommensabhängige Zuzahlungen (schont sozial Schwache), qualitätsorientierte Vergütung statt Fallpauschalen</li>
+            <li>Solidaritätsprinzip: Alle tragen nach Leistungsfähigkeit bei; kein Ausschluss aufgrund schlechter Risiken</li>
+            <li>Kreativitätskriterium: Originalität des Ansatzes, schlüssige Begründung, Reflexion von Zielkonflikten (Effizienz vs. Gerechtigkeit)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Drucken</button>
+    <button class="btn btn-secondary" onclick="showStep(3)">← Zurück zu Schritt 3</button>
+  </div>
+</div>
+
+</main>
+
+<!-- PIN MODAL -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal" id="pinModalBox">
+    <h3>🔒 Lehrkraft-Modus</h3>
+    <p>Bitte geben Sie die 6-stellige PIN ein.</p>
+    <div class="pin-display" id="pinDisplay">——————</div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinKey('1')">1</button>
+      <button class="numpad-btn" onclick="pinKey('2')">2</button>
+      <button class="numpad-btn" onclick="pinKey('3')">3</button>
+      <button class="numpad-btn" onclick="pinKey('4')">4</button>
+      <button class="numpad-btn" onclick="pinKey('5')">5</button>
+      <button class="numpad-btn" onclick="pinKey('6')">6</button>
+      <button class="numpad-btn" onclick="pinKey('7')">7</button>
+      <button class="numpad-btn" onclick="pinKey('8')">8</button>
+      <button class="numpad-btn" onclick="pinKey('9')">9</button>
+      <button class="numpad-btn numpad-del" onclick="pinDel()">⌫</button>
+      <button class="numpad-btn" onclick="pinKey('0')">0</button>
+      <button class="numpad-btn" onclick="closePinModal()">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STATE ────────────────────────────────────
+const TEACHER_PIN = '123456';
+let pinBuffer = '';
+let currentStep = 1;
+let teacherMode = false;
+
+// ── STEPS ────────────────────────────────────
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  document.getElementById('step-btn-' + n).classList.add('active');
+  currentStep = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ── PIN ──────────────────────────────────────
+function openPinModal() {
+  if (teacherMode) {
+    teacherMode = false;
+    document.body.classList.remove('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔒 Lehrkraft';
+    document.getElementById('step-btn-4').style.display = 'none';
+    if (currentStep === 4) showStep(1);
+    return;
+  }
+  pinBuffer = '';
+  updatePinDisplay();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('open');
+}
+function closePinModal() {
+  document.getElementById('pinModal').classList.remove('open');
+  pinBuffer = '';
+}
+function pinKey(k) {
+  if (pinBuffer.length >= 6) return;
+  pinBuffer += k;
+  updatePinDisplay();
+  if (pinBuffer.length === 6) setTimeout(checkPin, 200);
+}
+function pinDel() {
+  pinBuffer = pinBuffer.slice(0, -1);
+  updatePinDisplay();
+}
+function updatePinDisplay() {
+  let d = '';
+  for (let i = 0; i < 6; i++) d += i < pinBuffer.length ? '●' : '—';
+  document.getElementById('pinDisplay').textContent = d;
+}
+function checkPin() {
+  if (pinBuffer === TEACHER_PIN) {
+    teacherMode = true;
+    document.body.classList.add('teacher-mode');
+    document.getElementById('teacherToggle').textContent = '🔓 Lehrkraft aktiv';
+    document.getElementById('step-btn-4').style.display = 'flex';
+    closePinModal();
+  } else {
+    document.getElementById('pinError').textContent = 'Falsche PIN. Bitte erneut versuchen.';
+    const m = document.getElementById('pinModalBox');
+    m.classList.add('shake');
+    setTimeout(() => m.classList.remove('shake'), 400);
+    pinBuffer = '';
+    updatePinDisplay();
+  }
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('pinModal').classList.contains('open')) return;
+  if (e.key >= '0' && e.key <= '9') pinKey(e.key);
+  if (e.key === 'Backspace') pinDel();
+  if (e.key === 'Escape') closePinModal();
+});
+document.getElementById('pinModal').addEventListener('click', function(e) {
+  if (e.target === this) closePinModal();
+});
+
+// ── POLL ─────────────────────────────────────
+function pollVote(id, val, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .poll-opt`);
+  opts.forEach(o => { o.disabled = true; o.classList.remove('selected'); });
+  btn.classList.add('selected');
+  const res = document.getElementById(`${id}-result`);
+  res.className = 'quiz-result show ok';
+  res.textContent = 'Danke für Ihre Stimme! Vergleichen Sie Ihr Ergebnis im Plenum.';
+  document.getElementById(`${id}-retry`).style.display = 'inline-block';
+}
+function retryPoll(id) {
+  const opts = document.querySelectorAll(`#${id}-opts .poll-opt`);
+  opts.forEach(o => { o.disabled = false; o.classList.remove('selected','correct-answer','wrong-answer'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-result`).textContent = '';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+
+// ── QUIZ ─────────────────────────────────────
+function quizAnswer(id, val, correct, btn) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => o.disabled = true);
+  const res = document.getElementById(`${id}-result`);
+  if (correct) {
+    btn.classList.add('correct');
+    res.className = 'quiz-result show ok';
+    res.textContent = '✓ Richtig!';
+  } else {
+    btn.classList.add('wrong');
+    // Highlight correct
+    opts.forEach(o => { if (!o.classList.contains('wrong')) o.classList.add('correct'); });
+    res.className = 'quiz-result show err';
+    res.textContent = '✗ Nicht ganz – die richtige Antwort ist hervorgehoben.';
+    document.getElementById(`${id}-retry`).style.display = 'inline-block';
+  }
+}
+function retryQuiz(id) {
+  const opts = document.querySelectorAll(`#${id}-opts .quiz-opt`);
+  opts.forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById(`${id}-result`).className = 'quiz-result';
+  document.getElementById(`${id}-retry`).style.display = 'none';
+}
+
+// ── SOLUTION TOGGLE ───────────────────────────
+function toggleSolution(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('visible');
+}
+
+// ── ZUORDNUNG ─────────────────────────────────
+const zuordnungCorrect = {
+  z1e:true,  z1a:true,  z1s:true,
+  z2e:false, z2a:true,  z2s:true,
+  z3e:true,  z3a:false, z3s:true,
+  z4e:false, z4a:true,  z4s:true,
+};
+function checkZuordnung() {
+  let correct = 0, total = 12;
+  for (const [id, expected] of Object.entries(zuordnungCorrect)) {
+    const cb = document.getElementById(id);
+    if (cb.checked === expected) correct++;
+  }
+  const res = document.getElementById('zuordnung-result');
+  res.style.display = 'block';
+  if (correct === total) {
+    res.className = 'quiz-result show ok';
+    res.textContent = `✓ Alle ${total} Felder korrekt ausgefüllt!`;
+  } else {
+    res.className = 'quiz-result show err';
+    res.textContent = `${correct} von ${total} korrekt. Überprüfen Sie Ihre Angaben und vergleichen Sie mit der Musterlösung.`;
+  }
+}
+function resetZuordnung() {
+  ['z1e','z1a','z1s','z2e','z2a','z2s','z3e','z3a','z3s','z4e','z4a','z4s'].forEach(id => {
+    document.getElementById(id).checked = false;
+  });
+  const res = document.getElementById('zuordnung-result');
+  res.style.display = 'none';
+  res.textContent = '';
+}
+
+// ── ABFRAGE TOGGLE ────────────────────────────
+function toggleAbfrage(btn) {
+  const reveal = btn.closest('.abfrage-card').querySelector('.abfrage-reveal');
+  reveal.classList.toggle('visible');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
