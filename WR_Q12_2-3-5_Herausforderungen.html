@@ -767,7 +767,7 @@ body.teacher-mode .teacher-step{display:flex !important;}
       </div>
     </div>
     <div class="task-body">
-      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Diskutieren Sie in Kleingruppen: Welche der folgenden Gegenmaßnahmen gegen Moral Hazard halten Sie für sinnvoll? Begründen Sie Ihre Einschätzung mit Blick auf <strong>Effizienz</strong> und <strong>soziale Gerechtigkeit</strong>.</p>
+      <p style="font-size:14px;font-weight:600;margin-bottom:0.75rem;">Diskutiert in Kleingruppen: Welche der folgenden Gegenmaßnahmen gegen Moral Hazard halten Sie für sinnvoll? Begründet eure Einschätzung mit Blick auf <strong>Effizienz</strong> und <strong>soziale Gerechtigkeit</strong>.</p>
 
       <div class="challenge-grid" style="margin-bottom:1rem;">
         <div class="challenge-card demo">
@@ -789,7 +789,7 @@ body.teacher-mode .teacher-step{display:flex !important;}
       </div>
 
       <label style="font-size:13px;font-weight:800;color:var(--text-secondary);display:block;margin-bottom:4px;">Ihre Einschätzung:</label>
-      <textarea class="answer-area" id="diskussion-antwort" placeholder="Welche Maßnahme bevorzugen Sie und warum? Bedenken Sie dabei beide Kriterien: Effizienz und Gerechtigkeit ..."></textarea>
+      <textarea class="answer-area" id="diskussion-antwort" placeholder="Welche Maßnahme bevorzugst du und warum? Bedenke dabei beide Kriterien: Effizienz und Gerechtigkeit ..."></textarea>
 
       <button class="solution-btn" onclick="toggleSolution('sol-disk')">💡 Orientierungshilfe</button>
       <div class="solution-reveal" id="sol-disk">
@@ -909,7 +909,7 @@ body.teacher-mode .teacher-step{display:flex !important;}
       <div class="abfrage-card">
         <div class="abfrage-card-header">
           <span class="abfrage-k-badge k-wissen">Wissen</span>
-          <div class="abfrage-question">Erläutern Sie, warum das Umlageverfahren der Rentenversicherung durch den demografischen Wandel unter Druck gerät. Nennen Sie dabei die relevanten Ursachen.</div>
+          <div class="abfrage-question">Erläutere, warum das Umlageverfahren der Rentenversicherung durch den demografischen Wandel unter Druck gerät. Nenne dabei die relevanten Ursachen.</div>
           <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
         </div>
         <div class="abfrage-reveal">
@@ -945,7 +945,7 @@ body.teacher-mode .teacher-step{display:flex !important;}
       <div class="abfrage-card">
         <div class="abfrage-card-header">
           <span class="abfrage-k-badge k-komm">Kommunikation</span>
-          <div class="abfrage-question">Erklären Sie einem fiktiven Mitschüler, der die Stunde verpasst hat, warum Digitalisierung und Plattformarbeit die Finanzierungsbasis der Sozialversicherung beeinflussen können.</div>
+          <div class="abfrage-question">Erkläre einem fiktiven Mitschüler, der die Stunde verpasst hat, warum Digitalisierung und Minijobs die Finanzierungsbasis der Sozialversicherung beeinflussen können.</div>
           <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
         </div>
         <div class="abfrage-reveal">
@@ -953,7 +953,6 @@ body.teacher-mode .teacher-step{display:flex !important;}
           <ul>
             <li>Sozialversicherung finanziert sich aus Beiträgen sozialversicherungspflichtiger Beschäftigungsverhältnisse</li>
             <li>Automatisierung kann reguläre Stellen ersetzen → Beitragsbasis schrumpft</li>
-            <li>Plattformarbeiter (z. B. Fahrer, Freelancer) gelten oft als Selbstständige → keine Pflichtversicherung → keine Beiträge</li>
             <li>Minijobs und Teilzeit führen zu geringeren Beiträgen und späteren Rentenansprüchen</li>
             <li>Chance: Höhere Produktivität durch Automatisierung könnte staatliche Steuerzuschüsse erhöhen</li>
             <li>Kommunikationskriterium: verständliche Sprache, Beispiele, strukturierter Aufbau</li>
@@ -964,7 +963,7 @@ body.teacher-mode .teacher-step{display:flex !important;}
       <div class="abfrage-card">
         <div class="abfrage-card-header">
           <span class="abfrage-k-badge k-kreativ">Kreativität</span>
-          <div class="abfrage-question">Entwickeln Sie einen eigenen Reformvorschlag, der gleichzeitig die Einnahmenseite stärkt und Fehlanreize auf der Ausgabenseite reduziert. Begründen Sie, warum Ihr Vorschlag dem Solidaritätsprinzip Rechnung trägt.</div>
+          <div class="abfrage-question">Entwickele einen eigenen Reformvorschlag, der gleichzeitig die Einnahmenseite stärkt und Fehlanreize auf der Ausgabenseite reduziert. Begründe, warum dein Vorschlag dem Solidaritätsprinzip Rechnung trägt.</div>
           <button class="expand-btn" onclick="toggleAbfrage(this)">▼</button>
         </div>
         <div class="abfrage-reveal">
@@ -1097,7 +1096,7 @@ function pollVote(id, val, btn) {
   btn.classList.add('selected');
   const res = document.getElementById(`${id}-result`);
   res.className = 'quiz-result show ok';
-  res.textContent = 'Danke für Ihre Stimme! Vergleichen Sie Ihr Ergebnis im Plenum.';
+  res.textContent = 'Danke für deine Stimme! Vergleiche dein Ergebnis im Plenum.';
   document.getElementById(`${id}-retry`).style.display = 'inline-block';
 }
 function retryPoll(id) {
@@ -1159,7 +1158,7 @@ function checkZuordnung() {
     res.textContent = `✓ Alle ${total} Felder korrekt ausgefüllt!`;
   } else {
     res.className = 'quiz-result show err';
-    res.textContent = `${correct} von ${total} korrekt. Überprüfen Sie Ihre Angaben und vergleichen Sie mit der Musterlösung.`;
+    res.textContent = `${correct} von ${total} korrekt. Überprüfe deine Angaben und vergleiche sie mit der Musterlösung.`;
   }
 }
 function resetZuordnung() {
